@@ -23,7 +23,7 @@ npm run build
 O deploy atual publica o export estatico em `/var/www/impulsox-site`.
 
 ```bash
-cd /root/impulso-x-site
+cd /root/impulso-x/site-repositorio
 npm run typecheck
 npm run build
 rsync -a --delete out/ /var/www/impulsox-site/
@@ -41,4 +41,3 @@ Nao publicar este site em caminhos da Mimo Power, como:
 - `/var/www/mimopower-site/dist`
 - `/etc/nginx/sites-available/mp-hub.conf`
 - `/etc/letsencrypt/live/www.mimopower.com.br/`
-
