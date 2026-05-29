@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ASSETS } from '@/lib/assets';
 import { SITE, WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
+import { LogoShine } from './ui/logo-shine';
 
 const currentYear = new Date().getFullYear();
 
@@ -27,6 +28,7 @@ export function Footer() {
                   height={ASSETS.mark.height}
                   className="h-full w-full object-contain"
                 />
+                <LogoShine variant="subtle" />
               </span>
               <span>
                 <span className="block font-display text-2xl font-bold text-cream">Impulso X</span>

@@ -84,11 +84,11 @@ export function FinalCta() {
           Vamos organizar o próximo passo da sua empresa?
         </h2>
 
-        <p className="mx-auto mt-7 max-w-[46ch] font-sans text-lead text-steel text-pretty">
+        <p className="mx-auto mt-5 max-w-[46ch] font-sans text-lead text-steel text-pretty">
           Conversa direta, sem compromisso. Você traz o momento da empresa e nós ajudamos a enxergar o caminho.
         </p>
 
-        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
             Agendar diagnóstico
           </CtaButton>
@@ -97,7 +97,7 @@ export function FinalCta() {
           </CtaButton>
         </div>
 
-        <p className="mt-6 font-sans text-sm text-steel/60">
+        <p className="mt-4 font-sans text-sm text-steel/60">
           Sem compromisso
         </p>
       </div>

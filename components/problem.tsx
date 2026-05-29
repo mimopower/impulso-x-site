@@ -28,7 +28,7 @@ export function Problem() {
             >
               Quando a empresa cresce, o improviso custa caro.
             </h2>
-            <p className="mt-7 max-w-prose text-lead text-steel text-pretty">
+            <p className="mt-5 max-w-prose text-lead text-steel text-pretty">
               A maioria das empresas não trava por falta de esforço. Trava porque site,
               atendimento, marca e processos foram montados aos poucos, sem uma estrutura comum.
             </p>
@@ -52,7 +52,7 @@ export function Problem() {
         </div>
 
         {/* 4 pain points — open 2x2, large outline numbers. No metal-panel cards (banned). */}
-        <div className="mt-14 grid grid-cols-2 border border-cream/10 md:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 border border-cream/10 md:grid-cols-4">
           {pains.map((pain, i) => (
             <motion.div
               key={pain}

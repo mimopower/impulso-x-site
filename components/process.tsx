@@ -48,7 +48,7 @@ export function Process() {
         {/* Steps — open layout, NO metal-panel cards (taste-skill ban: identical card grid).
             Remotion philosophy: each step enters with a deliberate delay sequence (60ms stagger).
             Desktop: horizontal 4-col. Mobile: stacked. */}
-        <div className="mt-14 grid gap-0 md:grid-cols-4">
+        <div className="mt-12 grid gap-0 md:grid-cols-4">
           {steps.map((step, i) => (
             <motion.div
               key={step.n}
@@ -73,10 +73,10 @@ export function Process() {
                 >
                   {step.n}
                 </span>
-                <h3 className="mt-5 font-display text-2xl font-bold text-cream md:text-3xl">
+                <h3 className="mt-4 font-display text-2xl font-bold text-cream md:text-3xl">
                   {step.title}
                 </h3>
-                <p className="mt-4 font-sans text-base leading-relaxed text-steel text-pretty">
+                <p className="mt-3 font-sans text-base leading-[1.5] text-steel text-pretty">
                   {step.body}
                 </p>
               </div>

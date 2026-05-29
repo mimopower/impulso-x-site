@@ -97,10 +97,10 @@ function FounderCard({ founder, index }: { founder: typeof founders[0]; index: n
       </div>
 
       {/* Manifesto text */}
-      <div className="flex flex-col justify-center px-0 py-10 lg:col-span-7 lg:px-12 lg:py-14">
+      <div className="flex flex-col justify-center px-0 py-8 lg:col-span-7 lg:px-12 lg:py-12">
         {/* Name repeated as display heading — separate from photo for readers without images */}
         <h3 className="font-display text-title font-bold text-cream">{founder.name}</h3>
-        <div className="mt-6 space-y-5 font-sans text-base leading-relaxed text-steel md:text-lg">
+        <div className="mt-5 space-y-3.5 font-sans text-base leading-[1.5] text-steel md:text-lg">
           {founder.manifesto.map((paragraph) => (
             <p key={paragraph} className="max-w-prose text-pretty">
               {paragraph}
@@ -121,12 +121,12 @@ export function Founders() {
           <h2 id="founders-heading" className="font-display text-display font-bold text-cream text-balance">
             Tecnologia e criatividade, lado a lado.
           </h2>
-          <p className="mt-6 max-w-prose font-sans text-lg leading-relaxed text-steel text-pretty">
+          <p className="mt-5 max-w-prose font-sans text-lg leading-[1.5] text-steel text-pretty">
             A Impulso X nasce da união entre raciocínio técnico, visão de marca e cuidado na execução.
           </p>
         </SectionReveal>
 
-        <div className="mt-16 flex flex-col gap-0">
+        <div className="mt-12 flex flex-col gap-0">
           {founders.map((founder, i) => (
             <FounderCard key={founder.name} founder={founder} index={i} />
           ))}

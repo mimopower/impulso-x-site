@@ -51,7 +51,7 @@ export function Services() {
         {/* Editorial horizontal list — NOT 3 identical cards (taste-skill ban).
             Each pillar is a full-width row with large outline number.
             Emil: CSS clip-path for the hover sweep — no JS required per row. */}
-        <div className="mt-16">
+        <div className="mt-12">
           {pillars.map((p) => (
             <article
               key={p.n}
@@ -81,7 +81,7 @@ export function Services() {
               </h3>
 
               {/* Body — only visible on desktop grid col 3 */}
-              <p className="col-span-2 font-sans text-base leading-relaxed text-steel text-pretty md:col-span-1 md:self-center">
+              <p className="col-span-2 font-sans text-base leading-[1.5] text-steel text-pretty md:col-span-1 md:self-center">
                 {p.body}
               </p>
             </article>

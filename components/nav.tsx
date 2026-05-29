@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { SITE, WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
+import { LogoShine } from './ui/logo-shine';
 
 const links = [
   { href: '#servicos', label: 'Soluções' },
@@ -62,6 +63,7 @@ export function Nav() {
               priority
               className="h-full w-full object-contain"
             />
+            <LogoShine variant="subtle" />
           </span>
           <span className="flex min-w-0 flex-col leading-none">
             <span className={`font-display font-bold text-cream transition-all duration-500 ${scrolled ? 'text-base md:text-lg' : 'text-lg md:text-xl'}`}>

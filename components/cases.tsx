@@ -67,13 +67,13 @@ export function Cases() {
               O que pode ser construído
             </h2>
           </div>
-          <p className="max-w-prose font-sans text-lg leading-relaxed text-steel text-pretty">
+          <p className="max-w-prose font-sans text-lg leading-[1.5] text-steel text-pretty">
             Estes são exemplos de aplicação da identidade e do tipo de entrega que a Impulso X pode montar.
             Não são projetos reais publicados; são possibilidades de projeto.
           </p>
         </SectionReveal>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-12">
+        <div className="mt-12 grid gap-5 lg:grid-cols-12">
           {examples.map((example, i) => (
             <motion.article
               key={example.title}
@@ -93,7 +93,7 @@ export function Cases() {
               <div className="p-6 md:p-8">
                 <p className="font-display text-sm font-bold text-gold">{example.label}</p>
                 <h3 className="mt-3 font-display text-3xl font-bold text-cream">{example.title}</h3>
-                <p className="mt-4 max-w-prose font-sans text-base leading-relaxed text-steel text-pretty">
+                <p className="mt-4 max-w-prose font-sans text-base leading-[1.5] text-steel text-pretty">
                   {example.body}
                 </p>
               </div>

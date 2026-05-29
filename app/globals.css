@@ -72,8 +72,13 @@
     .scroll-line {
       display: none;
     }
-    /* Stop the shield-breathe CSS animation for users who prefer reduced motion */
-    [style*="shield-breathe"] {
+    /* Stop CSS animations on logo elements for users who prefer reduced motion */
+    [style*="shield-breathe"],
+    [style*="logo-zoom"] {
+      animation: none !important;
+    }
+    .logo-shine-sweep,
+    .logo-shine-energy {
       animation: none !important;
     }
   }
@@ -234,6 +239,23 @@
   10% { opacity: 1; }
   90% { opacity: 1; }
   100% { transform: translateY(600%); opacity: 0; }
+}
+
+/* Logo cinematic: sweep, energy pulse, camera zoom */
+@keyframes logo-shine {
+  0% { transform: translateX(-165%); }
+  16% { transform: translateX(165%); }
+  100% { transform: translateX(165%); }
+}
+
+@keyframes logo-energy {
+  0% { opacity: 0.16; }
+  100% { opacity: 0.88; }
+}
+
+@keyframes logo-zoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
 }
 
 /* Stagger helper: CSS cascade delays for pillar/step reveals */

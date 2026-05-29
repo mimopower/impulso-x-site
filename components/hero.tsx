@@ -7,7 +7,7 @@ import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { WordRotator } from './ui/word-rotator';
-import { GoldCircuitLines } from './ui/gold-circuit-lines';
+import { LogoShine } from './ui/logo-shine';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -85,7 +85,7 @@ export function Hero() {
           aspectRatio: '1',
           background:
             'radial-gradient(ellipse 58% 58% at 55% 48%, rgba(201,162,39,0.16) 0%, transparent 70%)',
-          filter: 'blur(44px)',
+          filter: 'blur(30px)',
         }}
       />
 
@@ -96,19 +96,26 @@ export function Hero() {
         style={{ y: shieldY, opacity: shieldOpacity }}
         className="pointer-events-none absolute right-[-2%] top-[50%] hidden select-none md:block will-change-transform"
       >
-        <Image
-          src={ASSETS.mark.src}
-          alt=""
-          width={ASSETS.mark.width}
-          height={ASSETS.mark.height}
-          priority
-          className="h-auto"
+        {/* Inner: handles logo-zoom + clips LogoShine sweep to shield bounds */}
+        <div
+          className="relative overflow-hidden"
           style={{
             width: 'clamp(360px, 42vw, 560px)',
-            opacity: 0.45,
-            animation: 'shield-breathe 9s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+            aspectRatio: '1 / 1',
+            animation: 'logo-zoom 14s ease-in-out infinite',
           }}
-        />
+        >
+          <Image
+            src={ASSETS.mark.src}
+            alt=""
+            width={ASSETS.mark.width}
+            height={ASSETS.mark.height}
+            priority
+            className="h-auto w-full"
+            style={{ opacity: 0.45 }}
+          />
+          <LogoShine variant="full" />
+        </div>
       </motion.div>
 
       {/* Content */}
@@ -170,7 +177,7 @@ export function Hero() {
             initial={{ opacity: 0.9, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.52, ease, delay: 0.36 }}
-            className="mt-7 max-w-[52ch] text-lead text-steel text-pretty"
+            className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
             A Impulso X une estratégia, design, IA e automação para organizar sua
             presença digital, reduzir tarefas manuais e deixar sua empresa pronta
@@ -182,7 +189,7 @@ export function Hero() {
             initial={{ opacity: 0.9, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.52, ease, delay: 0.44 }}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+            className="mt-7 flex flex-col gap-3 sm:flex-row"
           >
             <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
               Agendar diagnóstico
@@ -201,9 +208,6 @@ export function Hero() {
       >
         <span className="block h-5 w-px animate-[scroll-cue_1.8s_cubic-bezier(0.16,1,0.3,1)_infinite] bg-gold" />
       </div>
-
-      {/* Gold circuit lines — brand signature, desktop only */}
-      <GoldCircuitLines variant="hero" className="z-0" />
 
       {/* Gold hairline at section bottom */}
       <div
