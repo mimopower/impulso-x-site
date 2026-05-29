@@ -64,7 +64,7 @@ export function Nav() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
           {links.map((link) => (
             <a
               key={link.href}
@@ -77,7 +77,7 @@ export function Nav() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="outline" size="md" external>
             Agendar diagnóstico
           </CtaButton>
@@ -85,7 +85,7 @@ export function Nav() {
 
         <button
           type="button"
-          className="relative grid h-11 w-11 place-items-center rounded-control border border-cream/12 md:hidden"
+          className="relative grid h-11 w-11 place-items-center rounded-control border border-cream/12 lg:hidden"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
           onClick={() => setOpen((state) => !state)}
@@ -107,7 +107,7 @@ export function Nav() {
         initial={false}
         animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
         transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-        className="mx-auto mt-2 max-w-[1320px] rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:hidden"
+        className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
       >
         <nav aria-label="Menu mobile">
           <ul className="flex flex-col gap-2">

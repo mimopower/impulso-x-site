@@ -20,7 +20,7 @@ const config: Config = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        hero: ['clamp(2.75rem, 5.8vw, 5.4rem)', { lineHeight: '0.98' }],
+        hero: ['clamp(2.45rem, 5.8vw, 5.4rem)', { lineHeight: '0.98' }],
         display: ['clamp(2.2rem, 4.6vw, 5rem)', { lineHeight: '1' }],
         title: ['clamp(1.55rem, 2.6vw, 2.8rem)', { lineHeight: '1.08' }],
         lead: ['clamp(1.05rem, 1.25vw, 1.35rem)', { lineHeight: '1.55' }],
