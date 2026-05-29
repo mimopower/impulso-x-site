@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
+import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -42,6 +43,9 @@ export function FinalCta() {
           }}
         />
       </div>
+
+      {/* Gold circuit lines — brand signature */}
+      <GoldCircuitLines variant="cta" />
 
       {/* Gold hairline at top */}
       <div className="gold-hairline absolute inset-x-0 top-0" aria-hidden />

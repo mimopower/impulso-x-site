@@ -7,6 +7,7 @@ export const SITE = {
   whatsappDisplay: '(11) 93950-5573',
   instagram: 'https://www.instagram.com/impulsoxbr',
   tiktok: 'https://www.tiktok.com/@impulsoxbr',
+  cnpj: '33.753.890/0001-61',
 };
 
 export const WHATSAPP_MESSAGES = {

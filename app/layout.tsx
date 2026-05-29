@@ -99,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: SITE.name,
               url: SITE.url,
               logo: `${SITE.url}/assets/identidade/marca-completa.webp`,
+              taxID: SITE.cnpj,
               sameAs: [SITE.instagram, SITE.tiktok],
               contactPoint: {
                 '@type': 'ContactPoint',

@@ -32,14 +32,14 @@ export default function NotFound() {
             aria-label={`${SITE.shortName} - voltar ao início`}
             className="mx-auto inline-flex items-center gap-3"
           >
-            <span className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-[7px] border border-gold/25 bg-ink">
+            <span className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-[7px] border border-gold/25 bg-ink p-1">
               <Image
                 src={ASSETS.mark.src}
                 alt=""
                 width={ASSETS.mark.width}
                 height={ASSETS.mark.height}
                 priority
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
             </span>
             <span className="text-left">

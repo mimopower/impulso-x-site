@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { SectionReveal } from './section-reveal';
+import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
 const steps = [
   {
@@ -30,7 +31,8 @@ const ease = [0.23, 1, 0.32, 1] as const;
 
 export function Process() {
   return (
-    <section id="processo" className="section-shell bg-ink2" aria-labelledby="process-heading">
+    <section id="processo" className="section-shell-tight relative bg-ink2" aria-labelledby="process-heading">
+      <GoldCircuitLines variant="process" />
       <div className="container-x">
         <SectionReveal className="max-w-3xl">
           {/* Eyebrow #2 of 3 allowed on page */}

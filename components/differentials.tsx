@@ -14,7 +14,7 @@ const ease = [0.23, 1, 0.32, 1] as const;
 
 export function Differentials() {
   return (
-    <section id="diferenciais" className="section-shell bg-ink" aria-labelledby="differentials-heading">
+    <section id="diferenciais" className="section-shell-tight bg-ink" aria-labelledby="differentials-heading">
       <div className="container-x">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionReveal>

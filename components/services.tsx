@@ -1,9 +1,7 @@
-'use client';
-
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { SectionReveal } from './section-reveal';
+import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
 const pillars = [
   {
@@ -23,12 +21,11 @@ const pillars = [
   },
 ] as const;
 
-const ease = [0.23, 1, 0.32, 1] as const;
-
 export function Services() {
   return (
-    <section id="servicos" className="section-shell relative overflow-hidden bg-ink2" aria-labelledby="services-heading">
+    <section id="servicos" className="section-shell-tight relative overflow-hidden bg-ink2" aria-labelledby="services-heading">
       <div aria-hidden className="gold-hairline absolute inset-x-0 top-0" />
+      <GoldCircuitLines variant="services" />
 
       {/* Escudo watermark — brand atmosphere behind section */}
       <Image
@@ -53,27 +50,23 @@ export function Services() {
 
         {/* Editorial horizontal list — NOT 3 identical cards (taste-skill ban).
             Each pillar is a full-width row with large outline number.
-            Emil: clip-path wipe-in for the line separator reveal. */}
+            Emil: CSS clip-path for the hover sweep — no JS required per row. */}
         <div className="mt-16">
-          {pillars.map((p, i) => (
-            <motion.article
+          {pillars.map((p) => (
+            <article
               key={p.n}
               className="group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-10 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-12"
-              transition={{ duration: 0.4, ease }}
             >
-              {/* Gold hover sweep — clip-path hardware-accelerated */}
-              <motion.div
+              {/* Gold hover sweep — CSS only, hardware-accelerated via transform:scaleX */}
+              <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0"
-                initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0 }}
-                whileHover={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
-                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                className="pointer-events-none absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-out-expo group-hover:scale-x-100"
                 style={{
-                  background: 'linear-gradient(90deg, rgba(201,162,39,0.04) 0%, transparent 100%)',
+                  background: 'linear-gradient(90deg, rgba(201,162,39,0.05) 0%, transparent 100%)',
                 }}
               />
 
-              {/* Large outline number — Remotion-philosophy: deliberate entrance position */}
+              {/* Large outline number */}
               <span
                 className="font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
                 style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
@@ -83,7 +76,7 @@ export function Services() {
               </span>
 
               {/* Title */}
-              <h3 className="self-center font-display text-2xl font-bold text-cream group-hover:text-gold transition-colors duration-400 md:text-3xl">
+              <h3 className="self-center font-display text-2xl font-bold text-cream transition-colors duration-300 group-hover:text-gold md:text-3xl">
                 {p.title}
               </h3>
 
@@ -91,7 +84,7 @@ export function Services() {
               <p className="col-span-2 font-sans text-base leading-relaxed text-steel text-pretty md:col-span-1 md:self-center">
                 {p.body}
               </p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

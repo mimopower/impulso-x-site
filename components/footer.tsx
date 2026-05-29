@@ -19,13 +19,13 @@ export function Footer() {
         <div className="grid gap-12 py-14 md:grid-cols-12 md:py-20">
           <div className="md:col-span-5">
             <a href="#top" aria-label={`${SITE.name} - voltar ao topo`} className="inline-flex items-center gap-4">
-              <span className="relative h-16 w-16 overflow-hidden rounded-[7px] border border-gold/20 bg-ink">
+              <span className="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-[7px] border border-gold/20 bg-ink p-1.5">
                 <Image
-                  src={ASSETS.wordmark.src}
+                  src={ASSETS.mark.src}
                   alt=""
-                  width={ASSETS.wordmark.width}
-                  height={ASSETS.wordmark.height}
-                  className="h-full w-full object-cover"
+                  width={ASSETS.mark.width}
+                  height={ASSETS.mark.height}
+                  className="h-full w-full object-contain"
                 />
               </span>
               <span>
@@ -82,7 +82,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-cream/10 py-6 text-xs text-steel/65 sm:flex-row sm:items-center sm:justify-between">
           <p>© {currentYear} Impulso X Intelligence. Todos os direitos reservados.</p>
-          <p>Sites, automações e marca para empresas em crescimento.</p>
+          <p>CNPJ {SITE.cnpj}</p>
         </div>
       </div>
     </footer>

@@ -72,6 +72,10 @@
     .scroll-line {
       display: none;
     }
+    /* Stop the shield-breathe CSS animation for users who prefer reduced motion */
+    [style*="shield-breathe"] {
+      animation: none !important;
+    }
   }
 }
 
@@ -86,6 +90,16 @@
   .section-shell {
     position: relative;
     padding-block: theme('spacing.section');
+  }
+
+  .section-shell-tight {
+    position: relative;
+    padding-block: theme('spacing.sectionTight');
+  }
+
+  .section-shell-wide {
+    position: relative;
+    padding-block: theme('spacing.sectionWide');
   }
 
   .hairline {
@@ -213,6 +227,13 @@
 @keyframes clip-wipe-in {
   from { clip-path: inset(0 100% 0 0); opacity: 0; }
   to { clip-path: inset(0 0% 0 0); opacity: 1; }
+}
+
+@keyframes process-pulse {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(600%); opacity: 0; }
 }
 
 /* Stagger helper: CSS cascade delays for pillar/step reveals */

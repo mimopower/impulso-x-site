@@ -26,7 +26,9 @@ const config: Config = {
         lead: ['clamp(1.05rem, 1.25vw, 1.35rem)', { lineHeight: '1.55' }],
       },
       spacing: {
-        section: 'clamp(5rem, 10vw, 11rem)',
+        sectionTight: 'clamp(3.5rem, 5.8vw, 6.5rem)',
+        section: 'clamp(4.5rem, 7.5vw, 8.5rem)',
+        sectionWide: 'clamp(5.5rem, 9vw, 10rem)',
         gutter: 'clamp(1rem, 4vw, 3rem)',
       },
       maxWidth: {

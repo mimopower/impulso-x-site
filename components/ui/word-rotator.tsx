@@ -19,6 +19,9 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
  * Technique: inline-grid with all words overlapped in the same cell so the
  * container always sizes to the widest word (no layout shift).
  * Respects prefers-reduced-motion. Pauses when tab is hidden.
+ *
+ * A11y: the whole rotator is aria-hidden. The parent H1 carries a stable
+ * aria-label covering all words so screen readers get the full context.
  */
 export function WordRotator({
   words,
@@ -64,12 +67,12 @@ export function WordRotator({
   }, [words, interval, startDelay, prefersReduced]);
 
   if (prefersReduced) {
-    return <span className={className}>{words[0]}</span>;
+    return <span aria-hidden className={className}>{words[0]}</span>;
   }
 
   return (
     <span
-      aria-live="polite"
+      aria-hidden
       style={{
         display: 'inline-grid',
         gridTemplate: '1fr / 1fr',
@@ -103,7 +106,7 @@ export function WordRotator({
           initial={{ opacity: 0, y: '0.35em' }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: '-0.35em' }}
-          transition={{ duration: 0.72, ease: EASE }}
+          transition={{ duration: 0.42, ease: EASE }}
         >
           {words[index]}
         </motion.span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { AssetImage } from './ui/asset-image';
@@ -42,28 +42,42 @@ function FounderCard({ founder, index }: { founder: typeof founders[0]; index: n
   const prefersReduced = useReducedMotion();
   const isRight = founder.side === 'right';
 
+  // Parallax only on large screens — avoids jarring on touch devices
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    setIsLargeScreen(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
 
+  const enableParallax = isLargeScreen && !prefersReduced;
+
   // Subtle parallax on photo — Emil: only transform/opacity, hardware-accelerated
   const photoY = useTransform(
     scrollYProgress,
     [0, 1],
-    prefersReduced ? ['0%', '0%'] : ['-4%', '4%']
+    enableParallax ? ['-3%', '3%'] : ['0%', '0%'],
   );
 
   return (
-    <motion.article
+    <article
       ref={ref}
       className={`grid gap-0 border-t border-cream/12 lg:grid-cols-12 ${isRight ? 'lg:[&_.founder-photo]:order-last' : ''}`}
-      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
     >
       {/* Photo — taller aspect ratio for cinematic presence */}
       <div className="founder-photo lg:col-span-5">
         <div className="image-frame relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
-          <motion.div className="absolute inset-0 will-change-transform" style={{ y: photoY }}>
+          <motion.div
+            className="absolute inset-0"
+            style={{ y: photoY, willChange: enableParallax ? 'transform' : 'auto' }}
+          >
             <AssetImage
               src={founder.image.src}
               alt={founder.alt}
@@ -94,7 +108,7 @@ function FounderCard({ founder, index }: { founder: typeof founders[0]; index: n
           ))}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 

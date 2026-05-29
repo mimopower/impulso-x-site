@@ -7,6 +7,7 @@ import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { WordRotator } from './ui/word-rotator';
+import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -113,30 +114,32 @@ export function Hero() {
       {/* Content */}
       <div className="container-x relative z-10">
         <div className="max-w-[900px] lg:ml-[3vw] xl:ml-[7vw]">
-          {/* Eyebrow — hero's sole kicker (1 of 3 allowed on page) */}
+          {/* Eyebrow — visible by default (opacity 0.92), enhances to 1.0 on mount.
+              Emil: content must be visible even before motion fires. */}
           <motion.div
             className="section-kicker"
-            initial={{ opacity: 0, x: -14 }}
+            initial={{ opacity: 0.92, x: -6 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.65, ease, delay: 0.15 }}
+            transition={{ duration: 0.46, ease, delay: 0.08 }}
           >
             Crescer com clareza
           </motion.div>
 
-          {/* H1 — rotating pilar word on line 1, fixed copy on lines 2-3.
+          {/* H1 — stable aria-label for screen readers; visual word rotates.
               Emil: stagger 60-80ms between lines; only opacity+transform animated. */}
           <h1
             id="hero-heading"
+            aria-label="Sites, automações, marca e IA para empresas que crescem com clareza."
             className="mt-6 font-display text-hero font-bold text-cream text-balance"
             style={{ lineHeight: '0.98' }}
           >
-            {/* Line 1: service pilar rotates. inline-grid trick ensures no
-                layout shift even when the word length changes (Automações → IA). */}
+            {/* Line 1: service pillar rotates. rotator is aria-hidden; H1 has stable aria-label. */}
             <motion.span
+              aria-hidden
               className="block text-gold"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.92, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.72, ease, delay: 0.22 }}
+              transition={{ duration: 0.52, ease, delay: 0.13 }}
             >
               <WordRotator
                 words={['Sites', 'Automações', 'Marca', 'IA']}
@@ -144,17 +147,18 @@ export function Hero() {
               />
             </motion.span>
 
-            {/* Lines 2-3: fixed */}
+            {/* Lines 2-3: fixed — stagger 70ms apart */}
             {[
-              { text: 'para empresas que', delay: 0.30 },
-              { text: 'crescem com clareza.', delay: 0.38 },
+              { text: 'para empresas que', delay: 0.20 },
+              { text: 'crescem com clareza.', delay: 0.27 },
             ].map(({ text, delay }) => (
               <motion.span
+                aria-hidden
                 key={text}
                 className="block"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0.92, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.72, ease, delay }}
+                transition={{ duration: 0.52, ease, delay }}
               >
                 {text}
               </motion.span>
@@ -163,9 +167,9 @@ export function Hero() {
 
           {/* Subtexto — max ~20 words (taste-skill hero rule) */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0.9, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.72, ease, delay: 0.52 }}
+            transition={{ duration: 0.52, ease, delay: 0.36 }}
             className="mt-7 max-w-[52ch] text-lead text-steel text-pretty"
           >
             A Impulso X une estratégia, design, IA e automação para organizar sua
@@ -175,9 +179,9 @@ export function Hero() {
 
           {/* CTAs — 4th and final hero element */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0.9, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.72, ease, delay: 0.65 }}
+            transition={{ duration: 0.52, ease, delay: 0.44 }}
             className="mt-9 flex flex-col gap-3 sm:flex-row"
           >
             <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
@@ -197,6 +201,9 @@ export function Hero() {
       >
         <span className="block h-5 w-px animate-[scroll-cue_1.8s_cubic-bezier(0.16,1,0.3,1)_infinite] bg-gold" />
       </div>
+
+      {/* Gold circuit lines — brand signature, desktop only */}
+      <GoldCircuitLines variant="hero" className="z-0" />
 
       {/* Gold hairline at section bottom */}
       <div
