@@ -1,93 +1,48 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { FadeUpBlock } from './ui/animated-text';
-import { EASE_OUT_EXPO } from '@/lib/motion';
+import { SectionReveal } from './section-reveal';
 
 const steps = [
   {
     n: '01',
     title: 'Diagnóstico',
-    body: 'Mapeamos operação, gargalos, canais e dados. Em 7 dias você sabe exatamente o que está travando o crescimento.',
+    body: 'Entendemos a empresa, a oferta, os canais atuais e os pontos que mais geram retrabalho.',
   },
   {
     n: '02',
-    title: 'Estratégia',
-    body: 'Definimos as frentes que destravam mais em menos tempo — sem plano genérico, sem buzzword.',
+    title: 'Plano',
+    body: 'Organizamos prioridades e definimos o que precisa ser criado, ajustado ou automatizado primeiro.',
   },
   {
     n: '03',
-    title: 'Implementação',
-    body: 'Executamos junto com seu time: site, automações, IA, branding — tudo conectado.',
+    title: 'Execução',
+    body: 'Construímos site, identidade, materiais e fluxos de automação com acompanhamento próximo.',
   },
   {
     n: '04',
-    title: 'Evolução',
-    body: 'Operação medida, ajustada e escalada. Crescimento vira processo, não sorte.',
+    title: 'Ajuste',
+    body: 'Revisamos o que foi entregue, melhoramos a experiência e deixamos o próximo passo claro.',
   },
 ];
 
 export function Process() {
   return (
-    <section
-      id="processo"
-      className="relative bg-ink2 py-section overflow-hidden"
-      aria-labelledby="process-heading"
-    >
-      <div aria-hidden className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-grafite to-transparent" />
-
+    <section id="processo" className="section-shell bg-ink2" aria-labelledby="process-heading">
       <div className="container-x">
-        <FadeUpBlock>
-          <span className="text-[11px] text-gold tracking-[0.3em] uppercase font-display font-medium">
-            Como funciona
-          </span>
-          <h2
-            id="process-heading"
-            className="mt-6 font-display font-extrabold uppercase text-cream text-display track-tight-caps text-balance max-w-4xl"
-          >
-            Quatro passos, um caminho.
+        <SectionReveal className="max-w-3xl">
+          <span className="section-kicker">Método</span>
+          <h2 id="process-heading" className="mt-6 font-display text-display font-bold text-cream text-balance">
+            Como tiramos a ideia do papel
           </h2>
-        </FadeUpBlock>
+        </SectionReveal>
 
-        <div className="mt-20 relative">
-          {/* Connector line — desktop */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.4, ease: EASE_OUT_EXPO, delay: 0.2 }}
-            className="hidden md:block absolute top-[2.25rem] left-0 right-0 h-px origin-left bg-gradient-to-r from-gold/20 via-gold to-gold/20"
-          />
-
-          <ol className="grid md:grid-cols-4 gap-12 md:gap-6 relative">
-            {steps.map((s, i) => (
-              <motion.li
-                key={s.n}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.3 + i * 0.12 }}
-                className="relative"
-              >
-                {/* Node */}
-                <div className="relative z-10 flex items-center gap-4 md:block">
-                  <span
-                    aria-hidden
-                    className="md:absolute md:left-0 md:top-0 inline-flex items-center justify-center w-[3rem] h-[3rem] md:w-[3rem] md:h-[3rem] rounded-full bg-ink2 border border-gold text-gold font-display font-bold text-sm tracking-wider"
-                  >
-                    {s.n}
-                  </span>
-                  <h3 className="md:mt-10 font-display font-bold text-cream uppercase tracking-wide text-xl md:text-2xl">
-                    {s.title}
-                  </h3>
-                </div>
-                <p className="mt-4 md:mt-5 text-mist text-sm md:text-base leading-relaxed text-pretty">
-                  {s.body}
-                </p>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
+        <ol className="mt-14 grid gap-4 md:grid-cols-4">
+          {steps.map((step) => (
+            <li key={step.n} className="metal-panel min-h-[260px] p-6">
+              <span className="font-display text-sm font-bold text-gold tabular">{step.n}</span>
+              <h3 className="mt-8 font-display text-3xl font-bold text-cream">{step.title}</h3>
+              <p className="mt-5 text-base leading-relaxed text-steel text-pretty">{step.body}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

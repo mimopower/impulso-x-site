@@ -1,58 +1,60 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-  ],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        ink: '#0A0A0A',
-        ink2: '#111111',
+        ink: '#0D0D0D',
+        ink2: '#141414',
         surface: '#1A1A1A',
-        gold: '#D4AF37',
-        'gold-dim': '#8C7321',
-        'gold-deep': '#5C4A0E',
-        grafite: '#3A3A3A',
-        mist: '#A8A8A8',
-        cream: '#F5F5F0',
+        metal: '#888888',
+        steel: '#B8B2A5',
+        gold: '#C9A227',
+        'gold-soft': '#D8B84D',
+        'gold-dim': '#756225',
+        cream: '#F4F0E7',
       },
       fontFamily: {
-        display: ['var(--font-sora)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        hero: ['clamp(3.5rem, 9vw, 9rem)', { lineHeight: '0.92', letterSpacing: '-0.03em' }],
-        display: ['clamp(2.5rem, 5vw, 5rem)', { lineHeight: '0.96', letterSpacing: '-0.02em' }],
-        title: ['clamp(1.75rem, 2.6vw, 2.75rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
-        lead: ['clamp(1.125rem, 1.3vw, 1.5rem)', { lineHeight: '1.45' }],
+        hero: ['clamp(2.75rem, 5.8vw, 5.4rem)', { lineHeight: '0.98' }],
+        display: ['clamp(2.2rem, 4.6vw, 5rem)', { lineHeight: '1' }],
+        title: ['clamp(1.55rem, 2.6vw, 2.8rem)', { lineHeight: '1.08' }],
+        lead: ['clamp(1.05rem, 1.25vw, 1.35rem)', { lineHeight: '1.55' }],
       },
       spacing: {
-        section: 'clamp(5rem, 8vw, 10rem)',
-        gutter: 'clamp(1.25rem, 4vw, 3rem)',
+        section: 'clamp(5rem, 10vw, 11rem)',
+        gutter: 'clamp(1rem, 4vw, 3rem)',
       },
       maxWidth: {
         container: '1440px',
-        prose: '64ch',
+        prose: '68ch',
+      },
+      borderRadius: {
+        brand: '8px',
+        control: '6px',
       },
       transitionTimingFunction: {
         'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'out-quart': 'cubic-bezier(0.25, 1, 0.5, 1)',
       },
       keyframes: {
-        'gold-sweep': {
-          '0%': { backgroundPosition: '100% 0' },
-          '100%': { backgroundPosition: '0 0' },
+        'shield-breathe': {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
+          '50%': { transform: 'translate3d(0, -10px, 0) scale(1.015)' },
         },
-        'float-slow': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
+        'line-flow': {
+          '0%': { transform: 'translateX(-18%)', opacity: '0.25' },
+          '50%': { opacity: '0.8' },
+          '100%': { transform: 'translateX(18%)', opacity: '0.25' },
         },
       },
       animation: {
-        'gold-sweep': 'gold-sweep 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'float-slow': 'float-slow 8s ease-in-out infinite',
+        'shield-breathe': 'shield-breathe 9s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+        'line-flow': 'line-flow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate',
       },
     },
   },

@@ -17,17 +17,15 @@ type Props = {
 };
 
 const variantClass: Record<Variant, string> = {
-  primary:
-    'bg-gold text-ink hover:bg-cream hover:text-ink border border-gold hover:border-cream',
-  outline:
-    'border border-gold/60 text-gold hover:border-gold hover:bg-gold/5',
-  ghost: 'text-cream hover:text-gold',
+  primary: 'border-gold bg-gold text-ink hover:border-gold-soft hover:bg-gold-soft',
+  outline: 'border-gold/60 bg-ink/35 text-cream hover:border-gold hover:bg-gold/10',
+  ghost: 'border-transparent bg-transparent text-cream hover:text-gold',
 };
 
 const sizeClass: Record<Size, string> = {
-  md: 'px-5 py-2.5 text-sm tracking-wide',
-  lg: 'px-7 py-4 text-[15px] tracking-wide',
-  xl: 'px-9 py-5 text-base tracking-wider',
+  md: 'px-4 py-2.5 text-sm',
+  lg: 'px-5 py-3.5 text-[15px]',
+  xl: 'px-6 py-4 text-base',
 };
 
 export function CtaButton({
@@ -47,11 +45,18 @@ export function CtaButton({
       rel={external ? 'noopener noreferrer' : undefined}
       whileHover={{ y: -2 }}
       whileTap={{ y: 0, scale: 0.98 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative inline-flex items-center gap-3 font-display font-semibold uppercase transition-colors duration-300 ease-out-expo ${variantClass[variant]} ${sizeClass[size]} ${className}`}
+      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+      className={`group inline-flex max-w-full items-center justify-center gap-3 rounded-control border font-display font-semibold leading-none transition-colors duration-300 ease-out-expo ${variantClass[variant]} ${sizeClass[size]} ${className}`}
     >
-      <span>{children}</span>
-      <span aria-hidden="true" className="inline-block transition-transform duration-300 ease-out-expo group-hover:translate-x-1">
+      <span className="truncate">{children}</span>
+      <span
+        aria-hidden
+        className={`grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 ${
+          variant === 'primary'
+            ? 'border-ink/18 bg-ink/10 text-ink'
+            : 'border-gold/35 bg-gold/10 text-gold'
+        }`}
+      >
         →
       </span>
     </motion.a>

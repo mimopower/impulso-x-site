@@ -1,0 +1,148 @@
+[
+  {
+    "source": "Fundosite0IX.png",
+    "file": "fundo-site-0-desktop.webp",
+    "width": 1717,
+    "height": 916,
+    "bytes": 63212,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "Fundosite0IX.png",
+    "file": "fundo-site-0-mobile.webp",
+    "width": 900,
+    "height": 480,
+    "bytes": 18298,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "Fundosite1IX.png",
+    "file": "fundo-site-1-desktop.webp",
+    "width": 1717,
+    "height": 916,
+    "bytes": 70292,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "Fundosite1IX.png",
+    "file": "fundo-site-1-mobile.webp",
+    "width": 900,
+    "height": 480,
+    "bytes": 19520,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "Marcatransp0IM.png",
+    "file": "marca-completa.webp",
+    "width": 760,
+    "height": 760,
+    "bytes": 112012,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "Marcatransp1IM.png",
+    "file": "marca-escudo.webp",
+    "width": 760,
+    "height": 760,
+    "bytes": 73954,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "logoImpulsox.PNG",
+    "file": "logo-institucional.webp",
+    "width": 720,
+    "height": 720,
+    "bytes": 42074,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "EscritorioIX.png",
+    "file": "escritorio.webp",
+    "width": 1400,
+    "height": 1120,
+    "bytes": 100718,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "MacbookIX.png",
+    "file": "mockup-macbook.webp",
+    "width": 1180,
+    "height": 787,
+    "bytes": 48808,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "IphoneIX.png",
+    "file": "mockup-iphone.webp",
+    "width": 760,
+    "height": 1140,
+    "bytes": 33984,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "IpadIX.png",
+    "file": "mockup-ipad.webp",
+    "width": 980,
+    "height": 735,
+    "bytes": 41334,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "IconesIX.png",
+    "file": "icones.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 56800,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "RedesIX.png",
+    "file": "redes.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 34366,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "TemasIX.png",
+    "file": "temas.webp",
+    "width": 760,
+    "height": 760,
+    "bytes": 48810,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "perfil Luiz.jpg",
+    "file": "perfil-luiz.webp",
+    "width": 720,
+    "height": 793,
+    "bytes": 17400,
+    "sourceHasAlpha": false
+  },
+  {
+    "source": "Perfil Karina.JPG",
+    "file": "perfil-karina.webp",
+    "width": 720,
+    "height": 1080,
+    "bytes": 103430,
+    "sourceHasAlpha": false
+  },
+  {
+    "file": "og-image.png",
+    "width": 1200,
+    "height": 630,
+    "bytes": 507006
+  },
+  {
+    "file": "favicon.png",
+    "width": 96,
+    "height": 96,
+    "bytes": 8795
+  },
+  {
+    "file": "apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 28393
+  }
+]

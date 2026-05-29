@@ -1,142 +1,79 @@
-'use client';
+import { ASSETS } from '@/lib/assets';
+import { AssetImage } from './ui/asset-image';
+import { SectionReveal } from './section-reveal';
 
-import { motion } from 'framer-motion';
-import { FadeUpBlock } from './ui/animated-text';
-import { EASE_OUT_EXPO } from '@/lib/motion';
+const examples = [
+  {
+    label: 'Exemplo de solução',
+    title: 'Site que explica a oferta',
+    body: 'Uma página clara, visualmente forte e pronta para receber tráfego de campanhas, redes sociais ou indicação.',
+    image: ASSETS.mockups.macbook,
+    alt: 'Aplicação visual da marca Impulso X em notebook',
+    className: 'lg:col-span-7',
+  },
+  {
+    label: 'Modelo de aplicação',
+    title: 'Atendimento conectado',
+    body: 'Formulários, WhatsApp e automações para reduzir demora na primeira resposta.',
+    image: ASSETS.mockups.iphone,
+    alt: 'Aplicação visual da marca Impulso X em celular',
+    className: 'lg:col-span-5',
+  },
+  {
+    label: 'Possibilidade de projeto',
+    title: 'Marca consistente nos canais',
+    body: 'Identidade, temas e formatos visuais para a empresa parecer a mesma em cada ponto de contato.',
+    image: ASSETS.mockups.ipad,
+    alt: 'Aplicação visual da marca Impulso X em tablet',
+    className: 'lg:col-span-5',
+  },
+  {
+    label: 'Exemplo de solução',
+    title: 'Conteúdo mais organizado',
+    body: 'Templates e direção visual para redes, propostas e comunicações comerciais.',
+    image: ASSETS.mockups.redes,
+    alt: 'Peças visuais de redes sociais com identidade Impulso X',
+    className: 'lg:col-span-7',
+  },
+];
 
 export function Cases() {
   return (
-    <section
-      id="cases"
-      className="relative bg-ink2 py-section overflow-hidden"
-      aria-labelledby="cases-heading"
-    >
+    <section id="exemplos" className="section-shell bg-ink" aria-labelledby="examples-heading">
       <div className="container-x">
-        <FadeUpBlock>
-          <span className="text-[11px] text-gold tracking-[0.3em] uppercase font-display font-medium">
-            Cases
-          </span>
-          <h2
-            id="cases-heading"
-            className="mt-6 font-display font-extrabold uppercase text-cream text-display track-tight-caps text-balance max-w-4xl"
-          >
-            Operações que rodam.
-          </h2>
-        </FadeUpBlock>
-
-        <div className="mt-16 grid lg:grid-cols-12 gap-6">
-          {/* Featured case */}
-          <motion.article
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.9, ease: EASE_OUT_EXPO }}
-            className="lg:col-span-7 relative border border-grafite/60 bg-ink hover:border-gold/50 transition-colors duration-500 overflow-hidden"
-          >
-            {/* Abstract visual — geometric mock */}
-            <div className="relative aspect-[16/10] bg-ink overflow-hidden">
-              <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 100%, rgba(212,175,55,0.18) 0%, transparent 60%)' }} />
-              {/* SVG grid pattern */}
-              <svg className="absolute inset-0 w-full h-full opacity-40" aria-hidden>
-                <defs>
-                  <pattern id="grid-mp" width="32" height="32" patternUnits="userSpaceOnUse">
-                    <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#3A3A3A" strokeWidth="0.5" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid-mp)" />
-              </svg>
-              {/* Mock UI cards */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="grid grid-cols-3 gap-3 w-[78%]">
-                  {[...Array(6)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="aspect-[4/3] border border-grafite/80 bg-ink/70 backdrop-blur-sm flex flex-col p-3 gap-1.5"
-                    >
-                      <div className="h-1 w-6 bg-gold/70" />
-                      <div className="h-1 w-12 bg-grafite" />
-                      <div className="mt-auto h-2 w-8 bg-cream/30" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Floating tag */}
-              <span className="absolute top-5 left-5 text-[10px] tracking-[0.3em] uppercase text-gold border border-gold/60 px-2.5 py-1 bg-ink/60 backdrop-blur">
-                Em operação
-              </span>
-            </div>
-
-            <div className="p-8 md:p-10">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-display font-extrabold text-gold text-sm tracking-[0.25em] uppercase">
-                  Mimo Power
-                </span>
-                <span className="h-px w-8 bg-grafite" />
-                <span className="text-mist text-xs tracking-wider uppercase">Case principal</span>
-              </div>
-              <h3 className="font-display font-bold text-cream text-2xl md:text-3xl uppercase tracking-wide">
-                Ecossistema digital completo
-              </h3>
-              <p className="mt-4 text-mist text-pretty max-w-prose">
-                Loja, site institucional, 3 bots Telegram (Cléo, Loui, Ladeira),
-                hub administrativo 360° e calendário editorial conectado.
-                Tudo integrado num único stack operacional.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {['Site', 'Bots IA', 'Hub 360°', 'Branding', 'Automação'].map((t) => (
-                  <span key={t} className="text-[10px] tracking-[0.2em] uppercase text-cream border border-grafite/60 px-2.5 py-1">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.article>
-
-          {/* Two stacked concept cases */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            {[
-              {
-                tag: 'Conceito',
-                title: 'Automação Comercial',
-                body: 'Funil + CRM + IA respondendo lead em segundos, 24/7.',
-                tags: ['IA', 'Funil', 'Integração'],
-              },
-              {
-                tag: 'Conceito',
-                title: 'Dashboard Operacional',
-                body: 'Métricas-chave consolidadas num só painel — decisão por dado, não achismo.',
-                tags: ['Dados', 'BI', 'Tempo real'],
-              },
-            ].map((c, i) => (
-              <motion.article
-                key={c.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.15 + i * 0.1 }}
-                className="group relative border border-grafite/60 bg-ink hover:border-gold/50 transition-colors duration-500 p-7 md:p-9 flex-1"
-              >
-                <div className="flex items-center gap-2 mb-5">
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-gold border border-gold/50 px-2 py-0.5">
-                    {c.tag}
-                  </span>
-                </div>
-                <h3 className="font-display font-bold text-cream text-xl md:text-2xl uppercase tracking-wide">
-                  {c.title}
-                </h3>
-                <p className="mt-3 text-mist text-sm md:text-base text-pretty">
-                  {c.body}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {c.tags.map((t) => (
-                    <span key={t} className="text-[10px] tracking-[0.2em] uppercase text-mist border border-grafite/60 px-2 py-0.5 group-hover:border-gold-dim transition-colors duration-500">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
+        <SectionReveal className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <span className="section-kicker">Prova de capacidade</span>
+            <h2 id="examples-heading" className="mt-6 max-w-[12ch] font-display text-display font-bold text-cream text-balance">
+              O que pode ser construído
+            </h2>
           </div>
+          <p className="max-w-prose text-lg leading-relaxed text-steel text-pretty">
+            Estes são exemplos de aplicação da identidade e do tipo de entrega que a Impulso X pode montar.
+            Não são projetos reais publicados; são possibilidades de projeto.
+          </p>
+        </SectionReveal>
+
+        <div className="mt-14 grid gap-5 lg:grid-cols-12">
+          {examples.map((example) => (
+            <article key={example.title} className={`metal-panel overflow-hidden ${example.className}`}>
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-cream/10 bg-ink">
+                <AssetImage
+                  src={example.image.src}
+                  alt={example.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out-expo hover:scale-[1.025]"
+                  sizes="(min-width: 1024px) 58vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0.05),rgba(13,13,13,0.42))]" />
+              </div>
+              <div className="p-6 md:p-8">
+                <p className="font-display text-sm font-bold text-gold">{example.label}</p>
+                <h3 className="mt-3 font-display text-3xl font-bold text-cream">{example.title}</h3>
+                <p className="mt-4 max-w-prose text-base leading-relaxed text-steel text-pretty">{example.body}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
