@@ -1,30 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { WordRotator } from './ui/word-rotator';
-import { LogoShine } from './ui/logo-shine';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReduced = useReducedMotion();
-
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
 
   // Parallax — only compositor props (transform/opacity)
-  const bgY = useTransform(scrollYProgress, [0, 1], prefersReduced ? ['0%', '0%'] : ['0%', '10%']);
-
-  // Shield: starts centered (y = -50% of own height from top:50%) and drifts up on scroll
-  const shieldY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReduced ? ['-50%', '-50%'] : ['-50%', '-58%'],
-  );
-  const shieldOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.2]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
   const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -75,48 +64,19 @@ export function Hero() {
         />
       </div>
 
-      {/* Gold ambient glow behind shield — desktop only */}
+      {/* Gold ambient glow — right side, desktop only — atmosphere only, no mark drawn */}
       <div
         aria-hidden
-        className="pointer-events-none absolute right-[-2%] top-[50%] hidden md:block"
+        className="pointer-events-none absolute right-0 top-[50%] hidden md:block"
         style={{
-          width: 'clamp(360px, 42vw, 560px)',
+          width: 'clamp(300px, 36vw, 480px)',
           transform: 'translateY(-50%)',
           aspectRatio: '1',
           background:
-            'radial-gradient(ellipse 58% 58% at 55% 48%, rgba(201,162,39,0.16) 0%, transparent 70%)',
-          filter: 'blur(30px)',
+            'radial-gradient(ellipse 58% 58% at 55% 48%, rgba(201,162,39,0.10) 0%, transparent 70%)',
+          filter: 'blur(40px)',
         }}
       />
-
-      {/* Shield — desktop only. Width clamped so it never overwhelms the hero
-          at laptop sizes. Centered vertically via y:-50% (from top:50%). */}
-      <motion.div
-        aria-hidden
-        style={{ y: shieldY, opacity: shieldOpacity }}
-        className="pointer-events-none absolute right-[-2%] top-[50%] hidden select-none md:block will-change-transform"
-      >
-        {/* Inner: handles logo-zoom + clips LogoShine sweep to shield bounds */}
-        <div
-          className="relative overflow-hidden"
-          style={{
-            width: 'clamp(360px, 42vw, 560px)',
-            aspectRatio: '1 / 1',
-            animation: 'logo-zoom 14s ease-in-out infinite',
-          }}
-        >
-          <Image
-            src={ASSETS.mark.src}
-            alt=""
-            width={ASSETS.mark.width}
-            height={ASSETS.mark.height}
-            priority
-            className="h-auto w-full"
-            style={{ opacity: 0.45 }}
-          />
-          <LogoShine variant="full" />
-        </div>
-      </motion.div>
 
       {/* Content */}
       <div className="container-x relative z-10">
