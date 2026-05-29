@@ -65,11 +65,6 @@ export const metadata: Metadata = {
       'Estratégia, design, IA e automação para organizar sua presença digital e reduzir tarefas manuais.',
     images: ['/og-image.png'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
 };
 
 export const viewport: Viewport = {
@@ -92,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="preload"
           as="image"
-          href="/assets/identidade/fundo-site-0-mobile.webp"
+          href="/assets/identidade/fundo-site-0-desktop.webp"
           media="(max-width: 767px)"
         />
         <script
@@ -123,6 +118,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Pular para o conteúdo
         </a>
 
+        {/* Scroll progress — gold left-edge bar (CSS scroll-driven, progressive) */}
+        <div aria-hidden className="scroll-line" />
+
+        {/* Film grain */}
         <div aria-hidden className="grain">
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
             <filter id="noise-filter">

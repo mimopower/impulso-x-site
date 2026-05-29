@@ -1,13 +1,15 @@
 export const ASSETS = {
   hero: {
     desktop: '/assets/identidade/fundo-site-0-desktop.webp',
-    mobile: '/assets/identidade/fundo-site-0-mobile.webp',
+    // Desktop image on mobile: 1717x916 at object-cover gives ~1.86x retina density,
+    // much sharper than the 900x480 landscape crop. object-[64%_center] frames the shield.
+    mobile: '/assets/identidade/fundo-site-0-desktop.webp',
     width: 1717,
     height: 916,
   },
   heroAlt: {
     desktop: '/assets/identidade/fundo-site-1-desktop.webp',
-    mobile: '/assets/identidade/fundo-site-1-mobile.webp',
+    mobile: '/assets/identidade/fundo-site-1-desktop.webp',
     width: 1717,
     height: 916,
   },

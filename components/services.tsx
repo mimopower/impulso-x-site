@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { SectionReveal } from './section-reveal';
 
@@ -18,43 +21,77 @@ const pillars = [
     title: 'Marca, conteúdo e estratégia',
     body: 'Identidade, comunicação e direcionamento para sua empresa transmitir mais confiança antes mesmo da primeira conversa.',
   },
-];
+] as const;
+
+const ease = [0.23, 1, 0.32, 1] as const;
 
 export function Services() {
   return (
     <section id="servicos" className="section-shell relative overflow-hidden bg-ink2" aria-labelledby="services-heading">
       <div aria-hidden className="gold-hairline absolute inset-x-0 top-0" />
+
+      {/* Escudo watermark — brand atmosphere behind section */}
       <Image
         src={ASSETS.mark.src}
         alt=""
         width={ASSETS.mark.width}
         height={ASSETS.mark.height}
-        className="pointer-events-none absolute -right-40 top-16 hidden w-[520px] opacity-[0.055] mix-blend-screen lg:block"
+        className="pointer-events-none absolute -right-32 top-8 hidden w-[500px] select-none lg:block"
+        style={{ opacity: 0.05 }}
       />
 
       <div className="container-x relative">
         <SectionReveal className="max-w-3xl">
-          <span className="section-kicker">Soluções</span>
-          <h2 id="services-heading" className="mt-6 font-display text-display font-bold text-cream text-balance">
+          {/* No eyebrow here — eyebrow budget used at Hero and Process only */}
+          <h2
+            id="services-heading"
+            className="font-display text-display font-bold text-cream text-balance"
+          >
             O que a Impulso X organiza
           </h2>
-          <p className="mt-6 max-w-prose text-lg leading-relaxed text-steel text-pretty">
-            Três frentes que se conectam sem confundir o cliente: presença, rotina e posicionamento.
-          </p>
         </SectionReveal>
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-3">
-          {pillars.map((pillar) => (
-            <article key={pillar.n} className="metal-panel group min-h-[310px] p-6 transition-transform duration-500 ease-out-expo hover:-translate-y-1 md:p-8">
-              <div className="flex items-center justify-between border-b border-cream/10 pb-5">
-                <span className="font-display text-sm font-bold text-gold tabular">{pillar.n}</span>
-                <span className="h-2 w-2 rounded-[2px] bg-gold/80" aria-hidden />
-              </div>
-              <h3 className="mt-8 max-w-[12ch] font-display text-3xl font-bold text-cream md:text-4xl">
-                {pillar.title}
+        {/* Editorial horizontal list — NOT 3 identical cards (taste-skill ban).
+            Each pillar is a full-width row with large outline number.
+            Emil: clip-path wipe-in for the line separator reveal. */}
+        <div className="mt-16">
+          {pillars.map((p, i) => (
+            <motion.article
+              key={p.n}
+              className="group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-10 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-12"
+              transition={{ duration: 0.4, ease }}
+            >
+              {/* Gold hover sweep — clip-path hardware-accelerated */}
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0 }}
+                whileHover={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                style={{
+                  background: 'linear-gradient(90deg, rgba(201,162,39,0.04) 0%, transparent 100%)',
+                }}
+              />
+
+              {/* Large outline number — Remotion-philosophy: deliberate entrance position */}
+              <span
+                className="font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
+                style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
+                aria-hidden
+              >
+                {p.n}
+              </span>
+
+              {/* Title */}
+              <h3 className="self-center font-display text-2xl font-bold text-cream group-hover:text-gold transition-colors duration-400 md:text-3xl">
+                {p.title}
               </h3>
-              <p className="mt-6 text-base leading-relaxed text-steel text-pretty">{pillar.body}</p>
-            </article>
+
+              {/* Body — only visible on desktop grid col 3 */}
+              <p className="col-span-2 font-sans text-base leading-relaxed text-steel text-pretty md:col-span-1 md:self-center">
+                {p.body}
+              </p>
+            </motion.article>
           ))}
         </div>
       </div>

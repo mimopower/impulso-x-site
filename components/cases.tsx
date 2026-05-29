@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ASSETS } from '@/lib/assets';
 import { AssetImage } from './ui/asset-image';
 import { SectionReveal } from './section-reveal';
@@ -35,29 +39,48 @@ const examples = [
     alt: 'Peças visuais de redes sociais com identidade Impulso X',
     className: 'lg:col-span-7',
   },
-];
+] as const;
+
+const ease = [0.23, 1, 0.32, 1] as const;
 
 export function Cases() {
   return (
-    <section id="exemplos" className="section-shell bg-ink" aria-labelledby="examples-heading">
-      <div className="container-x">
+    <section id="exemplos" className="section-shell relative overflow-hidden bg-ink" aria-labelledby="examples-heading">
+      {/* Shield watermark — brand atmosphere. Same technique as services but at lower opacity. */}
+      <Image
+        src={ASSETS.mark.src}
+        alt=""
+        width={ASSETS.mark.width}
+        height={ASSETS.mark.height}
+        className="pointer-events-none absolute left-1/2 top-1/2 w-[420px] -translate-x-1/2 -translate-y-1/2 select-none"
+        style={{ opacity: 0.03 }}
+      />
+
+      <div className="container-x relative">
         <SectionReveal className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
-            <span className="section-kicker">Prova de capacidade</span>
-            <h2 id="examples-heading" className="mt-6 max-w-[12ch] font-display text-display font-bold text-cream text-balance">
+            {/* No eyebrow here — eyebrow budget exhausted */}
+            <h2
+              id="examples-heading"
+              className="max-w-[12ch] font-display text-display font-bold text-cream text-balance"
+            >
               O que pode ser construído
             </h2>
           </div>
-          <p className="max-w-prose text-lg leading-relaxed text-steel text-pretty">
+          <p className="max-w-prose font-sans text-lg leading-relaxed text-steel text-pretty">
             Estes são exemplos de aplicação da identidade e do tipo de entrega que a Impulso X pode montar.
             Não são projetos reais publicados; são possibilidades de projeto.
           </p>
         </SectionReveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-12">
-          {examples.map((example) => (
-            <article key={example.title} className={`metal-panel overflow-hidden ${example.className}`}>
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-cream/10 bg-ink">
+          {examples.map((example, i) => (
+            <motion.article
+              key={example.title}
+              className={`metal-panel overflow-hidden ${example.className}`}
+              transition={{ duration: 0.4, ease }}
+            >
+              <div className="relative overflow-hidden border-b border-cream/10 bg-ink" style={{ aspectRatio: '16/10' }}>
                 <AssetImage
                   src={example.image.src}
                   alt={example.alt}
@@ -65,14 +88,16 @@ export function Cases() {
                   className="object-cover transition-transform duration-700 ease-out-expo hover:scale-[1.025]"
                   sizes="(min-width: 1024px) 58vw, 100vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0.05),rgba(13,13,13,0.42))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0.05),rgba(13,13,13,0.38))]" />
               </div>
               <div className="p-6 md:p-8">
                 <p className="font-display text-sm font-bold text-gold">{example.label}</p>
                 <h3 className="mt-3 font-display text-3xl font-bold text-cream">{example.title}</h3>
-                <p className="mt-4 max-w-prose text-base leading-relaxed text-steel text-pretty">{example.body}</p>
+                <p className="mt-4 max-w-prose font-sans text-base leading-relaxed text-steel text-pretty">
+                  {example.body}
+                </p>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

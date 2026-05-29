@@ -13,6 +13,12 @@
     --metal: #888888;
     --steel: #b8b2a5;
     --cream: #f4f0e7;
+
+    /* Emil Kowalski easing vars — strong custom curves */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   *,
@@ -30,11 +36,9 @@
   }
 
   body {
-    min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
-    background:
-      linear-gradient(180deg, rgba(13, 13, 13, 0.98), rgba(13, 13, 13, 1)),
-      var(--ink);
+    background: var(--ink);
     color: var(--cream);
     font-family: var(--font-sans), system-ui, sans-serif;
   }
@@ -58,13 +62,15 @@
     html {
       scroll-behavior: auto;
     }
-
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    .scroll-line {
+      display: none;
     }
   }
 }
@@ -84,41 +90,69 @@
 
   .hairline {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(136, 136, 136, 0.38), transparent);
+    background: linear-gradient(90deg, transparent, rgba(136, 136, 136, 0.3), transparent);
   }
 
   .gold-hairline {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.45), transparent);
   }
 
+  /* Panel with metallic glass feel — Emil: inner border highlight */
   .metal-panel {
-    border: 1px solid rgba(184, 178, 165, 0.14);
+    border: 1px solid rgba(184, 178, 165, 0.12);
     border-radius: 8px;
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
-      rgba(26, 26, 26, 0.74);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+      rgba(26, 26, 26, 0.7);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
+  /* Photo frame with gold border */
   .image-frame {
-    border: 1px solid rgba(201, 162, 39, 0.28);
+    border: 1px solid rgba(201, 162, 39, 0.22);
     border-radius: 8px;
-    background: rgba(13, 13, 13, 0.72);
+    background: rgba(13, 13, 13, 0.7);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 22px 80px rgba(0, 0, 0, 0.32);
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 24px 80px rgba(0, 0, 0, 0.36);
   }
 
+  /* Film grain — Emil: fixed, pointer-events-none, no scrolling containers */
   .grain {
     position: fixed;
     inset: 0;
     z-index: 80;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: 0.045;
     mix-blend-mode: overlay;
   }
 
+  /* Scroll progress indicator — gold left-edge bar */
+  .scroll-line {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 2.5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), rgba(201, 162, 39, 0.35));
+    transform-origin: top;
+    transform: scaleY(0);
+    z-index: 150;
+    pointer-events: none;
+  }
+
+  /* Progressive enhancement: CSS scroll-driven animation (Chrome/Edge/Safari) */
+  @supports (animation-timeline: scroll()) {
+    .scroll-line {
+      animation: scroll-line-grow linear;
+      animation-timeline: scroll();
+      animation-range: 0% 100%;
+      transform: none;
+    }
+  }
+
+  /* Eyebrow / kicker label */
   .section-kicker {
     display: inline-flex;
     align-items: center;
@@ -128,13 +162,15 @@
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   .section-kicker::before {
     content: "";
     width: 2rem;
     height: 1px;
-    background: rgba(201, 162, 39, 0.7);
+    background: rgba(201, 162, 39, 0.65);
+    flex-shrink: 0;
   }
 }
 
@@ -151,3 +187,36 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* Keyframes */
+@keyframes scroll-line-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes shield-breathe {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -10px, 0) scale(1.015); }
+}
+
+@keyframes gold-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(240%); opacity: 0; }
+}
+
+@keyframes clip-wipe-in {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to { clip-path: inset(0 0% 0 0); opacity: 1; }
+}
+
+/* Stagger helper: CSS cascade delays for pillar/step reveals */
+.stagger-item:nth-child(1) { animation-delay: 0ms; }
+.stagger-item:nth-child(2) { animation-delay: 60ms; }
+.stagger-item:nth-child(3) { animation-delay: 120ms; }
+.stagger-item:nth-child(4) { animation-delay: 180ms; }

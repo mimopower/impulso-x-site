@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { SectionReveal } from './section-reveal';
 
 const changes = [
@@ -7,29 +10,38 @@ const changes = [
   'Canais digitais mais claros.',
 ];
 
+const ease = [0.23, 1, 0.32, 1] as const;
+
 export function Differentials() {
   return (
     <section id="diferenciais" className="section-shell bg-ink" aria-labelledby="differentials-heading">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionReveal>
-            <span className="section-kicker">Na prática</span>
-            <h2 id="differentials-heading" className="mt-6 max-w-[11ch] font-display text-display font-bold text-cream text-balance">
+            {/* No eyebrow — budget used at Hero, Process, and CTA only */}
+            <h2
+              id="differentials-heading"
+              className="max-w-[11ch] font-display text-display font-bold text-cream text-balance"
+            >
               O que muda na prática
             </h2>
           </SectionReveal>
 
+          {/* Numbered large-type list — different family from services editorial list */}
           <div className="border-y border-cream/12">
-            {changes.map((change, index) => (
-              <div
+            {changes.map((change, i) => (
+              <motion.div
                 key={change}
-                className="group grid gap-4 border-b border-cream/12 py-6 last:border-b-0 sm:grid-cols-[72px_1fr] sm:items-center"
+                className="group flex items-center gap-5 border-b border-cream/12 py-7 last:border-b-0"
+                transition={{ duration: 0.3, ease }}
               >
-                <span className="font-display text-sm font-bold text-gold tabular">0{index + 1}</span>
-                <p className="font-display text-3xl font-semibold text-cream transition-colors duration-300 group-hover:text-gold md:text-5xl">
+                <span className="w-10 flex-shrink-0 font-display text-sm font-bold text-gold tabular">
+                  0{i + 1}
+                </span>
+                <p className="font-display text-3xl font-semibold text-cream transition-colors duration-300 group-hover:text-gold md:text-[2.6rem] md:leading-none">
                   {change}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

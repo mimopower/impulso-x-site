@@ -1,3 +1,7 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { AssetImage } from './ui/asset-image';
 import { SectionReveal } from './section-reveal';
@@ -8,6 +12,8 @@ const founders = [
     role: 'Tecnologia, estratégia e automação',
     image: ASSETS.founders.luiz,
     alt: 'Retrato de Luiz Otávio, cofundador da Impulso X',
+    photoClass: 'object-[50%_28%]',
+    side: 'left' as const,
     manifesto: [
       'Sou Luiz Otávio, engenheiro por formação e apaixonado por tecnologia, estratégia e soluções inteligentes. Sempre busquei unir inovação e criatividade para transformar ideias em experiências reais e negócios mais eficientes.',
       'Na Impulso X, meu foco é desenvolver soluções que conectem automação, posicionamento digital e inteligência artificial para ajudar empresas a crescerem de forma mais estratégica e organizada.',
@@ -19,6 +25,9 @@ const founders = [
     role: 'Criatividade, marca e comunicação',
     image: ASSETS.founders.karina,
     alt: 'Retrato de Karina, cofundadora da Impulso X',
+    // Desaturate Karina's bright background to fit the dark palette (Emil: CSS filters, not heavy edits)
+    photoClass: 'object-[50%_24%] saturate-[0.72] contrast-[1.08]',
+    side: 'right' as const,
     manifesto: [
       'Sou Karina, cofundadora da Impulso X e apaixonada por criatividade, comunicação e experiências que conectam marcas e pessoas de forma verdadeira.',
       'Atuo diretamente na parte criativa, marketing e construção da identidade da marca, buscando unir estratégia, inovação e autenticidade em cada projeto desenvolvido.',
@@ -28,57 +37,84 @@ const founders = [
   },
 ];
 
+function FounderCard({ founder, index }: { founder: typeof founders[0]; index: number }) {
+  const ref = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
+  const isRight = founder.side === 'right';
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  // Subtle parallax on photo — Emil: only transform/opacity, hardware-accelerated
+  const photoY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    prefersReduced ? ['0%', '0%'] : ['-4%', '4%']
+  );
+
+  return (
+    <motion.article
+      ref={ref}
+      className={`grid gap-0 border-t border-cream/12 lg:grid-cols-12 ${isRight ? 'lg:[&_.founder-photo]:order-last' : ''}`}
+      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+    >
+      {/* Photo — taller aspect ratio for cinematic presence */}
+      <div className="founder-photo lg:col-span-5">
+        <div className="image-frame relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
+          <motion.div className="absolute inset-0 will-change-transform" style={{ y: photoY }}>
+            <AssetImage
+              src={founder.image.src}
+              alt={founder.alt}
+              fill
+              className={`object-cover scale-[1.08] ${founder.photoClass}`}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          </motion.div>
+          {/* Bottom gradient for name overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0)_42%,rgba(13,13,13,0.82)_100%)]" />
+          {/* Name overlay on photo */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <p className="font-display text-3xl font-bold text-cream">{founder.name}</p>
+            <p className="mt-1 text-sm font-medium text-gold tracking-wide">{founder.role}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Manifesto text */}
+      <div className="flex flex-col justify-center px-0 py-10 lg:col-span-7 lg:px-12 lg:py-14">
+        {/* Name repeated as display heading — separate from photo for readers without images */}
+        <h3 className="font-display text-title font-bold text-cream">{founder.name}</h3>
+        <div className="mt-6 space-y-5 font-sans text-base leading-relaxed text-steel md:text-lg">
+          {founder.manifesto.map((paragraph) => (
+            <p key={paragraph} className="max-w-prose text-pretty">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export function Founders() {
   return (
     <section id="fundadores" className="section-shell overflow-hidden bg-ink2" aria-labelledby="founders-heading">
       <div className="container-x">
         <SectionReveal className="max-w-4xl">
-          <span className="section-kicker">Luiz e Karina</span>
-          <h2 id="founders-heading" className="mt-6 font-display text-display font-bold text-cream text-balance">
+          {/* No eyebrow — the photos communicate who this section is about */}
+          <h2 id="founders-heading" className="font-display text-display font-bold text-cream text-balance">
             Tecnologia e criatividade, lado a lado.
           </h2>
-          <p className="mt-6 max-w-prose text-lg leading-relaxed text-steel text-pretty">
+          <p className="mt-6 max-w-prose font-sans text-lg leading-relaxed text-steel text-pretty">
             A Impulso X nasce da união entre raciocínio técnico, visão de marca e cuidado na execução.
           </p>
         </SectionReveal>
 
-        <div className="mt-16 grid gap-12">
-          {founders.map((founder, index) => (
-            <article
-              key={founder.name}
-              className={`grid gap-8 border-t border-cream/12 pt-10 lg:grid-cols-12 lg:gap-12 ${
-                index % 2 === 1 ? 'lg:[&_.founder-photo]:order-2' : ''
-              }`}
-            >
-              <div className="founder-photo lg:col-span-5">
-                <div className="image-frame relative aspect-[4/5] overflow-hidden">
-                  <AssetImage
-                    src={founder.image.src}
-                    alt={founder.alt}
-                    fill
-                    className={`object-cover ${founder.name === 'Karina' ? 'object-[50%_34%] saturate-[0.82] contrast-[1.06]' : 'object-[50%_28%] saturate-[0.9] contrast-[1.08]'}`}
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0)_46%,rgba(13,13,13,0.64)_100%)]" />
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <p className="font-display text-3xl font-bold text-cream">{founder.name}</p>
-                    <p className="mt-1 text-sm font-medium text-gold">{founder.role}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col justify-center lg:col-span-7">
-                <p className="font-display text-sm font-bold text-gold tabular">0{index + 1}</p>
-                <h3 className="mt-4 font-display text-title font-bold text-cream">{founder.name}</h3>
-                <div className="mt-6 space-y-5 text-base leading-relaxed text-steel md:text-lg">
-                  {founder.manifesto.map((paragraph) => (
-                    <p key={paragraph} className="max-w-prose text-pretty">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </article>
+        <div className="mt-16 flex flex-col gap-0">
+          {founders.map((founder, i) => (
+            <FounderCard key={founder.name} founder={founder} index={i} />
           ))}
         </div>
       </div>
