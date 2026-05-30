@@ -81,8 +81,8 @@ export const ASSETS = {
     {
       name: 'Jamil — Treinamento Personalizado',
       src: '/assets/cases/jamil.webp',
-      width: 175,
-      height: 200,
+      width: 193,
+      height: 220,
     },
     {
       name: 'Ohana',
@@ -93,8 +93,14 @@ export const ASSETS = {
     {
       name: 'Mimo Power',
       src: '/assets/cases/mimo-power.webp',
-      width: 578,
-      height: 200,
+      width: 635,
+      height: 220,
+    },
+    {
+      name: 'Minas Eventos — Foodtruck e Barracas',
+      src: '/assets/cases/minas-eventos.webp',
+      width: 288,
+      height: 220,
     },
   ],
 } as const;

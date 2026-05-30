@@ -27,10 +27,12 @@ const jobs = [
   ['Perfil Karina.JPG', 'perfil-karina.webp', { width: 720, quality: 80 }],
 ];
 
+// Logos transparentes (sem flatten) — devem flutuar sobre o fundo preto da seção.
 const clientJobs = [
-  ['Jamil.PNG', 'jamil.webp', { height: 200, quality: 84, trim: true, flatten: true }],
-  ['Ohana.png', 'ohana.webp', { height: 200, quality: 84, trim: true, flatten: true }],
-  ['Mimo Power.PNG', 'mimo-power.webp', { height: 200, quality: 84, trim: true, flatten: true }],
+  ['Jamil.PNG', 'jamil.webp', { height: 220, quality: 86, trim: true }],
+  ['Ohana.png', 'ohana.webp', { height: 220, quality: 86, trim: true }],
+  ['Mimo Power.PNG', 'mimo-power.webp', { height: 220, quality: 86, trim: true }],
+  ['Food.PNG', 'minas-eventos.webp', { height: 220, quality: 86, trim: true }],
 ];
 
 async function optimize(inputName, outputName, options, dirs = {}) {

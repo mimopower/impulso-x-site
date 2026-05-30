@@ -2,9 +2,9 @@
   {
     "source": "Jamil.PNG",
     "file": "jamil.webp",
-    "width": 175,
-    "height": 200,
-    "bytes": 8566,
+    "width": 193,
+    "height": 220,
+    "bytes": 19436,
     "sourceHasAlpha": true
   },
   {
@@ -12,15 +12,23 @@
     "file": "ohana.webp",
     "width": 332,
     "height": 136,
-    "bytes": 9300,
+    "bytes": 24588,
     "sourceHasAlpha": true
   },
   {
     "source": "Mimo Power.PNG",
     "file": "mimo-power.webp",
-    "width": 578,
-    "height": 200,
-    "bytes": 13494,
+    "width": 635,
+    "height": 220,
+    "bytes": 29172,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "Food.PNG",
+    "file": "minas-eventos.webp",
+    "width": 288,
+    "height": 220,
+    "bytes": 28726,
     "sourceHasAlpha": true
   }
 ]
