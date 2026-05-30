@@ -75,29 +75,34 @@ export function Cases() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-12">
           {examples.map((example, i) => (
-            <motion.article
+            <div
               key={example.title}
-              className={`metal-panel overflow-hidden ${example.className}`}
-              transition={{ duration: 0.4, ease }}
+              className={`living-border ${example.className}`}
+              style={{ animationDelay: `${i * 0.9}s` }}
             >
-              <div className="relative overflow-hidden border-b border-cream/10 bg-ink" style={{ aspectRatio: '16/10' }}>
-                <AssetImage
-                  src={example.image.src}
-                  alt={example.alt}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out-expo hover:scale-[1.025]"
-                  sizes="(min-width: 1024px) 58vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0.05),rgba(13,13,13,0.38))]" />
-              </div>
-              <div className="p-6 md:p-8">
-                <p className="font-display text-sm font-bold text-gold">{example.label}</p>
-                <h3 className="mt-3 font-display text-3xl font-bold text-cream">{example.title}</h3>
-                <p className="mt-4 max-w-prose font-sans text-base leading-[1.5] text-steel text-pretty">
-                  {example.body}
-                </p>
-              </div>
-            </motion.article>
+              <motion.article
+                className="metal-panel relative z-10 h-full overflow-hidden"
+                transition={{ duration: 0.4, ease }}
+              >
+                <div className="relative overflow-hidden border-b border-cream/10 bg-ink" style={{ aspectRatio: '16/10' }}>
+                  <AssetImage
+                    src={example.image.src}
+                    alt={example.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out-expo hover:scale-[1.025]"
+                    sizes="(min-width: 1024px) 58vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,13,13,0.05),rgba(13,13,13,0.38))]" />
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-display text-sm font-bold text-gold">{example.label}</p>
+                  <h3 className="mt-3 font-display text-3xl font-bold text-cream">{example.title}</h3>
+                  <p className="mt-4 max-w-prose font-sans text-base leading-[1.5] text-steel text-pretty">
+                    {example.body}
+                  </p>
+                </div>
+              </motion.article>
+            </div>
           ))}
         </div>
       </div>

@@ -3,8 +3,10 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const root = path.resolve(import.meta.dirname, '..');
-const sourceDir = path.resolve(root, '..', 'identidade');
-const outputDir = path.resolve(root, 'public', 'assets', 'identidade');
+const identitySourceDir = path.resolve(root, '..', 'identidade');
+const identityOutputDir = path.resolve(root, 'public', 'assets', 'identidade');
+const casesSourceDir = path.resolve(root, '..', 'cases');
+const casesOutputDir = path.resolve(root, 'public', 'assets', 'cases');
 
 const jobs = [
   ['Fundosite0IX.png', 'fundo-site-0-desktop.webp', { width: 1717, quality: 76 }],
@@ -25,22 +27,40 @@ const jobs = [
   ['Perfil Karina.JPG', 'perfil-karina.webp', { width: 720, quality: 80 }],
 ];
 
-async function optimize(inputName, outputName, options) {
+const clientJobs = [
+  ['Jamil.PNG', 'jamil.webp', { height: 200, quality: 84, trim: true, flatten: true }],
+  ['Ohana.png', 'ohana.webp', { height: 200, quality: 84, trim: true, flatten: true }],
+  ['Mimo Power.PNG', 'mimo-power.webp', { height: 200, quality: 84, trim: true, flatten: true }],
+];
+
+async function optimize(inputName, outputName, options, dirs = {}) {
+  const sourceDir = dirs.sourceDir ?? identitySourceDir;
+  const outputDir = dirs.outputDir ?? identityOutputDir;
   const inputPath = path.join(sourceDir, inputName);
   const outputPath = path.join(outputDir, outputName);
-  const image = sharp(inputPath, { failOn: 'none' }).rotate();
+  let image = sharp(inputPath, { failOn: 'none' }).rotate();
   const metadata = await image.metadata();
   const hasAlpha = Boolean(metadata.hasAlpha);
 
+  if (options.trim) {
+    image = image.trim();
+  }
+
+  image = image.resize({
+    width: options.width,
+    height: options.height,
+    withoutEnlargement: true,
+    fit: 'inside',
+  });
+
+  if (options.flatten) {
+    image = image.flatten({ background: '#ffffff' });
+  }
+
   await image
-    .resize({
-      width: options.width,
-      withoutEnlargement: true,
-      fit: 'inside',
-    })
     .webp({
       quality: options.quality,
-      alphaQuality: hasAlpha ? 88 : undefined,
+      alphaQuality: hasAlpha && !options.flatten ? 88 : undefined,
       effort: 5,
     })
     .toFile(outputPath);
@@ -59,8 +79,8 @@ async function optimize(inputName, outputName, options) {
 }
 
 async function makeOgImage() {
-  const background = path.join(outputDir, 'fundo-site-0-desktop.webp');
-  const logo = path.join(outputDir, 'marca-completa.webp');
+  const background = path.join(identityOutputDir, 'fundo-site-0-desktop.webp');
+  const logo = path.join(identityOutputDir, 'marca-completa.webp');
   const out = path.join(root, 'public', 'og-image.png');
 
   const canvas = sharp(background)
@@ -100,7 +120,7 @@ async function makeOgImage() {
 }
 
 async function makeIcons() {
-  const logo = path.join(outputDir, 'marca-escudo.webp');
+  const logo = path.join(identityOutputDir, 'marca-escudo.webp');
   const favicons = [
     ['favicon.png', 96],
     ['apple-touch-icon.png', 180],
@@ -118,7 +138,8 @@ async function makeIcons() {
   return results;
 }
 
-await fs.mkdir(outputDir, { recursive: true });
+await fs.mkdir(identityOutputDir, { recursive: true });
+await fs.mkdir(casesOutputDir, { recursive: true });
 
 const manifest = [];
 for (const job of jobs) {
@@ -128,11 +149,26 @@ manifest.push(await makeOgImage());
 manifest.push(...(await makeIcons()));
 
 await fs.writeFile(
-  path.join(outputDir, 'manifest.json'),
+  path.join(identityOutputDir, 'manifest.json'),
   `${JSON.stringify(manifest, null, 2)}\n`,
 );
 
-for (const item of manifest) {
+const casesManifest = [];
+for (const job of clientJobs) {
+  casesManifest.push(
+    await optimize(...job, {
+      sourceDir: casesSourceDir,
+      outputDir: casesOutputDir,
+    }),
+  );
+}
+
+await fs.writeFile(
+  path.join(casesOutputDir, 'manifest.json'),
+  `${JSON.stringify(casesManifest, null, 2)}\n`,
+);
+
+for (const item of [...manifest, ...casesManifest]) {
   const kb = `${(item.bytes / 1024).toFixed(1)} KB`.padStart(10, ' ');
   const size = `${item.width}x${item.height}`.padEnd(11, ' ');
   console.log(`${item.file.padEnd(28, ' ')} ${size} ${kb}`);

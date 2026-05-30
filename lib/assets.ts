@@ -77,4 +77,24 @@ export const ASSETS = {
       height: 640,
     },
   },
+  clients: [
+    {
+      name: 'Jamil — Treinamento Personalizado',
+      src: '/assets/cases/jamil.webp',
+      width: 175,
+      height: 200,
+    },
+    {
+      name: 'Ohana',
+      src: '/assets/cases/ohana.webp',
+      width: 332,
+      height: 136,
+    },
+    {
+      name: 'Mimo Power',
+      src: '/assets/cases/mimo-power.webp',
+      width: 578,
+      height: 200,
+    },
+  ],
 } as const;

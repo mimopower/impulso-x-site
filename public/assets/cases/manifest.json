@@ -1,0 +1,26 @@
+[
+  {
+    "source": "Jamil.PNG",
+    "file": "jamil.webp",
+    "width": 175,
+    "height": 200,
+    "bytes": 8566,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "Ohana.png",
+    "file": "ohana.webp",
+    "width": 332,
+    "height": 136,
+    "bytes": 9300,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "Mimo Power.PNG",
+    "file": "mimo-power.webp",
+    "width": 578,
+    "height": 200,
+    "bytes": 13494,
+    "sourceHasAlpha": true
+  }
+]
