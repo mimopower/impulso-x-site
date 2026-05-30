@@ -30,7 +30,7 @@ export function Problem() {
             </h2>
             <p className="mt-5 max-w-prose text-lead text-steel text-pretty">
               A maioria das empresas não trava por falta de esforço. Trava porque site,
-              atendimento, marca e processos foram montados aos poucos, sem uma estrutura comum.
+              atendimento, marca e processos foram montados sem uma estrutura comum.
             </p>
           </SectionReveal>
 

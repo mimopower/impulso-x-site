@@ -17,7 +17,7 @@ const pillars = [
   {
     n: '03',
     title: 'Marca, conteúdo e estratégia',
-    body: 'Identidade, comunicação e direcionamento para sua empresa transmitir mais confiança antes mesmo da primeira conversa.',
+    body: 'Identidade, comunicação e direcionamento para sua empresa transmitir mais confiança antes mesmo da primeira conversa com o possível cliente.',
   },
 ] as const;
 
