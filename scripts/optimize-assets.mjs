@@ -23,7 +23,7 @@ const jobs = [
   ['IconesIX.png', 'icones.webp', { width: 960, quality: 78 }],
   ['RedesIX.png', 'redes.webp', { width: 960, quality: 78 }],
   ['TemasIX.png', 'temas.webp', { width: 760, quality: 78 }],
-  ['perfil Luiz.jpg', 'perfil-luiz.webp', { width: 720, quality: 80 }],
+  ['perfil Luizv2.png', 'perfil-luiz.webp', { width: 720, quality: 80 }],
   ['Perfil Karina.JPG', 'perfil-karina.webp', { width: 720, quality: 80 }],
 ];
 

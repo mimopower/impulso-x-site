@@ -37,7 +37,7 @@ export const ASSETS = {
     luiz: {
       src: '/assets/identidade/perfil-luiz.webp',
       width: 720,
-      height: 793,
+      height: 798,
     },
     karina: {
       src: '/assets/identidade/perfil-karina.webp',
