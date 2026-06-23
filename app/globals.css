@@ -469,44 +469,40 @@
       filter 220ms var(--ease-expo);
   }
 
+  /* Placa clara só atrás dos dois logos coloridos sobre transparência.
+     Casa das Magnólias e Vivian somem no preto; sobre cream, a cor real lê com clareza. */
   .client-logo-chip--highlight {
     opacity: 1;
-    filter:
-      drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5))
-      drop-shadow(0 0 18px rgba(236, 121, 169, 0.18));
+    background: var(--cream, #f4f0e7);
+    border: 1px solid rgba(201, 162, 39, 0.28);
+    border-radius: 14px;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
   }
 
   .client-logo-chip--seal {
     width: clamp(9.5rem, 14vw, 12rem);
     height: clamp(5.9rem, 7.6vw, 7.2rem);
-    padding: 0.15rem 1.15rem;
+    padding: 0.5rem 1rem;
   }
 
   .client-logo-chip--wide-pink {
     height: clamp(5.3rem, 7vw, 6.5rem);
-    padding-inline: 1rem;
+    padding: 0.55rem 1.1rem;
   }
 
   .client-logo-image {
     transform-origin: center;
   }
 
+  /* Cor real da marca sobre a placa clara, sem filtro de brilho/saturação. */
   .client-logo-image--pink-seal {
-    transform: scale(1.28);
-    filter:
-      brightness(1.32)
-      contrast(1.18)
-      saturate(1.25)
-      drop-shadow(0 0 10px rgba(236, 121, 169, 0.25));
+    transform: scale(1.02);
+    filter: none;
   }
 
   .client-logo-image--pink-wide {
-    transform: scale(1.2);
-    filter:
-      brightness(1.58)
-      contrast(1.22)
-      saturate(1.35)
-      drop-shadow(0 0 12px rgba(236, 121, 169, 0.26));
+    transform: scale(1.02);
+    filter: none;
   }
 
   .client-logo-chip:hover {
