@@ -70,7 +70,7 @@ export function IntroReveal() {
       // The animation may run without storage; its fallback still releases the page.
     }
 
-    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 1300 : 1600;
+    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 2600 : 2950;
     const fallback = window.setTimeout(finish, fallbackMs);
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted) finish();
@@ -110,12 +110,13 @@ export function IntroReveal() {
         <span className="intro-reveal__wordmark" role="img" aria-label="Impulso X">
           <span className="intro-reveal__wordmark-text" aria-hidden="true">
             {WORDMARK_LETTERS.map((letter, index) => (
-              <span
-                key={`${letter}-${index}`}
-                className={letter === 'X' ? 'intro-reveal__letter intro-reveal__letter--gold' : 'intro-reveal__letter'}
-                style={{ '--letter-delay': `${index * 42}ms` } as CSSProperties}
-              >
-                {letter}
+              <span className="intro-reveal__letter-mask" key={`${letter}-${index}`}>
+                <span
+                  className={letter === 'X' ? 'intro-reveal__letter intro-reveal__letter--gold' : 'intro-reveal__letter'}
+                  style={{ '--letter-delay': `${index * 60}ms` } as CSSProperties}
+                >
+                  {letter}
+                </span>
               </span>
             ))}
           </span>

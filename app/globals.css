@@ -130,7 +130,7 @@
 
   html[data-intro="play"] .intro-reveal {
     display: grid;
-    animation: intro-curtain 1.52s cubic-bezier(0.83, 0, 0.17, 1) both;
+    animation: intro-curtain 2.85s cubic-bezier(0.83, 0, 0.17, 1) both;
   }
 
   .intro-reveal__brand {
@@ -139,7 +139,7 @@
     width: min(82vw, 720px);
     place-items: center;
     gap: 0.3rem;
-    animation: intro-brand 1.3s var(--ease-expo) both;
+    animation: intro-brand 2.7s var(--ease-expo) both;
   }
 
   .intro-reveal__mark {
@@ -183,11 +183,17 @@
     white-space: nowrap;
   }
 
+  .intro-reveal__letter-mask {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 0.02em 0.06em;
+    vertical-align: bottom;
+  }
+
   .intro-reveal__letter {
     display: inline-block;
-    opacity: 0;
-    transform: translate3d(0, 0.42em, 0) scale(0.985);
-    animation: intro-letter-in 0.48s var(--ease-expo) calc(0.1s + var(--letter-delay)) forwards;
+    transform: translate3d(0, 115%, 0);
+    animation: intro-letter-rise 0.62s var(--ease-expo) calc(0.18s + var(--letter-delay)) forwards;
   }
 
   .intro-reveal__letter--gold {
@@ -205,7 +211,7 @@
     background: linear-gradient(105deg, transparent 39%, rgba(255, 255, 255, 0.78) 47%, rgba(216, 184, 77, 0.72) 52%, transparent 61%);
     opacity: 0;
     transform: translate3d(-72%, 0, 0) skewX(-12deg);
-    animation: intro-wordmark-shimmer 0.62s var(--ease-expo) 0.62s forwards;
+    animation: intro-wordmark-shimmer 0.7s var(--ease-expo) 1.25s forwards;
     mix-blend-mode: screen;
   }
 
@@ -229,7 +235,7 @@
     opacity: 0;
     text-transform: uppercase;
     transform: translate3d(0, 8px, 0);
-    animation: intro-tag 0.38s var(--ease-expo) 0.72s forwards;
+    animation: intro-tag 0.42s var(--ease-expo) 1.2s forwards;
   }
 
   .hero-aurora {
@@ -287,12 +293,12 @@
   @media (max-width: 767px) {
     html[data-intro="play"] .intro-reveal {
       border-radius: 0 0 20px 20px;
-      animation-duration: 1.24s;
+      animation-duration: 2.5s;
     }
 
     .intro-reveal__brand {
       width: min(92vw, 390px);
-      animation-duration: 1.08s;
+      animation-duration: 2.35s;
     }
 
     .intro-reveal__mark {
@@ -534,13 +540,13 @@
 
 /* Keyframes */
 @keyframes intro-curtain {
-  0%, 58% { transform: translate3d(0, 0, 0); }
+  0%, 78% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(0, -101%, 0); }
 }
 
 @keyframes intro-brand {
   0% { opacity: 0.98; transform: translate3d(0, 8px, 0) scale(0.99); }
-  18%, 72% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  10%, 84% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
   100% { opacity: 0.08; transform: translate3d(0, -7px, 0) scale(1.012); }
 }
 
@@ -549,9 +555,9 @@
   100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes intro-letter-in {
-  0% { opacity: 0; transform: translate3d(0, 0.42em, 0) scale(0.985); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+@keyframes intro-letter-rise {
+  0% { transform: translate3d(0, 115%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes intro-wordmark-glow {
