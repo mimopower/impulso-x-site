@@ -82,7 +82,7 @@ export function Services() {
               <ServiceSweep />
               <span
                 className="relative z-10 font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
-                style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
+                style={{ color: 'rgba(216,184,77,0.5)', WebkitTextStroke: '1px rgba(216,184,77,0.92)' }}
                 aria-hidden
               >
                 {solution.n}
@@ -113,7 +113,7 @@ export function Services() {
               <ServiceSweep />
               <span
                 className="relative z-10 font-display text-3xl font-bold leading-none text-transparent select-none"
-                style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
+                style={{ color: 'rgba(216,184,77,0.5)', WebkitTextStroke: '1px rgba(216,184,77,0.92)' }}
                 aria-hidden
               >
                 {solution.n}

@@ -82,7 +82,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-cream/10 py-6 text-xs text-steel/65 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-cream/10 py-6 text-xs text-steel/80 sm:flex-row sm:items-center sm:justify-between">
           <p>© {currentYear} Impulso X Intelligence. Todos os direitos reservados.</p>
           <p>CNPJ {SITE.cnpj}</p>
         </div>

@@ -63,7 +63,7 @@ export function Problem() {
               {/* Outline number — Emil: nothing appears from nothing, scale(0.98) start */}
               <span
                 className="font-display text-[3.5rem] font-bold leading-none text-transparent select-none"
-                style={{ WebkitTextStroke: '1px rgba(201,162,39,0.35)' }}
+                style={{ color: 'rgba(216,184,77,0.5)', WebkitTextStroke: '1px rgba(216,184,77,0.92)' }}
                 aria-hidden
               >
                 0{i + 1}

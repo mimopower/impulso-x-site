@@ -97,7 +97,7 @@ export function FinalCta() {
           </CtaButton>
         </div>
 
-        <p className="mt-4 font-sans text-sm text-steel/60">
+        <p className="mt-4 font-sans text-sm text-steel/85">
           Sem compromisso
         </p>
       </div>
