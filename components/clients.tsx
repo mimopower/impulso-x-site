@@ -17,14 +17,17 @@ function ClientChip({
   client: (typeof ASSETS.clients)[number];
   readable: boolean;
 }) {
+  const chipClass = 'chipClass' in client ? client.chipClass : '';
+  const logoClass = 'logoClass' in client ? client.logoClass : '';
+
   return (
-    <div className="client-logo-chip" aria-hidden={readable ? undefined : true}>
+    <div className={`client-logo-chip ${chipClass}`} aria-hidden={readable ? undefined : true}>
       <AssetImage
         src={client.src}
         alt={readable ? client.name : ''}
         width={client.width}
         height={client.height}
-        className="h-full w-full object-contain"
+        className={`client-logo-image h-full w-full object-contain ${logoClass}`}
         sizes="180px"
       />
     </div>

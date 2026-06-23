@@ -469,6 +469,46 @@
       filter 220ms var(--ease-expo);
   }
 
+  .client-logo-chip--highlight {
+    opacity: 1;
+    filter:
+      drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5))
+      drop-shadow(0 0 18px rgba(236, 121, 169, 0.18));
+  }
+
+  .client-logo-chip--seal {
+    width: clamp(9.5rem, 14vw, 12rem);
+    height: clamp(5.9rem, 7.6vw, 7.2rem);
+    padding: 0.15rem 1.15rem;
+  }
+
+  .client-logo-chip--wide-pink {
+    height: clamp(5.3rem, 7vw, 6.5rem);
+    padding-inline: 1rem;
+  }
+
+  .client-logo-image {
+    transform-origin: center;
+  }
+
+  .client-logo-image--pink-seal {
+    transform: scale(1.28);
+    filter:
+      brightness(1.32)
+      contrast(1.18)
+      saturate(1.25)
+      drop-shadow(0 0 10px rgba(236, 121, 169, 0.25));
+  }
+
+  .client-logo-image--pink-wide {
+    transform: scale(1.2);
+    filter:
+      brightness(1.58)
+      contrast(1.22)
+      saturate(1.35)
+      drop-shadow(0 0 12px rgba(236, 121, 169, 0.26));
+  }
+
   .client-logo-chip:hover {
     transform: scale(1.05);
     opacity: 1;

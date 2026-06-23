@@ -95,6 +95,8 @@ export const ASSETS = {
       src: '/assets/cases/casamagnolia.webp',
       width: 792,
       height: 1441,
+      chipClass: 'client-logo-chip--highlight client-logo-chip--seal',
+      logoClass: 'client-logo-image--pink-seal',
     },
     {
       name: 'Mimo Power',
@@ -113,6 +115,8 @@ export const ASSETS = {
       src: '/assets/cases/vivian.webp',
       width: 992,
       height: 743,
+      chipClass: 'client-logo-chip--highlight client-logo-chip--wide-pink',
+      logoClass: 'client-logo-image--pink-wide',
     },
   ],
 } as const;
