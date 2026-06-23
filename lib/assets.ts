@@ -91,6 +91,12 @@ export const ASSETS = {
       height: 315,
     },
     {
+      name: 'Casa das Magnólias',
+      src: '/assets/cases/casamagnolia.webp',
+      width: 792,
+      height: 1441,
+    },
+    {
       name: 'Mimo Power',
       src: '/assets/cases/mimo-power.webp',
       width: 635,
@@ -101,6 +107,12 @@ export const ASSETS = {
       src: '/assets/cases/minas-eventos.webp',
       width: 288,
       height: 220,
+    },
+    {
+      name: 'Vivian Bustamante',
+      src: '/assets/cases/vivian.webp',
+      width: 992,
+      height: 743,
     },
   ],
 } as const;

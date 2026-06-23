@@ -8,11 +8,27 @@
     "sourceHasAlpha": true
   },
   {
-    "source": "Ohana.png",
+    "source": "Ohana2.png",
     "file": "ohana.webp",
-    "width": 332,
-    "height": 136,
-    "bytes": 24588,
+    "width": 588,
+    "height": 315,
+    "bytes": 62252,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "casamagnolia.png",
+    "file": "casamagnolia.webp",
+    "width": 792,
+    "height": 1441,
+    "bytes": 157366,
+    "sourceHasAlpha": true
+  },
+  {
+    "source": "Vivian.png",
+    "file": "vivian.webp",
+    "width": 992,
+    "height": 743,
+    "bytes": 175464,
     "sourceHasAlpha": true
   },
   {
