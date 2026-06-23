@@ -86,7 +86,7 @@ export const ASSETS = {
     },
     {
       name: 'Ohana',
-      src: '/assets/cases/ohana.webp',
+      src: '/assets/cases/ohana-v2.webp',
       width: 588,
       height: 315,
     },

@@ -30,7 +30,7 @@ const jobs = [
 // Logos transparentes (sem flatten) — devem flutuar sobre o fundo preto da seção.
 const clientJobs = [
   ['Jamil.PNG', 'jamil.webp', { height: 220, quality: 86, trim: true }],
-  ['Ohana.png', 'ohana.webp', { height: 220, quality: 86, trim: true }],
+  ['Ohana2.png', 'ohana-v2.webp', { quality: 92, trim: true }],
   ['Mimo Power.PNG', 'mimo-power.webp', { height: 220, quality: 86, trim: true }],
   ['Food.PNG', 'minas-eventos.webp', { height: 220, quality: 86, trim: true }],
 ];
