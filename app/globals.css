@@ -130,21 +130,67 @@
 
   html[data-intro="play"] .intro-reveal {
     display: grid;
-    animation: intro-curtain 1.2s cubic-bezier(0.83, 0, 0.17, 1) both;
+    animation: intro-curtain 2.05s cubic-bezier(0.83, 0, 0.17, 1) both;
   }
 
   .intro-reveal__brand {
     position: relative;
-    width: clamp(180px, 24vw, 300px);
-    animation: intro-brand 1.05s var(--ease-expo) both;
+    display: grid;
+    width: min(82vw, 720px);
+    place-items: center;
+    gap: 0.45rem;
+    animation: intro-brand 1.8s var(--ease-expo) both;
   }
 
-  .intro-reveal__shine {
-    position: absolute;
-    inset: 0 0 auto;
-    height: 76%;
+  .intro-reveal__mark {
+    position: relative;
+    display: grid;
+    height: clamp(54px, 7vw, 82px);
+    width: clamp(54px, 7vw, 82px);
+    place-items: center;
     overflow: hidden;
-    pointer-events: none;
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    border-radius: 8px;
+    background: rgba(13, 13, 13, 0.78);
+    padding: 0.42rem;
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.96);
+    animation: intro-mark 1.35s var(--ease-expo) 0.08s both;
+  }
+
+  .intro-reveal__signature {
+    width: min(88vw, 720px);
+    height: auto;
+    overflow: visible;
+  }
+
+  .intro-reveal__signature text {
+    fill: transparent;
+    stroke: var(--gold);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+    stroke-dasharray: 860;
+    stroke-dashoffset: 860;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 104px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    paint-order: stroke fill;
+    animation:
+      intro-signature-draw 1.08s var(--ease-expo) 0.18s forwards,
+      intro-signature-fill 0.5s ease-out 0.98s forwards;
+  }
+
+  .intro-reveal__tag {
+    color: var(--steel);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: clamp(0.72rem, 1.3vw, 0.9rem);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    opacity: 0;
+    text-transform: uppercase;
+    transform: translate3d(0, 8px, 0);
+    animation: intro-tag 0.52s var(--ease-expo) 1.04s forwards;
   }
 
   .hero-aurora {
@@ -202,11 +248,21 @@
   @media (max-width: 767px) {
     html[data-intro="play"] .intro-reveal {
       border-radius: 0 0 20px 20px;
-      animation-duration: 0.92s;
+      animation-duration: 1.65s;
     }
 
     .intro-reveal__brand {
-      animation-duration: 0.82s;
+      width: min(92vw, 390px);
+      animation-duration: 1.45s;
+    }
+
+    .intro-reveal__signature text {
+      font-size: 94px;
+      stroke-width: 1.4;
+    }
+
+    .intro-reveal__tag {
+      letter-spacing: 0.24em;
     }
 
     .grain {
@@ -435,14 +491,34 @@
 
 /* Keyframes */
 @keyframes intro-curtain {
-  0%, 44% { transform: translate3d(0, 0, 0); }
+  0%, 62% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(0, -101%, 0); }
 }
 
 @keyframes intro-brand {
-  0% { opacity: 0.9; transform: scale(0.96); }
-  34%, 70% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0.12; transform: scale(1.015); }
+  0% { opacity: 0.98; transform: translate3d(0, 10px, 0) scale(0.985); }
+  18%, 72% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0.08; transform: translate3d(0, -8px, 0) scale(1.012); }
+}
+
+@keyframes intro-mark {
+  0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.96); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes intro-signature-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes intro-signature-fill {
+  to {
+    fill: var(--cream);
+    stroke: rgba(201, 162, 39, 0.34);
+  }
+}
+
+@keyframes intro-tag {
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes aurora-drift {

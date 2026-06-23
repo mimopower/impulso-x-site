@@ -68,7 +68,7 @@ export function IntroReveal() {
       // The animation may run without storage; its fallback still releases the page.
     }
 
-    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 1150 : 1450;
+    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 1750 : 2150;
     const fallback = window.setTimeout(finish, fallbackMs);
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted) finish();
@@ -93,18 +93,29 @@ export function IntroReveal() {
       }}
     >
       <div className="intro-reveal__brand">
-        <Image
-          src={ASSETS.wordmark.src}
-          alt=""
-          width={ASSETS.wordmark.width}
-          height={ASSETS.wordmark.height}
-          priority
-          sizes="(max-width: 767px) 180px, 300px"
-          className="h-auto w-full"
-        />
-        <span className="intro-reveal__shine">
+        <span className="intro-reveal__mark">
+          <Image
+            src={ASSETS.mark.src}
+            alt=""
+            width={ASSETS.mark.width}
+            height={ASSETS.mark.height}
+            priority
+            sizes="(max-width: 767px) 64px, 86px"
+            className="h-full w-full object-contain"
+          />
           <LogoShine variant="intro" />
         </span>
+        <svg
+          className="intro-reveal__signature"
+          viewBox="0 0 720 150"
+          role="img"
+          aria-label="Impulso X"
+        >
+          <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle">
+            Impulso X
+          </text>
+        </svg>
+        <span className="intro-reveal__tag">Intelligence</span>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const introGateScript = `(function(){
       window.setTimeout(function(){
         release();
         window.dispatchEvent(new Event('ix:intro-complete'));
-      },window.matchMedia('(max-width: 767px)').matches?1100:1400);
+      },window.matchMedia('(max-width: 767px)').matches?1700:2100);
     }
   } catch(error) {
     release();
