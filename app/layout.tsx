@@ -14,12 +14,16 @@ const introGateScript = `(function(){
   try {
     var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var seen=sessionStorage.getItem('ix_intro_seen')==='1';
-    if(!reduced&&!seen){
+    var forced=new URLSearchParams(window.location.search).get('intro')==='1';
+    if(forced){
+      try { sessionStorage.removeItem('ix_intro_seen'); } catch(error) {}
+    }
+    if(!reduced&&(!seen||forced)){
       root.dataset.intro='play';
       window.setTimeout(function(){
         release();
         window.dispatchEvent(new Event('ix:intro-complete'));
-      },window.matchMedia('(max-width: 767px)').matches?1700:2100);
+      },window.matchMedia('(max-width: 767px)').matches?1250:1550);
     }
   } catch(error) {
     release();

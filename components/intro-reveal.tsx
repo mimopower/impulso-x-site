@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { LogoShine } from './ui/logo-shine';
 
 const INTRO_COMPLETE_EVENT = 'ix:intro-complete';
+const WORDMARK_LETTERS = ['I', 'm', 'p', 'u', 'l', 's', 'o', '\u00a0', 'X'] as const;
 
 export function useIntroReady() {
   const [ready, setReady] = useState(false);
@@ -68,7 +70,7 @@ export function IntroReveal() {
       // The animation may run without storage; its fallback still releases the page.
     }
 
-    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 1750 : 2150;
+    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 1300 : 1600;
     const fallback = window.setTimeout(finish, fallbackMs);
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted) finish();
@@ -105,16 +107,20 @@ export function IntroReveal() {
           />
           <LogoShine variant="intro" />
         </span>
-        <svg
-          className="intro-reveal__signature"
-          viewBox="0 0 720 150"
-          role="img"
-          aria-label="Impulso X"
-        >
-          <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle">
-            Impulso X
-          </text>
-        </svg>
+        <span className="intro-reveal__wordmark" role="img" aria-label="Impulso X">
+          <span className="intro-reveal__wordmark-text" aria-hidden="true">
+            {WORDMARK_LETTERS.map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                className={letter === 'X' ? 'intro-reveal__letter intro-reveal__letter--gold' : 'intro-reveal__letter'}
+                style={{ '--letter-delay': `${index * 42}ms` } as CSSProperties}
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
+          <span className="intro-reveal__wordmark-shimmer" aria-hidden="true" />
+        </span>
         <span className="intro-reveal__tag">Intelligence</span>
       </div>
     </div>

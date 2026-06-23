@@ -130,7 +130,7 @@
 
   html[data-intro="play"] .intro-reveal {
     display: grid;
-    animation: intro-curtain 2.05s cubic-bezier(0.83, 0, 0.17, 1) both;
+    animation: intro-curtain 1.52s cubic-bezier(0.83, 0, 0.17, 1) both;
   }
 
   .intro-reveal__brand {
@@ -138,8 +138,8 @@
     display: grid;
     width: min(82vw, 720px);
     place-items: center;
-    gap: 0.45rem;
-    animation: intro-brand 1.8s var(--ease-expo) both;
+    gap: 0.3rem;
+    animation: intro-brand 1.3s var(--ease-expo) both;
   }
 
   .intro-reveal__mark {
@@ -155,30 +155,69 @@
     padding: 0.42rem;
     opacity: 0;
     transform: translate3d(0, 10px, 0) scale(0.96);
-    animation: intro-mark 1.35s var(--ease-expo) 0.08s both;
+    animation: intro-mark 0.72s var(--ease-expo) 0.03s both;
   }
 
-  .intro-reveal__signature {
-    width: min(88vw, 720px);
-    height: auto;
-    overflow: visible;
+  .intro-reveal__wordmark {
+    position: relative;
+    display: inline-grid;
+    max-width: 92vw;
+    overflow: hidden;
+    padding: 0.05em 0.06em 0.11em;
+    isolation: isolate;
   }
 
-  .intro-reveal__signature text {
-    fill: transparent;
-    stroke: var(--gold);
-    stroke-width: 1.2;
-    stroke-linejoin: round;
-    stroke-dasharray: 860;
-    stroke-dashoffset: 860;
+  .intro-reveal__wordmark-text {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
     font-family: var(--font-display), system-ui, sans-serif;
-    font-size: 104px;
+    font-size: clamp(4.15rem, 9.4vw, 8.1rem);
     font-weight: 700;
-    letter-spacing: 0.01em;
-    paint-order: stroke fill;
-    animation:
-      intro-signature-draw 1.08s var(--ease-expo) 0.18s forwards,
-      intro-signature-fill 0.5s ease-out 0.98s forwards;
+    letter-spacing: 0;
+    line-height: 0.86;
+    color: var(--cream);
+    text-shadow:
+      0 0 18px rgba(244, 240, 231, 0.12),
+      0 0 34px rgba(201, 162, 39, 0.16);
+    white-space: nowrap;
+  }
+
+  .intro-reveal__letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 0.42em, 0) scale(0.985);
+    animation: intro-letter-in 0.48s var(--ease-expo) calc(0.1s + var(--letter-delay)) forwards;
+  }
+
+  .intro-reveal__letter--gold {
+    color: var(--gold-soft);
+    text-shadow:
+      0 0 14px rgba(216, 184, 77, 0.28),
+      0 0 34px rgba(201, 162, 39, 0.26);
+  }
+
+  .intro-reveal__wordmark-shimmer {
+    position: absolute;
+    inset: -18% -34%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 39%, rgba(255, 255, 255, 0.78) 47%, rgba(216, 184, 77, 0.72) 52%, transparent 61%);
+    opacity: 0;
+    transform: translate3d(-72%, 0, 0) skewX(-12deg);
+    animation: intro-wordmark-shimmer 0.62s var(--ease-expo) 0.62s forwards;
+    mix-blend-mode: screen;
+  }
+
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .intro-reveal__letter--gold {
+      background-image: linear-gradient(100deg, var(--gold) 0%, #ffe68f 52%, var(--gold-soft) 100%);
+      background-size: 160% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .intro-reveal__tag {
@@ -190,7 +229,7 @@
     opacity: 0;
     text-transform: uppercase;
     transform: translate3d(0, 8px, 0);
-    animation: intro-tag 0.52s var(--ease-expo) 1.04s forwards;
+    animation: intro-tag 0.38s var(--ease-expo) 0.72s forwards;
   }
 
   .hero-aurora {
@@ -248,17 +287,21 @@
   @media (max-width: 767px) {
     html[data-intro="play"] .intro-reveal {
       border-radius: 0 0 20px 20px;
-      animation-duration: 1.65s;
+      animation-duration: 1.24s;
     }
 
     .intro-reveal__brand {
       width: min(92vw, 390px);
-      animation-duration: 1.45s;
+      animation-duration: 1.08s;
     }
 
-    .intro-reveal__signature text {
-      font-size: 94px;
-      stroke-width: 1.4;
+    .intro-reveal__mark {
+      height: 58px;
+      width: 58px;
+    }
+
+    .intro-reveal__wordmark-text {
+      font-size: clamp(3.15rem, 17vw, 4.45rem);
     }
 
     .intro-reveal__tag {
@@ -491,14 +534,14 @@
 
 /* Keyframes */
 @keyframes intro-curtain {
-  0%, 62% { transform: translate3d(0, 0, 0); }
+  0%, 58% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(0, -101%, 0); }
 }
 
 @keyframes intro-brand {
-  0% { opacity: 0.98; transform: translate3d(0, 10px, 0) scale(0.985); }
+  0% { opacity: 0.98; transform: translate3d(0, 8px, 0) scale(0.99); }
   18%, 72% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-  100% { opacity: 0.08; transform: translate3d(0, -8px, 0) scale(1.012); }
+  100% { opacity: 0.08; transform: translate3d(0, -7px, 0) scale(1.012); }
 }
 
 @keyframes intro-mark {
@@ -506,15 +549,19 @@
   100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes intro-signature-draw {
-  to { stroke-dashoffset: 0; }
+@keyframes intro-letter-in {
+  0% { opacity: 0; transform: translate3d(0, 0.42em, 0) scale(0.985); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes intro-signature-fill {
-  to {
-    fill: var(--cream);
-    stroke: rgba(201, 162, 39, 0.34);
-  }
+@keyframes intro-wordmark-glow {
+  to { background-position: 100% 50%; }
+}
+
+@keyframes intro-wordmark-shimmer {
+  0% { opacity: 0; transform: translate3d(-72%, 0, 0) skewX(-12deg); }
+  18%, 72% { opacity: 0.75; }
+  100% { opacity: 0; transform: translate3d(72%, 0, 0) skewX(-12deg); }
 }
 
 @keyframes intro-tag {
