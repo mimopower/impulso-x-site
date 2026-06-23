@@ -87,8 +87,8 @@ export const ASSETS = {
     {
       name: 'Ohana',
       src: '/assets/cases/ohana.webp',
-      width: 1280,
-      height: 720,
+      width: 588,
+      height: 315,
     },
     {
       name: 'Mimo Power',
