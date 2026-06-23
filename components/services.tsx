@@ -3,23 +3,50 @@ import { ASSETS } from '@/lib/assets';
 import { SectionReveal } from './section-reveal';
 import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
-const pillars = [
+const primarySolutions = [
   {
     n: '01',
     title: 'Sites e presença digital',
-    body: 'Páginas que explicam sua oferta, fortalecem sua marca e facilitam o contato de quem já está pronto para conversar.',
+    body: 'Páginas que explicam sua oferta e facilitam o próximo contato.',
   },
   {
     n: '02',
-    title: 'Automação e IA aplicada',
-    body: 'Fluxos para responder leads, organizar rotinas e tirar do manual tarefas que consomem tempo todos os dias.',
+    title: 'Automação & IA aplicada',
+    body: 'Fluxos que tiram tarefas repetitivas do manual.',
   },
   {
     n: '03',
-    title: 'Marca, conteúdo e estratégia',
-    body: 'Identidade, comunicação e direcionamento para sua empresa transmitir mais confiança antes mesmo da primeira conversa com o possível cliente.',
+    title: 'Marca, identidade e estratégia',
+    body: 'Identidade e direção para transmitir confiança antes da primeira conversa.',
   },
 ] as const;
+
+const complementarySolutions = [
+  {
+    n: '04',
+    title: 'Agente de IA no WhatsApp',
+    body: 'Atendimento automático que responde, encaminha e transfere a conversa para uma pessoa quando necessário.',
+  },
+  {
+    n: '05',
+    title: 'Google Meu Negócio e SEO local',
+    body: 'Presença fortalecida no Google e no Maps para buscas da sua região.',
+  },
+  {
+    n: '06',
+    title: 'Conteúdo para redes',
+    body: 'Criação e organização de conteúdo para sua marca manter consistência.',
+  },
+  {
+    n: '07',
+    title: 'Estratégia de marketing e campanhas',
+    body: 'Direção para campanhas e ações de marketing conectadas aos objetivos da empresa.',
+  },
+] as const;
+
+function ServiceSweep() {
+  return <span aria-hidden className="service-hover-sweep" />;
+}
 
 export function Services() {
   return (
@@ -27,7 +54,6 @@ export function Services() {
       <div aria-hidden className="gold-hairline absolute inset-x-0 top-0" />
       <GoldCircuitLines variant="services" />
 
-      {/* Escudo watermark — brand atmosphere behind section */}
       <Image
         src={ASSETS.mark.src}
         alt=""
@@ -38,51 +64,65 @@ export function Services() {
       />
 
       <div className="container-x relative">
-        <SectionReveal className="max-w-3xl">
-          {/* No eyebrow here — eyebrow budget used at Hero and Process only */}
+        <SectionReveal className="max-w-5xl">
           <h2
             id="services-heading"
-            className="font-display text-display font-bold text-cream text-balance"
+            className="max-w-[18ch] font-display text-display font-bold text-cream text-balance"
           >
-            O que a Impulso X organiza
+            Soluções para organizar e acelerar sua presença digital
           </h2>
         </SectionReveal>
 
-        {/* Editorial horizontal list — NOT 3 identical cards (taste-skill ban).
-            Each pillar is a full-width row with large outline number.
-            Emil: CSS clip-path for the hover sweep — no JS required per row. */}
         <div className="mt-12">
-          {pillars.map((p) => (
+          {primarySolutions.map((solution) => (
             <article
-              key={p.n}
-              className="group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-10 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-12"
+              key={solution.n}
+              className="service-item group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-9 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-11"
             >
-              {/* Gold hover sweep — CSS only, hardware-accelerated via transform:scaleX */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-out-expo group-hover:scale-x-100"
-                style={{
-                  background: 'linear-gradient(90deg, rgba(201,162,39,0.05) 0%, transparent 100%)',
-                }}
-              />
-
-              {/* Large outline number */}
+              <ServiceSweep />
               <span
-                className="font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
+                className="relative z-10 font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
                 style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
                 aria-hidden
               >
-                {p.n}
+                {solution.n}
               </span>
-
-              {/* Title */}
-              <h3 className="self-center font-display text-2xl font-bold text-cream transition-colors duration-300 group-hover:text-gold md:text-3xl">
-                {p.title}
+              <h3 className="service-item-title relative z-10 self-center font-display text-2xl font-bold text-cream md:text-3xl">
+                {solution.title}
               </h3>
+              <p className="relative z-10 col-span-2 font-sans text-base leading-[1.55] text-steel text-pretty md:col-span-1 md:self-center">
+                {solution.body}
+              </p>
+            </article>
+          ))}
+        </div>
 
-              {/* Body — only visible on desktop grid col 3 */}
-              <p className="col-span-2 font-sans text-base leading-[1.5] text-steel text-pretty md:col-span-1 md:self-center">
-                {p.body}
+        <SectionReveal delay={0.08} className="mt-16 grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+          <p className="section-kicker">Também podemos integrar</p>
+          <p className="max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
+            Soluções complementares entram no projeto conforme a necessidade e o momento da sua empresa.
+          </p>
+        </SectionReveal>
+
+        <div className="mt-8 grid border-y border-cream/12 lg:grid-cols-2">
+          {complementarySolutions.map((solution) => (
+            <article
+              key={solution.n}
+              className="service-capability service-item group relative grid grid-cols-[52px_1fr] gap-x-5 gap-y-4 border-b border-cream/12 py-8 last:border-b-0 lg:min-h-[190px] lg:grid-cols-[62px_1fr] lg:px-8 lg:py-9"
+            >
+              <ServiceSweep />
+              <span
+                className="relative z-10 font-display text-3xl font-bold leading-none text-transparent select-none"
+                style={{ WebkitTextStroke: '1px rgba(201,162,39,0.38)' }}
+                aria-hidden
+              >
+                {solution.n}
+              </span>
+              <h3 className="service-item-title relative z-10 font-display text-xl font-bold leading-tight text-cream md:text-2xl">
+                {solution.title}
+              </h3>
+              <p className="relative z-10 col-start-2 font-sans text-base leading-[1.55] text-steel text-pretty">
+                {solution.body}
               </p>
             </article>
           ))}

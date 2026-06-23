@@ -1,9 +1,7 @@
 'use client';
 
-import { useReducedMotion } from 'framer-motion';
-
 interface LogoShineProps {
-  variant?: 'full' | 'subtle';
+  variant?: 'full' | 'subtle' | 'intro';
   className?: string;
 }
 
@@ -23,14 +21,10 @@ interface LogoShineProps {
  * Rules:
  *   - Only transform + opacity (GPU, no layout thrash)
  *   - mask-image clips all layers to the shield silhouette
- *   - prefers-reduced-motion → renders nothing
+ *   - prefers-reduced-motion is handled in CSS to keep hydration stable
  *   - No SVG filters, no libs
  */
 export function LogoShine({ variant = 'full', className = '' }: LogoShineProps) {
-  const prefersReduced = useReducedMotion();
-
-  if (prefersReduced) return null;
-
   const maskStyle = {
     WebkitMaskImage: "url('/assets/identidade/marca-escudo.webp')",
     maskImage: "url('/assets/identidade/marca-escudo.webp')",
@@ -43,6 +37,7 @@ export function LogoShine({ variant = 'full', className = '' }: LogoShineProps) 
   };
 
   const isFull = variant === 'full';
+  const isIntro = variant === 'intro';
 
   return (
     <span
@@ -56,8 +51,10 @@ export function LogoShine({ variant = 'full', className = '' }: LogoShineProps) 
           ...maskStyle,
           background:
             'linear-gradient(105deg, transparent 36%, rgba(255,255,255,0.54) 47%, rgba(216,184,77,0.44) 52%, transparent 63%)',
-          animation: `logo-shine ${isFull ? '5.5s' : '7s'} cubic-bezier(0.16, 1, 0.3, 1) infinite`,
-          animationDelay: isFull ? '0.6s' : '2s',
+          animation: isIntro
+            ? 'logo-shine 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.08s 1 both'
+            : `logo-shine ${isFull ? '5.5s' : '7s'} cubic-bezier(0.16, 1, 0.3, 1) infinite`,
+          animationDelay: isIntro ? undefined : isFull ? '0.6s' : '2s',
         }}
       />
       {/* (b) Energy pulse — right-side circuit glow */}
@@ -67,8 +64,10 @@ export function LogoShine({ variant = 'full', className = '' }: LogoShineProps) 
           ...maskStyle,
           background:
             'radial-gradient(ellipse 55% 62% at 78% 50%, rgba(216,184,77,0.68), rgba(201,162,39,0.2) 48%, transparent 72%)',
-          animation: `logo-energy ${isFull ? '3.2s' : '4.2s'} ease-in-out infinite alternate`,
-          animationDelay: isFull ? '1.2s' : '2.8s',
+          animation: isIntro
+            ? 'logo-energy 0.72s ease-in-out 0.12s 1 alternate both'
+            : `logo-energy ${isFull ? '3.2s' : '4.2s'} ease-in-out infinite alternate`,
+          animationDelay: isIntro ? undefined : isFull ? '1.2s' : '2.8s',
         }}
       />
     </span>

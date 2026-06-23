@@ -5,6 +5,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 interface WordRotatorProps {
   words: string[];
+  /** Starts cycling only after the page experience is ready. */
+  enabled?: boolean;
   /** Total cycle duration in ms (hold + transition). Default 2600. */
   interval?: number;
   /** Delay before first cycle starts in ms. Default 1200. */
@@ -25,6 +27,7 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
  */
 export function WordRotator({
   words,
+  enabled = true,
   interval = 2600,
   startDelay = 1200,
   className = '',
@@ -33,7 +36,7 @@ export function WordRotator({
   const prefersReduced = useReducedMotion();
 
   useEffect(() => {
-    if (prefersReduced || words.length < 2) return;
+    if (!enabled || prefersReduced || words.length < 2) return;
 
     let timerId: ReturnType<typeof setTimeout>;
     let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -41,7 +44,7 @@ export function WordRotator({
     const advance = () => setIndex((i) => (i + 1) % words.length);
 
     const startCycling = () => {
-      intervalId = setInterval(advance, interval);
+      if (intervalId === null) intervalId = setInterval(advance, interval);
     };
 
     const stopCycling = () => {
@@ -64,11 +67,7 @@ export function WordRotator({
       stopCycling();
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [words, interval, startDelay, prefersReduced]);
-
-  if (prefersReduced) {
-    return <span aria-hidden className={className}>{words[0]}</span>;
-  }
+  }, [enabled, words, interval, startDelay, prefersReduced]);
 
   return (
     <span
@@ -103,10 +102,10 @@ export function WordRotator({
           key={words[index]}
           style={{ gridArea: '1 / 1' }}
           className={className}
-          initial={{ opacity: 0, y: '0.35em' }}
+          initial={prefersReduced ? false : { opacity: 0, y: '0.35em' }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: '-0.35em' }}
-          transition={{ duration: 0.42, ease: EASE }}
+          exit={prefersReduced ? undefined : { opacity: 0, y: '-0.35em' }}
+          transition={{ duration: prefersReduced ? 0 : 0.42, ease: EASE }}
         >
           {words[index]}
         </motion.span>

@@ -1,7 +1,65 @@
 import type { Metadata, Viewport } from 'next';
 import { Manrope, Rajdhani } from 'next/font/google';
+import { IntroReveal } from '@/components/intro-reveal';
 import { SITE } from '@/lib/site';
 import './globals.css';
+
+const introGateScript = `(function(){
+  var root=document.documentElement;
+  var release=function(){
+    root.removeAttribute('data-intro');
+    var shell=document.getElementById('site-shell');
+    if(shell) shell.inert=false;
+  };
+  try {
+    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen=sessionStorage.getItem('ix_intro_seen')==='1';
+    if(!reduced&&!seen){
+      root.dataset.intro='play';
+      window.setTimeout(function(){
+        release();
+        window.dispatchEvent(new Event('ix:intro-complete'));
+      },window.matchMedia('(max-width: 767px)').matches?1100:1400);
+    }
+  } catch(error) {
+    release();
+  }
+  window.addEventListener('pageshow',function(event){
+    if(event.persisted) release();
+  });
+})();`;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/assets/identidade/marca-completa.webp`,
+  taxID: SITE.cnpj,
+  sameAs: [SITE.instagram, SITE.tiktok],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: `+${SITE.whatsappE164}`,
+    contactType: 'customer service',
+    availableLanguage: 'Portuguese',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Soluções Impulso X',
+    itemListElement: [
+      'Sites e presença digital',
+      'Automação & IA aplicada',
+      'Marca, identidade e estratégia',
+      'Agente de IA no WhatsApp',
+      'Google Meu Negócio e SEO local',
+      'Conteúdo para redes',
+      'Estratégia de marketing e campanhas',
+    ].map((name) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name },
+    })),
+  },
+};
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
@@ -76,8 +134,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${rajdhani.variable} ${manrope.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${rajdhani.variable} ${manrope.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        <script id="ix-intro-gate" dangerouslySetInnerHTML={{ __html: introGateScript }} />
         <link
           rel="preload"
           as="image"
@@ -93,46 +156,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: SITE.name,
-              url: SITE.url,
-              logo: `${SITE.url}/assets/identidade/marca-completa.webp`,
-              taxID: SITE.cnpj,
-              sameAs: [SITE.instagram, SITE.tiktok],
-              contactPoint: {
-                '@type': 'ContactPoint',
-                telephone: `+${SITE.whatsappE164}`,
-                contactType: 'customer service',
-                availableLanguage: 'Portuguese',
-              },
-            }),
+            __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
           }}
         />
       </head>
       <body className="bg-ink text-cream antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:bg-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
-        >
-          Pular para o conteúdo
-        </a>
+        <IntroReveal />
+        <div id="site-shell">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:bg-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
+          >
+            Pular para o conteúdo
+          </a>
 
-        {/* Scroll progress — gold left-edge bar (CSS scroll-driven, progressive) */}
-        <div aria-hidden className="scroll-line" />
+          {/* Scroll progress — gold left-edge bar (CSS scroll-driven, progressive) */}
+          <div aria-hidden className="scroll-line" />
 
-        {/* Film grain */}
-        <div aria-hidden className="grain">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-            <filter id="noise-filter">
-              <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" stitchTiles="stitch" />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noise-filter)" />
-          </svg>
+          {/* Film grain */}
+          <div aria-hidden className="grain">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <filter id="noise-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" stitchTiles="stitch" />
+              </filter>
+              <rect width="100%" height="100%" filter="url(#noise-filter)" />
+            </svg>
+          </div>
+
+          {children}
         </div>
-
-        {children}
       </body>
     </html>
   );

@@ -35,6 +35,10 @@
     text-rendering: optimizeLegibility;
   }
 
+  html[data-intro="play"] {
+    overflow: hidden;
+  }
+
   body {
     min-height: 100dvh;
     overflow-x: hidden;
@@ -72,14 +76,23 @@
     .scroll-line {
       display: none;
     }
+    .intro-reveal {
+      display: none !important;
+    }
+    .hero-aurora {
+      animation: none !important;
+      opacity: 0.42;
+      transform: translate3d(0, -50%, 0);
+    }
     /* Stop CSS animations on logo elements for users who prefer reduced motion */
     [style*="shield-breathe"],
     [style*="logo-zoom"] {
       animation: none !important;
     }
     .logo-shine-sweep,
-    .logo-shine-energy {
-      animation: none !important;
+    .logo-shine-energy,
+    .gold-circuit-motion {
+      display: none !important;
     }
     .marquee-track,
     .living-border::before,
@@ -101,6 +114,106 @@
 }
 
 @layer components {
+  .intro-reveal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 0 0 28px 28px;
+    background: var(--ink);
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+    contain: layout paint style;
+  }
+
+  html[data-intro="play"] .intro-reveal {
+    display: grid;
+    animation: intro-curtain 1.2s cubic-bezier(0.83, 0, 0.17, 1) both;
+  }
+
+  .intro-reveal__brand {
+    position: relative;
+    width: clamp(180px, 24vw, 300px);
+    animation: intro-brand 1.05s var(--ease-expo) both;
+  }
+
+  .intro-reveal__shine {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 76%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-aurora {
+    width: clamp(340px, 42vw, 680px);
+    aspect-ratio: 1.35;
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse 58% 62% at 62% 48%, rgba(216, 184, 77, 0.23) 0%, rgba(201, 162, 39, 0.09) 38%, transparent 72%),
+      radial-gradient(ellipse 38% 46% at 82% 34%, rgba(244, 240, 231, 0.08) 0%, rgba(201, 162, 39, 0.05) 42%, transparent 76%);
+    opacity: 0.5;
+    transform: translate3d(-2%, -50%, 0) scale(0.98);
+    animation: aurora-drift 16s var(--ease-in-out) infinite alternate;
+    contain: layout paint;
+  }
+
+  .service-hover-sweep {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(90deg, rgba(201, 162, 39, 0.055), transparent 86%);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition:
+      transform 500ms var(--ease-expo),
+      opacity 300ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  .service-item-title {
+    transition: color 240ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .service-item:hover .service-hover-sweep {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .service-item:hover .service-item-title {
+      color: var(--gold-soft);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .service-capability:nth-child(odd) {
+      border-right: 1px solid rgba(244, 240, 231, 0.12);
+    }
+
+    .service-capability:nth-child(n + 3) {
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    html[data-intro="play"] .intro-reveal {
+      border-radius: 0 0 20px 20px;
+      animation-duration: 0.92s;
+    }
+
+    .intro-reveal__brand {
+      animation-duration: 0.82s;
+    }
+
+    .grain {
+      display: none;
+    }
+  }
+
   .container-x {
     width: 100%;
     max-width: theme('maxWidth.container');
@@ -293,6 +406,20 @@
 }
 
 @layer utilities {
+  .text-gold-gradient {
+    color: var(--gold);
+  }
+
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+    .text-gold-gradient {
+      background-image: linear-gradient(105deg, var(--gold) 8%, var(--gold-soft) 52%, #f0d777 92%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -307,6 +434,23 @@
 }
 
 /* Keyframes */
+@keyframes intro-curtain {
+  0%, 44% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -101%, 0); }
+}
+
+@keyframes intro-brand {
+  0% { opacity: 0.9; transform: scale(0.96); }
+  34%, 70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.12; transform: scale(1.015); }
+}
+
+@keyframes aurora-drift {
+  0% { opacity: 0.42; transform: translate3d(-2%, -50%, 0) scale(0.98); }
+  50% { opacity: 0.56; transform: translate3d(3%, -53%, 0) scale(1.015); }
+  100% { opacity: 0.47; transform: translate3d(6%, -48%, 0) scale(1.03); }
+}
+
 @keyframes scroll-line-grow {
   from { transform: scaleY(0); }
   to { transform: scaleY(1); }

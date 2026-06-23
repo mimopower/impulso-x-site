@@ -1,7 +1,5 @@
 'use client';
 
-import { useReducedMotion } from 'framer-motion';
-
 type Variant = 'hero' | 'services' | 'process' | 'cta';
 
 interface GoldCircuitLinesProps {
@@ -16,13 +14,11 @@ interface GoldCircuitLinesProps {
  * Rules:
  *   - Only transform + opacity (GPU, no layout thrash)
  *   - opacity 0.06–0.14 — never competes with text
- *   - prefers-reduced-motion → static lines, no animation
+ *   - prefers-reduced-motion is handled in CSS to keep hydration stable
  *   - No SVG filters (too heavy in Safari)
  *   - Mobile: greatly reduced or hidden to avoid clutter
  */
 export function GoldCircuitLines({ variant, className = '' }: GoldCircuitLinesProps) {
-  const prefersReduced = useReducedMotion();
-
   const gold = 'rgba(201,162,39,';
 
   if (variant === 'hero') {
@@ -56,25 +52,23 @@ export function GoldCircuitLines({ variant, className = '' }: GoldCircuitLinesPr
           <circle cx="40" cy="480" r="2.5" fill={`${gold}0.7)`} />
           <circle cx="150" cy="480" r="2.5" fill={`${gold}0.7)`} />
           {/* Animated pulse dot — translates along the vertical spine */}
-          {!prefersReduced && (
-            <circle cx="40" cy="0" r="3" fill={`${gold}0.85)`}>
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0,0; 0,600; 0,0"
-                dur="8s"
-                repeatCount="indefinite"
-                calcMode="spline"
-                keySplines="0.16 1 0.3 1; 0.16 1 0.3 1"
-              />
-              <animate
-                attributeName="opacity"
-                values="0; 1; 1; 0"
-                dur="8s"
-                repeatCount="indefinite"
-              />
-            </circle>
-          )}
+          <circle className="gold-circuit-motion" cx="40" cy="0" r="3" fill={`${gold}0.85)`}>
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 0,600; 0,0"
+              dur="8s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.16 1 0.3 1; 0.16 1 0.3 1"
+            />
+            <animate
+              attributeName="opacity"
+              values="0; 1; 1; 0"
+              dur="8s"
+              repeatCount="indefinite"
+            />
+          </circle>
         </svg>
       </div>
     );
@@ -88,16 +82,14 @@ export function GoldCircuitLines({ variant, className = '' }: GoldCircuitLinesPr
         className={`pointer-events-none absolute inset-x-0 top-0 select-none ${className}`}
         style={{ height: '1px', overflow: 'visible' }}
       >
-        {!prefersReduced && (
-          <div
-            className="absolute top-0 h-px"
-            style={{
-              width: '15%',
-              background: `linear-gradient(90deg, transparent, ${gold}0.7), transparent)`,
-              animation: 'line-flow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate',
-            }}
-          />
-        )}
+        <div
+          className="gold-circuit-motion absolute top-0 h-px"
+          style={{
+            width: '15%',
+            background: `linear-gradient(90deg, transparent, ${gold}0.7), transparent)`,
+            animation: 'line-flow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate',
+          }}
+        />
       </div>
     );
   }
@@ -116,16 +108,14 @@ export function GoldCircuitLines({ variant, className = '' }: GoldCircuitLinesPr
             background: `linear-gradient(to bottom, transparent 5%, ${gold}0.7) 20%, ${gold}0.7) 80%, transparent 95%)`,
           }}
         />
-        {!prefersReduced && (
-          <div
-            className="absolute left-0 w-full"
-            style={{
-              height: '20%',
-              background: `linear-gradient(to bottom, transparent, ${gold}1), transparent)`,
-              animation: 'process-pulse 5s cubic-bezier(0.16, 1, 0.3, 1) infinite',
-            }}
-          />
-        )}
+        <div
+          className="gold-circuit-motion absolute left-0 w-full"
+          style={{
+            height: '20%',
+            background: `linear-gradient(to bottom, transparent, ${gold}1), transparent)`,
+            animation: 'process-pulse 5s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+          }}
+        />
       </div>
     );
   }
@@ -160,25 +150,23 @@ export function GoldCircuitLines({ variant, className = '' }: GoldCircuitLinesPr
           <circle cx="400" cy="300" r="2" fill={`${gold}0.7)`} />
           <circle cx="600" cy="300" r="2" fill={`${gold}0.7)`} />
           {/* Animated pulse across top spine */}
-          {!prefersReduced && (
-            <circle cx="0" cy="100" r="3" fill={`${gold}0.9)`}>
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0,0; 800,0; 0,0"
-                dur="10s"
-                repeatCount="indefinite"
-                calcMode="spline"
-                keySplines="0.16 1 0.3 1; 0.16 1 0.3 1"
-              />
-              <animate
-                attributeName="opacity"
-                values="0; 1; 1; 0"
-                dur="10s"
-                repeatCount="indefinite"
-              />
-            </circle>
-          )}
+          <circle className="gold-circuit-motion" cx="0" cy="100" r="3" fill={`${gold}0.9)`}>
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 800,0; 0,0"
+              dur="10s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.16 1 0.3 1; 0.16 1 0.3 1"
+            />
+            <animate
+              attributeName="opacity"
+              values="0; 1; 1; 0"
+              dur="10s"
+              repeatCount="indefinite"
+            />
+          </circle>
         </svg>
       </div>
     );

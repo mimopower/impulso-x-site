@@ -1,16 +1,20 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
+import { useIntroReady } from './intro-reveal';
 import { CtaButton } from './ui/cta-button';
 import { WordRotator } from './ui/word-rotator';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const introReady = useIntroReady();
+  const prefersReducedMotion = useReducedMotion();
+  const motionReady = Boolean(prefersReducedMotion) || introReady;
 
   // Parallax — only compositor props (transform/opacity)
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
@@ -25,7 +29,11 @@ export function Hero() {
       aria-labelledby="hero-heading"
     >
       {/* Background with parallax */}
-      <motion.picture aria-hidden className="absolute inset-0 block" style={{ y: bgY }}>
+      <motion.picture
+        aria-hidden
+        className="absolute inset-0 z-0 block"
+        style={{ y: prefersReducedMotion ? 0 : bgY }}
+      >
         <source media="(max-width: 767px)" srcSet={ASSETS.hero.mobile} />
         <img
           src={ASSETS.hero.desktop}
@@ -38,7 +46,7 @@ export function Hero() {
       {/* Overlay: heavy on left for text legibility, lighter right for shield */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="absolute inset-0 z-[2]"
         style={{
           background:
             'linear-gradient(105deg, rgba(13,13,13,0.97) 0%, rgba(13,13,13,0.84) 38%, rgba(13,13,13,0.28) 70%, rgba(13,13,13,0.10) 100%)',
@@ -46,13 +54,13 @@ export function Hero() {
       />
 
       {/* Bottom fade into next section */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-[3] h-48 bg-gradient-to-t from-ink to-transparent" />
 
       {/* Shield watermark — mobile only. Subtle brand presence where the
           desktop shield is hidden. Low opacity so it never competes with text. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute right-0 top-0 block select-none md:hidden"
+        className="pointer-events-none absolute right-0 top-0 z-[4] block select-none md:hidden"
         style={{ width: '62vw', opacity: 0.07 }}
       >
         <Image
@@ -64,19 +72,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Gold ambient glow — right side, desktop only — atmosphere only, no mark drawn */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-[50%] hidden md:block"
-        style={{
-          width: 'clamp(300px, 36vw, 480px)',
-          transform: 'translateY(-50%)',
-          aspectRatio: '1',
-          background:
-            'radial-gradient(ellipse 58% 58% at 55% 48%, rgba(201,162,39,0.10) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-      />
+      {/* Controlled gold aurora — replaces the previous static glow. */}
+      <div aria-hidden className="hero-aurora pointer-events-none absolute right-[-6%] top-1/2 z-[1] hidden md:block" />
 
       {/* Content */}
       <div className="container-x relative z-10">
@@ -85,9 +82,9 @@ export function Hero() {
               Emil: content must be visible even before motion fires. */}
           <motion.div
             className="section-kicker"
-            initial={{ opacity: 0.92, x: -6 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.46, ease, delay: 0.08 }}
+            initial={false}
+            animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
             Crescer com clareza
           </motion.div>
@@ -103,14 +100,16 @@ export function Hero() {
             {/* Line 1: service pillar rotates. rotator is aria-hidden; H1 has stable aria-label. */}
             <motion.span
               aria-hidden
-              className="block text-gold"
-              initial={{ opacity: 0.92, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.52, ease, delay: 0.13 }}
+              className="block"
+              initial={false}
+              animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.02 : 0 }}
             >
               <WordRotator
                 words={['Sites', 'Automações', 'Marca', 'IA']}
-                startDelay={1200}
+                enabled={motionReady}
+                startDelay={900}
+                className="text-gold-gradient"
               />
             </motion.span>
 
@@ -123,9 +122,13 @@ export function Hero() {
                 aria-hidden
                 key={text}
                 className="block"
-                initial={{ opacity: 0.92, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.52, ease, delay }}
+                initial={false}
+                animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.24,
+                  ease,
+                  delay: motionReady ? Math.max(0, delay - 0.18) : 0,
+                }}
               >
                 {text}
               </motion.span>
@@ -134,9 +137,9 @@ export function Hero() {
 
           {/* Subtexto — max ~20 words (taste-skill hero rule) */}
           <motion.p
-            initial={{ opacity: 0.9, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.52, ease, delay: 0.36 }}
+            initial={false}
+            animate={{ opacity: motionReady ? 1 : 0.9, y: motionReady ? 0 : 5 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
             A Impulso X une estratégia, design, IA e automação para organizar sua
@@ -146,9 +149,9 @@ export function Hero() {
 
           {/* CTAs — 4th and final hero element */}
           <motion.div
-            initial={{ opacity: 0.9, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.52, ease, delay: 0.44 }}
+            initial={false}
+            animate={{ opacity: motionReady ? 1 : 0.9, y: motionReady ? 0 : 5 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.08 : 0 }}
             className="mt-7 flex flex-col gap-3 sm:flex-row"
           >
             <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>

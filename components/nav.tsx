@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { SITE, WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
+import { useIntroReady } from './intro-reveal';
 import { CtaButton } from './ui/cta-button';
 import { LogoShine } from './ui/logo-shine';
 
@@ -18,6 +19,9 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const introReady = useIntroReady();
+  const prefersReducedMotion = useReducedMotion();
+  const motionReady = Boolean(prefersReducedMotion) || introReady;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -36,9 +40,12 @@ export function Nav() {
 
   return (
     <motion.header
-      initial={{ y: -18, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.46, ease: [0.16, 1, 0.3, 1] }}
+      initial={false}
+      animate={{ y: motionReady ? 0 : -12, opacity: motionReady ? 1 : 0.94 }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.28,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="fixed inset-x-0 top-0 z-[70] px-3 pt-3 md:px-6 md:pt-5"
     >
       <div
