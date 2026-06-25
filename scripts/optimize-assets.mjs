@@ -84,6 +84,7 @@ async function makeOgImage() {
   const background = path.join(identityOutputDir, 'fundo-site-0-desktop.webp');
   const logo = path.join(identityOutputDir, 'marca-completa.webp');
   const out = path.join(root, 'public', 'og-image.png');
+  const versionedOut = path.join(root, 'public', 'og-image-ai-first.png');
 
   const canvas = sharp(background)
     .resize(1200, 630, { fit: 'cover', position: 'center' })
@@ -110,15 +111,21 @@ async function makeOgImage() {
     </svg>
   `);
 
-  await canvas
+  const pngBuffer = await canvas
     .composite([
       { input: textSvg, top: 0, left: 0 },
       { input: logoBuffer, top: 84, left: 74 },
     ])
     .png({ compressionLevel: 9 })
-    .toFile(out);
+    .toBuffer();
 
-  return { file: 'og-image.png', width: 1200, height: 630, bytes: (await fs.stat(out)).size };
+  await fs.writeFile(out, pngBuffer);
+  await fs.writeFile(versionedOut, pngBuffer);
+
+  return [
+    { file: 'og-image.png', width: 1200, height: 630, bytes: (await fs.stat(out)).size },
+    { file: 'og-image-ai-first.png', width: 1200, height: 630, bytes: (await fs.stat(versionedOut)).size },
+  ];
 }
 
 async function makeIcons() {
@@ -147,7 +154,7 @@ const manifest = [];
 for (const job of jobs) {
   manifest.push(await optimize(...job));
 }
-manifest.push(await makeOgImage());
+manifest.push(...(await makeOgImage()));
 manifest.push(...(await makeIcons()));
 
 await fs.writeFile(

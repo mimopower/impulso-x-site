@@ -65,6 +65,8 @@ const organizationSchema = {
   },
 };
 
+const ogImage = '/og-image-ai-first.png';
+
 const rajdhani = Rajdhani({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
@@ -113,7 +115,7 @@ export const metadata: Metadata = {
       'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
     images: [
       {
-        url: '/og-image.png',
+        url: ogImage,
         width: 1200,
         height: 630,
         alt: 'Impulso X Intelligence',
@@ -125,7 +127,7 @@ export const metadata: Metadata = {
     title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
       'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
-    images: ['/og-image.png'],
+    images: [ogImage],
   },
 };
 
