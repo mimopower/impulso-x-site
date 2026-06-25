@@ -4,20 +4,34 @@ import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { SectionReveal } from './section-reveal';
 
-const capabilities = [
-  'Primeira resposta automatizada',
-  'Qualificação do lead',
-  'Agendamento do próximo passo',
-  'Follow-up programado',
-  'Handoff humano',
-  'Registro para acompanhamento',
+const frontes = [
+  {
+    title: 'Atendimento inteligente',
+    body: 'Responde nos canais que sua operação usa, qualifica e aciona a equipe.',
+  },
+  {
+    title: 'Presença que converte',
+    body: 'Site, landing e Google Meu Negócio.',
+  },
+  {
+    title: 'Marca e identidade',
+    body: 'Confiança antes da primeira conversa.',
+  },
+  {
+    title: 'Conteúdo e redes',
+    body: 'Consistência de presença.',
+  },
+  {
+    title: 'Dados e recompra',
+    body: 'Relatórios, follow-up e recompra.',
+  },
 ] as const;
 
 const moments = [
   {
     n: '01',
     title: 'Lead chama',
-    body: 'A conversa entra pelo WhatsApp e já cai em um fluxo orientado pela sua operação.',
+    body: 'A conversa entra pelo canal que o cliente usa e já cai num fluxo orientado pela sua operação.',
   },
   {
     n: '02',
@@ -43,9 +57,16 @@ const messages = [
   { from: 'agent', text: 'Perfeito. Vou organizar essas informações e acionar a equipe com o contexto.' },
 ] as const;
 
-export function Agent() {
+export function Operation() {
   return (
-    <section id="agente" className="section-shell-wide relative overflow-hidden bg-ink2" aria-labelledby="agent-heading">
+    <section
+      id="operacao"
+      className="section-shell-wide relative overflow-hidden bg-ink2"
+      aria-labelledby="operation-heading"
+    >
+      {/* Âncora de compatibilidade — preserva links #agente já compartilhados (invisível). */}
+      <span id="agente" className="sr-only" aria-hidden="true" />
+
       <div aria-hidden className="gold-hairline absolute inset-x-0 top-0" />
 
       <Image
@@ -60,29 +81,32 @@ export function Agent() {
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <SectionReveal>
-            <p className="section-kicker">O produto-âncora</p>
+            <p className="section-kicker">O que instalamos na sua operação</p>
             <h2
-              id="agent-heading"
+              id="operation-heading"
               className="mt-6 max-w-[18ch] font-display text-display font-bold text-cream text-balance"
             >
-              Um agente que organiza a conversa, qualifica o lead e chama sua equipe quando importa.
+              Inteligência aplicada em cada ponto da sua operação.
             </h2>
             <p className="mt-6 max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
-              Ele organiza a primeira conversa, entende a demanda, coleta informações importantes,
-              agenda o próximo passo e transfere para uma pessoa quando a conversa pede decisão humana.
+              Do primeiro contato à recompra: atendimento que responde onde o seu cliente fala,
+              presença que converte, marca consistente, conteúdo e dados que mantêm o cliente voltando.
             </p>
 
-            <ul className="mt-8 border-y border-cream/12" aria-label="Capacidades do agente">
-              {capabilities.map((capability, index) => (
+            <ul className="mt-8 border-y border-cream/12" aria-label="Frentes da operação">
+              {frontes.map((frente, index) => (
                 <li
-                  key={capability}
+                  key={frente.title}
                   className="grid grid-cols-[2.8rem_1fr] items-center gap-4 border-b border-cream/12 py-4 last:border-b-0"
                 >
                   <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
                     0{index + 1}
                   </span>
                   <span className="font-display text-xl font-semibold leading-tight text-cream">
-                    {capability}
+                    {frente.title}
+                    <span className="block font-sans text-sm font-normal leading-snug text-steel">
+                      {frente.body}
+                    </span>
                   </span>
                 </li>
               ))}
@@ -96,7 +120,7 @@ export function Agent() {
           </SectionReveal>
 
           <SectionReveal delay={0.08}>
-            <div className="agent-showcase" aria-label="Fluxo operacional do agente de IA no WhatsApp">
+            <div className="agent-showcase" aria-label="Exemplo de atendimento inteligente em operação multicanal">
               <div aria-hidden className="agent-showcase__glow" />
               <div className="agent-console">
                 <div className="agent-console__header">
@@ -104,7 +128,8 @@ export function Agent() {
                     <p className="font-display text-sm font-bold uppercase tracking-[0.08em] text-gold">
                       Fluxo inteligente
                     </p>
-                    <p className="mt-1 text-sm text-steel">WhatsApp conectado à operação</p>
+                    <p className="mt-1 text-sm text-steel">Atendimento onde o seu cliente fala</p>
+                    <p className="mt-0.5 text-xs text-steel/70">Canais como WhatsApp, Instagram e Telegram</p>
                   </div>
                   <span className="agent-status">
                     <span aria-hidden className="agent-status__dot" />
@@ -140,6 +165,8 @@ export function Agent() {
                     </li>
                   ))}
                 </ol>
+
+                <p className="mt-3 text-right font-sans text-xs text-steel/70">Exemplo: atendimento inteligente</p>
               </div>
             </div>
           </SectionReveal>

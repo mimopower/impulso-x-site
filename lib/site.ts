@@ -12,8 +12,8 @@ export const SITE = {
 
 export const WHATSAPP_MESSAGES = {
   diagnostic:
-    'Olá! Quero o diagnóstico gratuito do meu funil de WhatsApp/Google com a Impulso X.',
-  solutions: 'Olá! Quero entender como funciona o Agente de IA da Impulso X.',
+    'Olá! Quero o diagnóstico gratuito da minha operação de atendimento e presença digital com a Impulso X.',
+  solutions: 'Olá! Quero entender como a Impulso X pode instalar inteligência na minha operação.',
 };
 
 export const WHATSAPP_URL = (message?: string) => {

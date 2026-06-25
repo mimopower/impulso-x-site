@@ -6,8 +6,8 @@ import { GoldCircuitLines } from './ui/gold-circuit-lines';
 const primarySolutions = [
   {
     n: '01',
-    title: 'Agente de IA no WhatsApp',
-    body: 'Organiza a primeira conversa, qualifica, agenda e faz follow-up, com transferência para humano quando precisa.',
+    title: 'Atendimento inteligente',
+    body: 'Um agente que responde nos canais que sua operação já usa, qualifica e transfere para a equipe quando precisa.',
   },
   {
     n: '02',

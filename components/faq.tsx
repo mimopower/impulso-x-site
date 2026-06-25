@@ -12,14 +12,19 @@ const faqs = [
       'As regras de handoff são configuradas com você. A transferência pode acontecer por tipo de pedido, dúvida sensível, intenção de compra ou qualquer limite definido no projeto.',
   },
   {
-    question: 'Preciso trocar meu número de WhatsApp?',
+    question: 'Preciso trocar meu número ou canal de atendimento?',
     answer:
-      'Não. A implantação é pensada para respeitar sua operação atual e reduzir fricção para sua equipe e para seus clientes.',
+      'Não. Adaptamos o fluxo ao canal que sua operação já usa, sem trocar número — a implantação respeita sua rotina e reduz fricção para equipe e clientes.',
   },
   {
     question: 'Funciona no meu segmento?',
     answer:
-      'Funciona melhor quando a empresa recebe muitas conversas pelo WhatsApp, Instagram ou Google e tem triagem repetitiva. Também pode ser adaptado a outros canais conforme a operação.',
+      'Funciona melhor quando a empresa recebe muitas conversas pelo WhatsApp, Instagram, Google ou outros canais e tem triagem repetitiva. Adaptamos o fluxo ao canal que sua operação já usa.',
+  },
+  {
+    question: 'A Impulso X só faz o agente de atendimento?',
+    answer:
+      'Não. Instalamos inteligência na operação inteira: atendimento, presença que converte, marca, conteúdo e dados para recompra.',
   },
 ] as const;
 

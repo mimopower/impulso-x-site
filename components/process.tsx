@@ -8,22 +8,22 @@ const steps = [
   {
     n: '01',
     title: 'Diagnóstico',
-    body: 'Mapeamos seu funil de WhatsApp/Google e onde o lead esfria.',
+    body: 'Mapeamos sua operação, seus canais de entrada e onde o cliente esfria.',
   },
   {
     n: '02',
-    title: 'Demonstração',
-    body: 'Você vê o agente funcionando e recebe uma proposta com escopo claro.',
+    title: 'Desenho da operação',
+    body: 'Definimos a frente prioritária: atendimento, presença, marca, conteúdo, dados ou recompra.',
   },
   {
     n: '03',
     title: 'Implantação',
-    body: 'Configuramos o agente e as regras de handoff e colocamos no ar.',
+    body: 'Colocamos a inteligência no ar com fluxos claros, handoff humano e pontos de conversão.',
   },
   {
     n: '04',
-    title: 'Valor & recompra',
-    body: 'Relatório mensal do que o agente respondeu, qualificou e agendou, com ajustes contínuos.',
+    title: 'Evolução',
+    body: 'Acompanhamos dados, follow-ups e oportunidades para manter o cliente voltando.',
   },
 ];
 
@@ -41,7 +41,7 @@ export function Process() {
             id="process-heading"
             className="mt-6 font-display text-display font-bold text-cream text-balance"
           >
-            Do diagnóstico ao agente no ar
+            Do diagnóstico à operação rodando
           </h2>
         </SectionReveal>
 

@@ -86,14 +86,14 @@ export function Hero() {
             animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
-            Atendimento inteligente para PMEs
+            Inteligência aplicada a PMEs
           </motion.div>
 
           {/* H1 — stable aria-label for screen readers; visual word rotates.
               Emil: stagger 60-80ms between lines; only opacity+transform animated. */}
           <h1
             id="hero-heading"
-            aria-label="Inteligência que atende, qualifica e agenda no seu WhatsApp."
+            aria-label="Inteligência para atender, qualificar, agendar e reativar conversas com clientes."
             className="mt-6 font-display text-hero font-bold text-cream text-balance"
             style={{ lineHeight: '0.98' }}
           >
@@ -104,7 +104,7 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.02 : 0 }}
             >
-              Inteligência que
+              Inteligência para
             </motion.span>
 
             <motion.span
@@ -115,7 +115,7 @@ export function Hero() {
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.04 : 0 }}
             >
               <WordRotator
-                words={['atende', 'qualifica', 'agenda', 'faz voltar']}
+                words={['atender', 'qualificar', 'agendar', 'reativar']}
                 enabled={motionReady}
                 startDelay={900}
                 className="text-gold-gradient"
@@ -129,7 +129,7 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.09 : 0 }}
             >
-              no seu WhatsApp.
+              conversas com clientes.
             </motion.span>
           </h1>
 
@@ -140,8 +140,8 @@ export function Hero() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
-            Instalamos um agente no seu WhatsApp para tirar dúvidas, qualificar pedidos,
-            agendar conversas e acionar sua equipe quando precisar.
+            Instalamos inteligência na operação da sua empresa para organizar atendimento,
+            presença, marca e dados — em canais como WhatsApp, Instagram, Google e Telegram.
           </motion.p>
 
           {/* CTAs — 4th and final hero element */}
@@ -154,7 +154,7 @@ export function Hero() {
             <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
               Quero meu diagnóstico
             </CtaButton>
-            <CtaButton href="#agente" variant="outline" size="xl">
+            <CtaButton href="#operacao" variant="outline" size="xl">
               Ver como funciona
             </CtaButton>
           </motion.div>

@@ -51,7 +51,7 @@ const organizationSchema = {
     '@type': 'OfferCatalog',
     name: 'Soluções Impulso X',
     itemListElement: [
-      'Agente de IA no WhatsApp com handoff humano',
+      'Atendimento inteligente com IA em canais digitais e handoff humano',
       'Diagnóstico do funil de atendimento',
       'Presença digital que converte',
       'Operação inteligente e recompra',
@@ -90,13 +90,16 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.shortName}`,
   },
   description:
-    'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
+    'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
   keywords: [
-    'agente de IA no WhatsApp',
+    'operação inteligente para PMEs',
     'atendimento automatizado com IA',
-    'IA para PMEs',
+    'agente de IA para atendimento',
+    'agente de IA no WhatsApp',
+    'agente de IA no Telegram',
+    'presença digital para PMEs',
     'qualificação de leads',
-    'automação de atendimento',
+    'recompra',
     'Impulso X',
   ],
   authors: [{ name: SITE.name }],
@@ -112,7 +115,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
+      'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
     images: [
       {
         url: ogImage,
@@ -126,7 +129,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
+      'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
     images: [ogImage],
   },
 };

@@ -106,7 +106,7 @@ async function makeOgImage() {
         e faz seu cliente voltar.
       </text>
       <text x="82" y="552" fill="#b8b2a5" font-family="Arial, sans-serif" font-size="22" font-weight="400">
-        Agente de IA no WhatsApp para PMEs
+        Inteligência operacional para PMEs
       </text>
     </svg>
   `);

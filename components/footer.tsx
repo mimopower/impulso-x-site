@@ -6,7 +6,7 @@ import { LogoShine } from './ui/logo-shine';
 const currentYear = new Date().getFullYear();
 
 const links = [
-  { label: 'Agente', href: '#agente' },
+  { label: 'Operação', href: '#operacao' },
   { label: 'Soluções', href: '#servicos' },
   { label: 'Processo', href: '#processo' },
   { label: 'Fundadores', href: '#fundadores' },

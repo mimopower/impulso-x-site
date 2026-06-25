@@ -1,7 +1,7 @@
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
 import { Problem } from '@/components/problem';
-import { Agent } from '@/components/agent';
+import { Operation } from '@/components/operation';
 import { Services } from '@/components/services';
 import { Differentials } from '@/components/differentials';
 import { Founders } from '@/components/founders';
@@ -20,7 +20,7 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <Problem />
-        <Agent />
+        <Operation />
         <Services />
         <Differentials />
         <Founders />
