@@ -8,22 +8,22 @@ const steps = [
   {
     n: '01',
     title: 'Diagnóstico',
-    body: 'Mapeamos sua operação, seus canais de entrada e onde o cliente esfria.',
+    body: 'Mapeamos seu funil de WhatsApp/Google e onde o lead esfria.',
   },
   {
     n: '02',
-    title: 'Desenho da operação',
-    body: 'Definimos a frente prioritária: atendimento, presença, marca, conteúdo, dados ou recompra.',
+    title: 'Agente no ar',
+    body: 'Implantamos o agente no WhatsApp ou Telegram, com handoff humano e fluxo aprovado.',
   },
   {
     n: '03',
-    title: 'Implantação',
-    body: 'Colocamos a inteligência no ar com fluxos claros, handoff humano e pontos de conversão.',
+    title: 'Presença que alimenta',
+    body: 'Site, GMN e presença nos canais certos para gerar leads mais qualificados para o agente.',
   },
   {
     n: '04',
-    title: 'Evolução',
-    body: 'Acompanhamos dados, follow-ups e oportunidades para manter o cliente voltando.',
+    title: 'Operação inteligente',
+    body: 'Painel, CRM e automações conforme a dor valida. Relatório mensal do que o agente gerou.',
   },
 ];
 

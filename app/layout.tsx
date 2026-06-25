@@ -51,10 +51,13 @@ const organizationSchema = {
     '@type': 'OfferCatalog',
     name: 'Soluções Impulso X',
     itemListElement: [
-      'Atendimento inteligente com IA em canais digitais e handoff humano',
+      'Agente de IA no WhatsApp ou Telegram com handoff humano',
       'Diagnóstico do funil de atendimento',
       'Presença digital que converte',
-      'Operação inteligente e recompra',
+      'Painel administrativo sob medida',
+      'CRM e funil comercial',
+      'Dashboards e relatórios de valor',
+      'Automações e integrações',
       'Marca e identidade',
       'Conteúdo para redes',
       'Google Meu Negócio e SEO local',
@@ -90,7 +93,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.shortName}`,
   },
   description:
-    'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
+    'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
   keywords: [
     'operação inteligente para PMEs',
     'atendimento automatizado com IA',
@@ -98,6 +101,8 @@ export const metadata: Metadata = {
     'agente de IA no WhatsApp',
     'agente de IA no Telegram',
     'presença digital para PMEs',
+    'painel administrativo sob medida',
+    'CRM para PMEs',
     'qualificação de leads',
     'recompra',
     'Impulso X',
@@ -115,7 +120,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
+      'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
     images: [
       {
         url: ogImage,
@@ -129,7 +134,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'A Impulso X instala inteligência operacional em PMEs: atendimento em múltiplos canais, presença, marca e dados para qualificar leads e gerar recompra.',
+      'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
     images: [ogImage],
   },
 };

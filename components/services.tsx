@@ -3,44 +3,66 @@ import { ASSETS } from '@/lib/assets';
 import { SectionReveal } from './section-reveal';
 import { GoldCircuitLines } from './ui/gold-circuit-lines';
 
-const primarySolutions = [
+// 3 camadas âncoras — o Agente (01) é renderizado como bloco dominante (maior área,
+// borda dourada, copy maior), nunca no mesmo template dos demais (cardápio plano = violação).
+type PrimarySolution = { n: string; title: string; body: string; anchor?: boolean };
+
+const primarySolutions: PrimarySolution[] = [
   {
     n: '01',
-    title: 'Atendimento inteligente',
-    body: 'Um agente que responde nos canais que sua operação já usa, qualifica e transfere para a equipe quando precisa.',
+    title: 'Agente de IA',
+    body: 'O agente de IA no WhatsApp ou Telegram: responde, qualifica, agenda e transfere para a equipe quando precisa.',
+    anchor: true,
   },
   {
     n: '02',
     title: 'Presença que converte',
-    body: 'Site, landing e Google Meu Negócio para o cliente confiar antes da conversa e alimentar melhor o agente.',
+    body: 'Site, landing e Google Meu Negócio para o cliente confiar antes da conversa — e alimentar melhor o agente.',
   },
   {
     n: '03',
-    title: 'Operação inteligente completa',
-    body: 'Agente, presença, conteúdo e recompra rodando como uma engrenagem só, com relatório mensal de valor.',
+    title: 'Operação inteligente',
+    body: 'Painel, CRM, dashboards e automações conforme a operação cresce — começando pelo essencial.',
   },
-] as const;
+];
 
+// "A operação inteligente por dentro" — camada 3 nomeada (mínimo-primeiro) + apoios
+// de presença. Entram conforme a dor valida, nunca como menu no frio.
 const complementarySolutions = [
   {
     n: '04',
-    title: 'Diagnóstico do funil',
-    body: 'Mapeamento dos pontos onde o lead esfria e do que precisa ser organizado primeiro.',
+    title: 'Painel administrativo sob medida',
+    body: 'Visibilidade operacional mínima primeiro. Expande conforme a operação cresce.',
   },
   {
     n: '05',
-    title: 'Marca e identidade',
-    body: 'Identidade e direção para transmitir confiança antes da primeira conversa com o possível cliente.',
+    title: 'CRM e funil comercial',
+    body: 'Registro e acompanhamento de leads desde o primeiro contato até a recompra.',
   },
   {
     n: '06',
-    title: 'Conteúdo para redes',
-    body: 'Criação e organização de conteúdo para sua marca manter consistência.',
+    title: 'Dashboards e relatórios de valor',
+    body: 'O que o agente respondeu, qualificou e agendou — em relatório mensal.',
   },
   {
     n: '07',
+    title: 'Automações e integrações',
+    body: 'Conectores aprovados. Integrações complexas viram projeto separado.',
+  },
+  {
+    n: '08',
+    title: 'Marca e identidade',
+    body: 'Linguagem visual que comunica antes do agente falar.',
+  },
+  {
+    n: '09',
+    title: 'Conteúdo para redes',
+    body: 'Conteúdo que alimenta o agente e os canais ao redor dele.',
+  },
+  {
+    n: '10',
     title: 'Google Meu Negócio e SEO local',
-    body: 'Presença fortalecida no Google e no Maps para buscas da sua região.',
+    body: 'Presença que atrai o lead antes de chegar no WhatsApp.',
   },
 ] as const;
 
@@ -74,33 +96,61 @@ export function Services() {
         </SectionReveal>
 
         <div className="mt-12">
-          {primarySolutions.map((solution) => (
-            <article
-              key={solution.n}
-              className="service-item group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-9 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-11"
-            >
-              <ServiceSweep />
-              <span
-                className="relative z-10 font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
-                style={{ color: 'rgba(216,184,77,0.5)', WebkitTextStroke: '1px rgba(216,184,77,0.92)' }}
-                aria-hidden
+          {primarySolutions.map((solution) =>
+            solution.anchor ? (
+              // Camada 1 — bloco âncora dominante (borda dourada, maior área/copy)
+              <article
+                key={solution.n}
+                className="service-item group relative mb-6 rounded-brand border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10"
               >
-                {solution.n}
-              </span>
-              <h3 className="service-item-title relative z-10 self-center font-display text-2xl font-bold text-cream md:text-3xl">
-                {solution.title}
-              </h3>
-              <p className="relative z-10 col-span-2 font-sans text-base leading-[1.55] text-steel text-pretty md:col-span-1 md:self-center">
-                {solution.body}
-              </p>
-            </article>
-          ))}
+                <ServiceSweep />
+                <div className="grid gap-6 md:grid-cols-[120px_1fr_1.4fr] md:items-center md:gap-10">
+                  <span
+                    className="relative z-10 font-display text-5xl font-bold leading-none text-transparent md:text-6xl select-none"
+                    style={{ color: 'rgba(216,184,77,0.55)', WebkitTextStroke: '1px rgba(216,184,77,0.95)' }}
+                    aria-hidden
+                  >
+                    {solution.n}
+                  </span>
+                  <h3 className="service-item-title relative z-10 self-center font-display text-3xl font-bold text-cream md:text-4xl">
+                    {solution.title}
+                    <span className="mt-1 block font-display text-xs font-bold tracking-[0.14em] text-gold">
+                      CAMADA ÂNCORA
+                    </span>
+                  </h3>
+                  <p className="relative z-10 col-span-2 font-sans text-lg leading-[1.55] text-steel text-pretty md:col-span-1 md:self-center">
+                    {solution.body}
+                  </p>
+                </div>
+              </article>
+            ) : (
+              <article
+                key={solution.n}
+                className="service-item group relative grid grid-cols-[60px_1fr] gap-6 border-t border-cream/12 py-9 last:border-b last:border-b-cream/12 md:grid-cols-[96px_1fr_1.2fr] md:gap-10 md:py-11"
+              >
+                <ServiceSweep />
+                <span
+                  className="relative z-10 font-display text-4xl font-bold leading-none text-transparent md:text-5xl select-none"
+                  style={{ color: 'rgba(216,184,77,0.5)', WebkitTextStroke: '1px rgba(216,184,77,0.92)' }}
+                  aria-hidden
+                >
+                  {solution.n}
+                </span>
+                <h3 className="service-item-title relative z-10 self-center font-display text-2xl font-bold text-cream md:text-3xl">
+                  {solution.title}
+                </h3>
+                <p className="relative z-10 col-span-2 font-sans text-base leading-[1.55] text-steel text-pretty md:col-span-1 md:self-center">
+                  {solution.body}
+                </p>
+              </article>
+            ),
+          )}
         </div>
 
         <SectionReveal delay={0.08} className="mt-16 grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-          <p className="section-kicker">Também podemos integrar</p>
+          <p className="section-kicker">A operação inteligente por dentro</p>
           <p className="max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
-            Soluções complementares entram no projeto conforme a necessidade e o momento da sua empresa.
+            A operação inteligente se constrói ao redor do agente, conforme a sua empresa cresce — começando pelo essencial.
           </p>
         </SectionReveal>
 

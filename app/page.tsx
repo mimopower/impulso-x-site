@@ -1,5 +1,6 @@
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
+import { OfferSnapshot } from '@/components/offer-snapshot';
 import { Problem } from '@/components/problem';
 import { Operation } from '@/components/operation';
 import { Services } from '@/components/services';
@@ -19,6 +20,7 @@ export default function HomePage() {
 
       <main id="main-content">
         <Hero />
+        <OfferSnapshot />
         <Problem />
         <Operation />
         <Services />

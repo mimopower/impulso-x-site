@@ -86,7 +86,7 @@ export function Hero() {
             animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
-            Inteligência aplicada a PMEs
+            IA por dentro, resultado por fora
           </motion.div>
 
           {/* H1 — stable aria-label for screen readers; visual word rotates.
@@ -140,8 +140,7 @@ export function Hero() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
-            Instalamos inteligência na operação da sua empresa para organizar atendimento,
-            presença, marca e dados — em canais como WhatsApp, Instagram, Google e Telegram.
+            Um agente de IA atende no WhatsApp ou Telegram, qualifica e passa para a sua equipe na hora certa. Ao redor dele, organizamos presença, dados e recompra.
           </motion.p>
 
           {/* CTAs — 4th and final hero element */}

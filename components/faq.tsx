@@ -14,7 +14,7 @@ const faqs = [
   {
     question: 'Preciso trocar meu número ou canal de atendimento?',
     answer:
-      'Não. Adaptamos o fluxo ao canal que sua operação já usa, sem trocar número — a implantação respeita sua rotina e reduz fricção para equipe e clientes.',
+      'Não. O agente roda no WhatsApp ou Telegram, à sua escolha, sem trocar o número que você já usa — a implantação respeita sua rotina e reduz fricção para equipe e clientes.',
   },
   {
     question: 'Funciona no meu segmento?',
@@ -24,7 +24,12 @@ const faqs = [
   {
     question: 'A Impulso X só faz o agente de atendimento?',
     answer:
-      'Não. Instalamos inteligência na operação inteira: atendimento, presença que converte, marca, conteúdo e dados para recompra.',
+      'Não. O agente é a âncora, mas a operação inteligente se constrói ao redor dele: presença que converte, marca, conteúdo e dados para recompra — em 3 camadas que crescem conforme a sua empresa precisa.',
+  },
+  {
+    question: 'O painel e o CRM são sob medida?',
+    answer:
+      'Sim. O escopo sai no diagnóstico — começamos pelo mínimo (painel operacional essencial) e expandimos conforme a operação cresce. Sem preço fechado no site: o tamanho da entrega depende da sua dor.',
   },
 ] as const;
 

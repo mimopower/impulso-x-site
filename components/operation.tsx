@@ -4,28 +4,29 @@ import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { SectionReveal } from './section-reveal';
 
-const frontes = [
+// 3 camadas AI-first — Camada 1 (agente) é a âncora/herói, com peso visual dominante.
+// Camadas 2 e 3 se constroem ao redor dela, como profundidade subordinada — nunca
+// como 3 itens de igual peso (cicatriz Realize: cardápio plano de agência).
+type Layer = { n: string; title: string; body: string; anchor?: boolean };
+
+const layers: Layer[] = [
   {
+    n: '01',
     title: 'Atendimento inteligente',
-    body: 'Responde nos canais que sua operação usa, qualifica e aciona a equipe.',
+    body: 'O agente de IA atende no WhatsApp ou Telegram, qualifica, agenda e faz follow-up — e passa para a equipe quando precisa.',
+    anchor: true,
   },
   {
+    n: '02',
     title: 'Presença que converte',
-    body: 'Site, landing e Google Meu Negócio.',
+    body: 'Site, landing e GMN que geram confiança antes da conversa e alimentam o agente com leads mais qualificados.',
   },
   {
-    title: 'Marca e identidade',
-    body: 'Confiança antes da primeira conversa.',
+    n: '03',
+    title: 'Operação inteligente',
+    body: 'Painel sob medida, CRM/funil, dashboards de valor e automações — começando pelo mínimo e crescendo conforme a dor valida.',
   },
-  {
-    title: 'Conteúdo e redes',
-    body: 'Consistência de presença.',
-  },
-  {
-    title: 'Dados e recompra',
-    body: 'Relatórios, follow-up e recompra.',
-  },
-] as const;
+];
 
 const moments = [
   {
@@ -81,35 +82,58 @@ export function Operation() {
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <SectionReveal>
-            <p className="section-kicker">O que instalamos na sua operação</p>
+            <p className="section-kicker">As 3 camadas da operação inteligente</p>
             <h2
               id="operation-heading"
-              className="mt-6 max-w-[18ch] font-display text-display font-bold text-cream text-balance"
+              className="mt-6 max-w-[20ch] font-display text-display font-bold text-cream text-balance"
             >
-              Inteligência aplicada em cada ponto da sua operação.
+              O agente é o coração. A operação se constrói ao redor dele.
             </h2>
             <p className="mt-6 max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
-              Do primeiro contato à recompra: atendimento que responde onde o seu cliente fala,
-              presença que converte, marca consistente, conteúdo e dados que mantêm o cliente voltando.
+              Do primeiro contato à recompra: o agente de IA atende onde o seu cliente fala.
+              Ao redor dele, presença que converte, marca consistente e dados que mantêm o cliente voltando.
             </p>
 
-            <ul className="mt-8 border-y border-cream/12" aria-label="Frentes da operação">
-              {frontes.map((frente, index) => (
-                <li
-                  key={frente.title}
-                  className="grid grid-cols-[2.8rem_1fr] items-center gap-4 border-b border-cream/12 py-4 last:border-b-0"
-                >
-                  <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
-                    0{index + 1}
-                  </span>
-                  <span className="font-display text-xl font-semibold leading-tight text-cream">
-                    {frente.title}
-                    <span className="block font-sans text-sm font-normal leading-snug text-steel">
-                      {frente.body}
+            {/* Camada 1 — bloco âncora destacado (borda dourada, maior área/copy) */}
+            <ul className="mt-8" aria-label="Camadas da operação inteligente">
+              {layers.map((layer) =>
+                layer.anchor ? (
+                  <li
+                    key={layer.n}
+                    className="relative mb-4 rounded-brand border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-6"
+                  >
+                    <span
+                      aria-hidden
+                      className="font-display text-xs font-bold tracking-[0.14em] text-gold"
+                    >
+                      CAMADA {layer.n} · ÂNCORA
                     </span>
-                  </span>
-                </li>
-              ))}
+                    <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
+                      {layer.title}
+                    </h3>
+                    <p className="mt-2 max-w-[46ch] font-sans text-base leading-[1.5] text-steel text-pretty">
+                      {layer.body}
+                    </p>
+                  </li>
+                ) : (
+                  <li
+                    key={layer.n}
+                    className="grid grid-cols-[2.4rem_1fr] items-start gap-4 border-b border-cream/12 py-5 last:border-b-0"
+                  >
+                    <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
+                      {layer.n}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-lg font-semibold leading-tight text-cream">
+                        {layer.title}
+                      </h3>
+                      <p className="mt-1.5 font-sans text-sm leading-snug text-steel text-pretty">
+                        {layer.body}
+                      </p>
+                    </div>
+                  </li>
+                ),
+              )}
             </ul>
 
             <div className="mt-8">
@@ -129,7 +153,7 @@ export function Operation() {
                       Fluxo inteligente
                     </p>
                     <p className="mt-1 text-sm text-steel">Atendimento onde o seu cliente fala</p>
-                    <p className="mt-0.5 text-xs text-steel/70">Canais como WhatsApp, Instagram e Telegram</p>
+                    <p className="mt-0.5 text-xs text-steel/70">WhatsApp ou Telegram, à escolha do cliente</p>
                   </div>
                   <span className="agent-status">
                     <span aria-hidden className="agent-status__dot" />
@@ -166,7 +190,7 @@ export function Operation() {
                   ))}
                 </ol>
 
-                <p className="mt-3 text-right font-sans text-xs text-steel/70">Exemplo: atendimento inteligente</p>
+                <p className="mt-3 text-right font-sans text-xs text-steel/70">Exemplo: o agente em operação</p>
               </div>
             </div>
           </SectionReveal>
