@@ -96,6 +96,7 @@
     }
     .marquee-track,
     .living-border::before,
+    .agent-showcase__glow,
     .gold-pulse-dot {
       animation: none !important;
     }
@@ -426,6 +427,242 @@
     flex-shrink: 0;
   }
 
+  .agent-showcase {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .agent-showcase__glow {
+    position: absolute;
+    inset: 8% 4%;
+    z-index: -1;
+    border: 1px solid rgba(201, 162, 39, 0.16);
+    border-radius: 8px;
+    background:
+      linear-gradient(115deg, rgba(201, 162, 39, 0.06), transparent 48%),
+      rgba(244, 240, 231, 0.015);
+    opacity: 0.78;
+    transform: translate3d(0, 0, 0) scale(0.98);
+    animation: agent-orbit 9s var(--ease-in-out) infinite alternate;
+  }
+
+  .agent-console {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+      rgba(13, 13, 13, 0.82);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 28px 90px rgba(0, 0, 0, 0.34);
+  }
+
+  .agent-console::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(201, 162, 39, 0.08) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(201, 162, 39, 0.055) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.14;
+  }
+
+  .agent-console__header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(244, 240, 231, 0.1);
+    padding: clamp(1rem, 2.4vw, 1.6rem);
+  }
+
+  .agent-status {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(201, 162, 39, 0.28);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    color: var(--cream);
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .agent-status__dot,
+  .agent-handoff__pulse {
+    display: inline-block;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: var(--gold);
+    animation: gold-pulse 1.8s ease-in-out infinite;
+  }
+
+  .agent-chat {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1rem, 2.6vw, 1.7rem);
+  }
+
+  .agent-chat__bubble {
+    max-width: min(82%, 28rem);
+    border: 1px solid rgba(244, 240, 231, 0.1);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--cream);
+  }
+
+  .agent-chat__bubble--lead {
+    justify-self: start;
+    background: rgba(26, 26, 26, 0.88);
+    color: var(--steel);
+  }
+
+  .agent-chat__bubble--agent {
+    justify-self: end;
+    border-color: rgba(201, 162, 39, 0.24);
+    background: rgba(201, 162, 39, 0.12);
+  }
+
+  .agent-handoff {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.55rem;
+    justify-self: end;
+    border-top: 1px solid rgba(201, 162, 39, 0.24);
+    padding-top: 0.8rem;
+    color: var(--gold-soft);
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .agent-flow {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    border-top: 1px solid rgba(244, 240, 231, 0.1);
+  }
+
+  .agent-flow__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(244, 240, 231, 0.1);
+    padding: clamp(1rem, 2.3vw, 1.45rem) clamp(1rem, 2.6vw, 1.7rem);
+  }
+
+  .agent-flow__item:last-child {
+    border-bottom: 0;
+  }
+
+  .agent-flow__number {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .agent-flow__title {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--cream);
+  }
+
+  .agent-flow__body {
+    margin-top: 0.45rem;
+    color: var(--steel);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .faq-list {
+    border-top: 1px solid rgba(244, 240, 231, 0.12);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(244, 240, 231, 0.12);
+  }
+
+  .faq-summary {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    min-height: 4.8rem;
+    cursor: pointer;
+    list-style: none;
+    color: var(--cream);
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: clamp(1.15rem, 1.8vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary::after {
+    content: "+";
+    justify-self: end;
+    color: var(--gold);
+    transition: transform 220ms var(--ease-expo);
+  }
+
+  .faq-item[open] .faq-summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-number {
+    color: var(--gold);
+    font-size: 0.86rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .faq-answer {
+    max-width: 72ch;
+    padding: 0 3.6rem 1.45rem;
+    color: var(--steel);
+    font-size: 1rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 767px) {
+    .agent-chat__bubble {
+      max-width: 92%;
+    }
+
+    .agent-flow__item,
+    .faq-summary {
+      grid-template-columns: 2.4rem 1fr;
+    }
+
+    .faq-answer {
+      padding-inline: 3.4rem 0;
+    }
+  }
+
   .client-marquee {
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -642,6 +879,12 @@
 @keyframes gold-pulse {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+@keyframes agent-orbit {
+  0% { opacity: 0.58; transform: translate3d(-1%, 1%, 0) scale(0.98); }
+  50% { opacity: 0.82; transform: translate3d(1%, -1%, 0) scale(1.01); }
+  100% { opacity: 0.68; transform: translate3d(2%, 0, 0) scale(1.02); }
 }
 
 @keyframes scroll-cue {

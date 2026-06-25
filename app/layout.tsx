@@ -51,13 +51,13 @@ const organizationSchema = {
     '@type': 'OfferCatalog',
     name: 'Soluções Impulso X',
     itemListElement: [
-      'Sites e presença digital',
-      'Automação & IA aplicada',
-      'Marca, identidade e estratégia',
-      'Agente de IA no WhatsApp',
-      'Google Meu Negócio e SEO local',
+      'Agente de IA no WhatsApp com handoff humano',
+      'Diagnóstico do funil de atendimento',
+      'Presença digital que converte',
+      'Operação inteligente e recompra',
+      'Marca e identidade',
       'Conteúdo para redes',
-      'Estratégia de marketing e campanhas',
+      'Google Meu Negócio e SEO local',
     ].map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -84,17 +84,17 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.shortName} | Sites, automações e marca para empresas em crescimento`,
+    default: `${SITE.shortName} | Inteligência que atende, qualifica e faz seu cliente voltar`,
     template: `%s | ${SITE.shortName}`,
   },
   description:
-    'A Impulso X cria sites, automações, identidade e estratégia digital para empresas que querem organizar a presença online e vender com mais clareza.',
+    'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
   keywords: [
-    'sites para empresas',
-    'automação empresarial',
-    'IA aplicada',
-    'branding',
-    'estratégia digital',
+    'agente de IA no WhatsApp',
+    'atendimento automatizado com IA',
+    'IA para PMEs',
+    'qualificação de leads',
+    'automação de atendimento',
     'Impulso X',
   ],
   authors: [{ name: SITE.name }],
@@ -108,9 +108,9 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: SITE.url,
     siteName: SITE.name,
-    title: 'Impulso X | Sites, automações e marca para empresas em crescimento',
+    title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'Estratégia, design, IA e automação para organizar sua presença digital e reduzir tarefas manuais.',
+      'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
     images: [
       {
         url: '/og-image.png',
@@ -122,9 +122,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Impulso X | Sites, automações e marca para empresas em crescimento',
+    title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
     description:
-      'Estratégia, design, IA e automação para organizar sua presença digital e reduzir tarefas manuais.',
+      'A Impulso X instala agentes no WhatsApp para atender, qualificar, agendar e acionar humanos quando necessário, reduzindo leads parados no funil.',
     images: ['/og-image.png'],
   },
 };

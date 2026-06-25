@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { SectionReveal } from './section-reveal';
 
 const changes = [
-  'Menos tarefas soltas.',
-  'Uma marca mais consistente.',
-  'Atendimento mais rápido.',
-  'Canais digitais mais claros.',
+  'Menos conversa parada no WhatsApp.',
+  'Menos tempo preso em perguntas repetidas.',
+  'Follow-up registrado, sem depender da memória.',
+  'Mais rotina para recompra e indicação.',
 ];
 
 const ease = [0.23, 1, 0.32, 1] as const;

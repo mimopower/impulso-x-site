@@ -8,22 +8,22 @@ const steps = [
   {
     n: '01',
     title: 'Diagnóstico',
-    body: 'Entendemos a empresa, a oferta, os canais atuais e os pontos que mais geram retrabalho.',
+    body: 'Mapeamos seu funil de WhatsApp/Google e onde o lead esfria.',
   },
   {
     n: '02',
-    title: 'Plano',
-    body: 'Organizamos prioridades e definimos o que precisa ser criado, ajustado ou automatizado primeiro.',
+    title: 'Demonstração',
+    body: 'Você vê o agente funcionando e recebe uma proposta com escopo claro.',
   },
   {
     n: '03',
-    title: 'Execução',
-    body: 'Construímos site, identidade, materiais e fluxos de automação com acompanhamento próximo.',
+    title: 'Implantação',
+    body: 'Configuramos o agente e as regras de handoff e colocamos no ar.',
   },
   {
     n: '04',
-    title: 'Ajuste',
-    body: 'Revisamos o que foi entregue, melhoramos a experiência e deixamos o próximo passo claro.',
+    title: 'Valor & recompra',
+    body: 'Relatório mensal do que o agente respondeu, qualificou e agendou, com ajustes contínuos.',
   },
 ];
 
@@ -41,7 +41,7 @@ export function Process() {
             id="process-heading"
             className="mt-6 font-display text-display font-bold text-cream text-balance"
           >
-            Como tiramos a ideia do papel
+            Do diagnóstico ao agente no ar
           </h2>
         </SectionReveal>
 

@@ -10,10 +10,10 @@ import { CtaButton } from './ui/cta-button';
 import { LogoShine } from './ui/logo-shine';
 
 const links = [
+  { href: '#agente', label: 'Agente' },
   { href: '#servicos', label: 'Soluções' },
-  { href: '#fundadores', label: 'Fundadores' },
-  { href: '#exemplos', label: 'Exemplos' },
   { href: '#processo', label: 'Processo' },
+  { href: '#fundadores', label: 'Fundadores' },
 ];
 
 export function Nav() {

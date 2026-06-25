@@ -9,14 +9,14 @@ import { SectionReveal } from './section-reveal';
 const founders = [
   {
     name: 'Luiz Otávio',
-    role: 'Tecnologia, estratégia e automação',
+    role: 'Tecnologia, IA e operação',
     image: ASSETS.founders.luiz,
     alt: 'Retrato de Luiz Otávio, cofundador da Impulso X',
     photoClass: 'object-[50%_28%]',
     side: 'left' as const,
     manifesto: [
       'Sou Luiz Otávio, engenheiro por formação e apaixonado por tecnologia, estratégia e soluções inteligentes. Sempre busquei unir inovação e criatividade para transformar ideias em experiências reais e negócios mais eficientes.',
-      'Na Impulso X, meu foco é desenvolver soluções que conectem automação, posicionamento digital e inteligência artificial para ajudar empresas a crescerem de forma mais estratégica e organizada.',
+      'Na Impulso X, meu foco é conectar inteligência artificial, operação e atendimento para ajudar empresas a organizar conversas, qualificar oportunidades e crescer com mais clareza.',
       'Acredito que tecnologia deve ir além do moderno: ela precisa gerar resultado, simplificar processos e criar impacto real.',
     ],
   },

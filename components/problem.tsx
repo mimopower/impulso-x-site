@@ -6,10 +6,10 @@ import { AssetImage } from './ui/asset-image';
 import { SectionReveal } from './section-reveal';
 
 const pains = [
-  'O lead chega, mas a resposta demora.',
-  'Tarefas simples continuam manuais.',
-  'O site não explica bem o valor da empresa.',
-  'A marca aparece diferente em cada canal.',
+  'O lead chama no WhatsApp e fica esperando.',
+  'As mesmas perguntas consomem tempo todos os dias.',
+  'Sem follow-up, o orçamento perde força.',
+  'Quando a equipe está ocupada, a conversa para.',
 ];
 
 const ease = [0.23, 1, 0.32, 1] as const;
@@ -26,11 +26,11 @@ export function Problem() {
               id="problem-heading"
               className="max-w-[13ch] font-display text-display font-bold text-cream text-balance"
             >
-              Quando a empresa cresce, o improviso custa caro.
+              Cada conversa parada é um cliente esfriando.
             </h2>
             <p className="mt-5 max-w-prose text-lead text-steel text-pretty">
-              A maioria das empresas não trava por falta de esforço. Trava porque site,
-              atendimento, marca e processos foram montados sem uma estrutura comum.
+              O lead chega pelo WhatsApp, Instagram ou Google, mas o atendimento nem
+              sempre acompanha o volume, os horários e o gargalo que fica preso no dono.
             </p>
           </SectionReveal>
 

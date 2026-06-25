@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'Impulso X Intelligence',
   shortName: 'Impulso X',
-  tagline: 'Sites, automações e marca para empresas em crescimento.',
+  tagline: 'Inteligência que atende, qualifica e faz seu cliente voltar.',
   url: 'https://www.impulsox.com.br',
   whatsappE164: '5511939505573',
   whatsappDisplay: '(11) 93950-5573',
@@ -12,8 +12,8 @@ export const SITE = {
 
 export const WHATSAPP_MESSAGES = {
   diagnostic:
-    'Olá! Quero agendar um diagnóstico com a Impulso X para entender como organizar meu site, marca ou automações.',
-  solutions: 'Olá! Quero conhecer as soluções da Impulso X.',
+    'Olá! Quero o diagnóstico gratuito do meu funil de WhatsApp/Google com a Impulso X.',
+  solutions: 'Olá! Quero entender como funciona o Agente de IA da Impulso X.',
 };
 
 export const WHATSAPP_URL = (message?: string) => {

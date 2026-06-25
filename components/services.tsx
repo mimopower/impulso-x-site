@@ -6,31 +6,31 @@ import { GoldCircuitLines } from './ui/gold-circuit-lines';
 const primarySolutions = [
   {
     n: '01',
-    title: 'Sites e presença digital',
-    body: 'Páginas que explicam sua oferta e facilitam o próximo contato.',
+    title: 'Agente de IA no WhatsApp',
+    body: 'Organiza a primeira conversa, qualifica, agenda e faz follow-up, com transferência para humano quando precisa.',
   },
   {
     n: '02',
-    title: 'Automação & IA aplicada',
-    body: 'Fluxos que tiram tarefas repetitivas do manual.',
+    title: 'Presença que converte',
+    body: 'Site, landing e Google Meu Negócio para o cliente confiar antes da conversa e alimentar melhor o agente.',
   },
   {
     n: '03',
-    title: 'Marca, identidade e estratégia',
-    body: 'Identidade e direção para transmitir confiança antes da primeira conversa.',
+    title: 'Operação inteligente completa',
+    body: 'Agente, presença, conteúdo e recompra rodando como uma engrenagem só, com relatório mensal de valor.',
   },
 ] as const;
 
 const complementarySolutions = [
   {
     n: '04',
-    title: 'Agente de IA no WhatsApp',
-    body: 'Atendimento automático que responde, encaminha e transfere a conversa para uma pessoa quando necessário.',
+    title: 'Diagnóstico do funil',
+    body: 'Mapeamento dos pontos onde o lead esfria e do que precisa ser organizado primeiro.',
   },
   {
     n: '05',
-    title: 'Google Meu Negócio e SEO local',
-    body: 'Presença fortalecida no Google e no Maps para buscas da sua região.',
+    title: 'Marca e identidade',
+    body: 'Identidade e direção para transmitir confiança antes da primeira conversa com o possível cliente.',
   },
   {
     n: '06',
@@ -39,8 +39,8 @@ const complementarySolutions = [
   },
   {
     n: '07',
-    title: 'Estratégia de marketing e campanhas',
-    body: 'Direção para campanhas e ações de marketing conectadas aos objetivos da empresa.',
+    title: 'Google Meu Negócio e SEO local',
+    body: 'Presença fortalecida no Google e no Maps para buscas da sua região.',
   },
 ] as const;
 
@@ -69,7 +69,7 @@ export function Services() {
             id="services-heading"
             className="max-w-[18ch] font-display text-display font-bold text-cream text-balance"
           >
-            Soluções para organizar e acelerar sua presença digital
+            Da primeira resposta à recompra
           </h2>
         </SectionReveal>
 

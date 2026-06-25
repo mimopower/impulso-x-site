@@ -81,19 +81,19 @@ export function FinalCta() {
           id="cta-heading"
           className="mx-auto mt-6 max-w-[13ch] font-display text-display font-bold text-cream text-balance"
         >
-          Vamos organizar o próximo passo da sua empresa?
+          Pronto para reduzir conversas paradas no WhatsApp?
         </h2>
 
         <p className="mx-auto mt-5 max-w-[46ch] font-sans text-lead text-steel text-pretty">
-          Conversa direta, sem compromisso. Você traz o momento da empresa e nós ajudamos a enxergar o caminho.
+          Comece pelo diagnóstico gratuito do seu funil. Mostramos onde o lead esfria e como o agente pode organizar o próximo passo.
         </p>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
-            Agendar diagnóstico
+            Quero meu diagnóstico
           </CtaButton>
-          <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.solutions)} variant="outline" size="xl" external>
-            Conhecer soluções
+          <CtaButton href="#agente" variant="outline" size="xl">
+            Ver como funciona o agente
           </CtaButton>
         </div>
 

@@ -86,18 +86,17 @@ export function Hero() {
             animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
-            Crescer com clareza
+            Atendimento inteligente para PMEs
           </motion.div>
 
           {/* H1 — stable aria-label for screen readers; visual word rotates.
               Emil: stagger 60-80ms between lines; only opacity+transform animated. */}
           <h1
             id="hero-heading"
-            aria-label="Sites, automações, marca e IA para empresas que crescem com clareza."
+            aria-label="Inteligência que atende, qualifica e agenda no seu WhatsApp."
             className="mt-6 font-display text-hero font-bold text-cream text-balance"
             style={{ lineHeight: '0.98' }}
           >
-            {/* Line 1: service pillar rotates. rotator is aria-hidden; H1 has stable aria-label. */}
             <motion.span
               aria-hidden
               className="block"
@@ -105,34 +104,33 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.02 : 0 }}
             >
+              Inteligência que
+            </motion.span>
+
+            <motion.span
+              aria-hidden
+              className="block"
+              initial={false}
+              animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.04 : 0 }}
+            >
               <WordRotator
-                words={['Sites', 'Automações', 'Marca', 'IA']}
+                words={['atende', 'qualifica', 'agenda', 'faz voltar']}
                 enabled={motionReady}
                 startDelay={900}
                 className="text-gold-gradient"
               />
             </motion.span>
 
-            {/* Lines 2-3: fixed — stagger 70ms apart */}
-            {[
-              { text: 'para empresas que', delay: 0.20 },
-              { text: 'crescem com clareza.', delay: 0.27 },
-            ].map(({ text, delay }) => (
-              <motion.span
-                aria-hidden
-                key={text}
-                className="block"
-                initial={false}
-                animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
-                transition={{
-                  duration: prefersReducedMotion ? 0 : 0.24,
-                  ease,
-                  delay: motionReady ? Math.max(0, delay - 0.18) : 0,
-                }}
-              >
-                {text}
-              </motion.span>
-            ))}
+            <motion.span
+              aria-hidden
+              className="block"
+              initial={false}
+              animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.09 : 0 }}
+            >
+              no seu WhatsApp.
+            </motion.span>
           </h1>
 
           {/* Subtexto — max ~20 words (taste-skill hero rule) */}
@@ -142,9 +140,8 @@ export function Hero() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
-            A Impulso X une estratégia, design, IA e automação para organizar sua
-            presença digital, reduzir tarefas manuais e deixar sua empresa pronta
-            para vender com mais clareza.
+            Instalamos um agente no seu WhatsApp para tirar dúvidas, qualificar pedidos,
+            agendar conversas e acionar sua equipe quando precisar.
           </motion.p>
 
           {/* CTAs — 4th and final hero element */}
@@ -155,10 +152,10 @@ export function Hero() {
             className="mt-7 flex flex-col gap-3 sm:flex-row"
           >
             <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
-              Agendar diagnóstico
+              Quero meu diagnóstico
             </CtaButton>
-            <CtaButton href="#servicos" variant="outline" size="xl">
-              Ver soluções
+            <CtaButton href="#agente" variant="outline" size="xl">
+              Ver como funciona
             </CtaButton>
           </motion.div>
         </div>

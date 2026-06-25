@@ -98,14 +98,14 @@ async function makeOgImage() {
     <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="630" fill="rgba(5,5,5,0.42)"/>
       <rect x="70" y="72" width="1060" height="486" fill="none" stroke="rgba(201,162,39,0.34)" stroke-width="1"/>
-      <text x="80" y="430" fill="#f4f0e7" font-family="Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="-1">
-        Sites, automacoes e marca
+      <text x="80" y="455" fill="#f4f0e7" font-family="Arial, sans-serif" font-size="50" font-weight="700" letter-spacing="-1">
+        Inteligência que atende, qualifica
       </text>
-      <text x="80" y="494" fill="#c9a227" font-family="Arial, sans-serif" font-size="46" font-weight="700">
-        para empresas em crescimento.
+      <text x="80" y="514" fill="#c9a227" font-family="Arial, sans-serif" font-size="46" font-weight="700">
+        e faz seu cliente voltar.
       </text>
-      <text x="82" y="548" fill="#b8b2a5" font-family="Arial, sans-serif" font-size="22" font-weight="400">
-        Impulso X Intelligence
+      <text x="82" y="552" fill="#b8b2a5" font-family="Arial, sans-serif" font-size="22" font-weight="400">
+        Agente de IA no WhatsApp para PMEs
       </text>
     </svg>
   `);
