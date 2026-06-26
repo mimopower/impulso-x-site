@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Manrope, Rajdhani } from 'next/font/google';
 import { IntroReveal } from '@/components/intro-reveal';
+import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
 import { SITE } from '@/lib/site';
 import './globals.css';
 
@@ -23,7 +24,7 @@ const introGateScript = `(function(){
       window.setTimeout(function(){
         release();
         window.dispatchEvent(new Event('ix:intro-complete'));
-      },window.matchMedia('(max-width: 767px)').matches?2500:2850);
+      },window.matchMedia('(max-width: 767px)').matches?${INTRO_MOBILE_TOTAL_MS}:${INTRO_DESKTOP_TOTAL_MS});
     }
   } catch(error) {
     release();

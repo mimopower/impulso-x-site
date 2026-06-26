@@ -129,18 +129,40 @@
     contain: layout paint style;
   }
 
+  /* intro timeline sync: desktop 2850ms / mobile 2450ms — see lib/intro-timeline.ts */
   html[data-intro="play"] .intro-reveal {
     display: grid;
-    animation: intro-curtain 2.85s cubic-bezier(0.83, 0, 0.17, 1) both;
+    animation: intro-curtain 2.85s cubic-bezier(0.7, 0, 0.84, 0) both;
   }
 
   .intro-reveal__brand {
     position: relative;
+    z-index: 2;
     display: grid;
     width: min(82vw, 720px);
     place-items: center;
     gap: 0.3rem;
-    animation: intro-brand 2.7s var(--ease-expo) both;
+    animation: intro-brand 2.85s var(--ease-expo) both;
+  }
+
+  .intro-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .intro-particle {
+    position: absolute;
+    top: 0;
+    color: var(--gold-soft);
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    will-change: transform, opacity;
+    text-shadow: 0 0 8px rgba(201, 162, 39, 0.18);
   }
 
   .intro-reveal__mark {
@@ -193,8 +215,18 @@
 
   .intro-reveal__letter {
     display: inline-block;
-    transform: translate3d(0, 115%, 0);
-    animation: intro-letter-rise 0.62s var(--ease-expo) calc(0.18s + var(--letter-delay)) forwards;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Decode variant: scramble glyphs in gold-soft, settle to cream (X stays gold).
+     RAF mutates textContent + toggles .is-settled; only color transitions. */
+  .intro-reveal__letter--decode {
+    color: var(--gold-soft);
+    transition: color 200ms var(--ease-out);
+  }
+
+  .intro-reveal__letter--decode.is-settled {
+    color: var(--cream);
   }
 
   .intro-reveal__letter--gold {
@@ -212,7 +244,7 @@
     background: linear-gradient(105deg, transparent 39%, rgba(255, 255, 255, 0.78) 47%, rgba(216, 184, 77, 0.72) 52%, transparent 61%);
     opacity: 0;
     transform: translate3d(-72%, 0, 0) skewX(-12deg);
-    animation: intro-wordmark-shimmer 0.7s var(--ease-expo) 1.25s forwards;
+    animation: intro-wordmark-shimmer 0.2s var(--ease-expo) 0.85s forwards;
     mix-blend-mode: screen;
   }
 
@@ -236,7 +268,7 @@
     opacity: 0;
     text-transform: uppercase;
     transform: translate3d(0, 8px, 0);
-    animation: intro-tag 0.42s var(--ease-expo) 1.2s forwards;
+    animation: intro-tag 0.42s var(--ease-expo) 1.05s forwards;
   }
 
   .hero-aurora {
@@ -294,12 +326,12 @@
   @media (max-width: 767px) {
     html[data-intro="play"] .intro-reveal {
       border-radius: 0 0 20px 20px;
-      animation-duration: 2.5s;
+      animation-duration: 2.45s;
     }
 
     .intro-reveal__brand {
       width: min(92vw, 390px);
-      animation-duration: 2.35s;
+      animation-duration: 2.45s;
     }
 
     .intro-reveal__mark {
@@ -688,7 +720,8 @@
     padding-block: 0.25rem;
   }
 
-  /* Logos transparentes flutuando sobre o fundo preto — sem plaquinha clara */
+  /* Logos transparentes flutuando sobre o fundo preto — sem plaquinha clara.
+     filter/drop-shadow é estático (legibilidade); hover anima só transform/opacity. */
   .client-logo-chip {
     display: flex;
     align-items: center;
@@ -702,8 +735,7 @@
     filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.45));
     transition:
       transform 220ms var(--ease-expo),
-      opacity 220ms var(--ease-expo),
-      filter 220ms var(--ease-expo);
+      opacity 220ms var(--ease-expo);
   }
 
   /* Versão monocromática: os pixels desses dois logos viram branco,
@@ -750,7 +782,6 @@
   .client-logo-chip:hover {
     transform: scale(1.05);
     opacity: 1;
-    filter: drop-shadow(0 10px 26px rgba(201, 162, 39, 0.22));
   }
 
   .gold-pulse-dot {
@@ -786,6 +817,29 @@
     transform-origin: center;
     will-change: transform;
   }
+
+  /* CtaButton glow — opacity-only layer, no box-shadow animation.
+     Hover guarded to pointer:fine so touch devices don't get a stuck glow. */
+  .cta-btn {
+    isolation: isolate;
+  }
+
+  .cta-glow {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(60% 130% at 50% 0%, rgba(216, 184, 77, 0.42), transparent 70%);
+    pointer-events: none;
+    transition: opacity 240ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cta-btn:hover .cta-glow {
+      opacity: 1;
+    }
+  }
 }
 
 @layer utilities {
@@ -817,25 +871,22 @@
 }
 
 /* Keyframes */
+/* intro timeline sync: curtain holds until 68% (~1950ms desktop / ~1666ms mobile)
+   then lifts. ease-in forte via cubic-bezier(0.7, 0, 0.84, 0). */
 @keyframes intro-curtain {
-  0%, 78% { transform: translate3d(0, 0, 0); }
+  0%, 68% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(0, -101%, 0); }
 }
 
 @keyframes intro-brand {
   0% { opacity: 0.98; transform: translate3d(0, 8px, 0) scale(0.99); }
-  10%, 84% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  6%, 80% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
   100% { opacity: 0.08; transform: translate3d(0, -7px, 0) scale(1.012); }
 }
 
 @keyframes intro-mark {
   0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.96); }
   100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-}
-
-@keyframes intro-letter-rise {
-  0% { transform: translate3d(0, 115%, 0); }
-  100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes intro-wordmark-glow {

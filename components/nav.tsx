@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
 import { SITE, WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
@@ -16,13 +16,21 @@ const links = [
   { href: '#fundadores', label: 'Fundadores' },
 ];
 
+const SECTION_IDS = ['top', 'operacao', 'servicos', 'processo', 'fundadores'] as const;
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState('');
   const introReady = useIntroReady();
   const prefersReducedMotion = useReducedMotion();
   const motionReady = Boolean(prefersReducedMotion) || introReady;
 
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const firstMountRef = useRef(true);
+
+  // Scroll state — passive listener, no layout recalculation.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
@@ -30,38 +38,103 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Scroll-spy via IntersectionObserver (no per-scroll layout jank).
   useEffect(() => {
+    const sections = SECTION_IDS
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-30% 0px -55% 0px', threshold: 0 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  // Body scroll lock + focus management on open/close.
+  useEffect(() => {
+    if (open) {
+      firstMountRef.current = false;
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      const t = window.setTimeout(() => {
+        const first = menuPanelRef.current?.querySelector<HTMLAnchorElement>('a[href]');
+        first?.focus();
+      }, 120);
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        window.clearTimeout(t);
+      };
+    }
+    // Skip focus-return on the very first mount (menu never opened yet).
+    if (firstMountRef.current) {
+      firstMountRef.current = false;
+      return;
+    }
+    menuButtonRef.current?.focus();
+  }, [open]);
+
+  // Esc to close + focus trap while the mobile menu is open.
+  useEffect(() => {
+    if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const panel = menuPanelRef.current;
+      if (!panel) return;
+      const focusables = Array.from(
+        panel.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('a[href], button'),
+      ).filter((el) => el.offsetParent !== null);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (event.shiftKey) {
+        if (active === first || !panel.contains(active)) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [open]);
+
+  const closeMenu = useCallback(() => setOpen(false), []);
 
   return (
     <motion.header
       initial={false}
       animate={{ y: motionReady ? 0 : -12, opacity: motionReady ? 1 : 0.94 }}
-      transition={{
-        duration: prefersReducedMotion ? 0 : 0.28,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
       className="fixed inset-x-0 top-0 z-[70] px-3 pt-3 md:px-6 md:pt-5"
     >
       <div
-        className={`mx-auto flex max-w-[1320px] items-center justify-between rounded-brand border transition-all duration-500 md:px-4 ${
+        className={`mx-auto flex max-w-[1320px] items-center justify-between rounded-brand border px-3 py-2 transition-colors duration-300 md:px-4 ${
           scrolled || open
-            ? 'border-gold/22 bg-ink/86 px-3 py-1.5 shadow-[0_14px_48px_rgba(0,0,0,0.30)] backdrop-blur-lg'
-            : 'border-cream/10 bg-ink/34 px-3 py-2.5 backdrop-blur-md'
+            ? 'border-gold/22 bg-ink/86 shadow-[0_14px_48px_rgba(0,0,0,0.30)] backdrop-blur-lg'
+            : 'border-cream/10 bg-ink/34 backdrop-blur-md'
         }`}
       >
         <a href="#top" className="group flex min-w-0 items-center gap-3" aria-label={`${SITE.name} - voltar ao topo`}>
-          {/* Logo box shrinks slightly when scrolled to reduce header presence */}
-          <span
-            className={`relative grid shrink-0 place-items-center overflow-hidden rounded-[7px] border border-gold/25 bg-ink p-1 transition-all duration-500 ${
-              scrolled ? 'h-9 w-9' : 'h-11 w-11'
-            }`}
-          >
+          {/* Logo box stays a fixed size on scroll — no layout shift. */}
+          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-[7px] border border-gold/25 bg-ink p-1">
             <Image
               src={ASSETS.mark.src}
               alt=""
@@ -73,24 +146,30 @@ export function Nav() {
             <LogoShine variant="subtle" />
           </span>
           <span className="flex min-w-0 flex-col leading-none">
-            <span className={`font-display font-bold text-cream transition-all duration-500 ${scrolled ? 'text-base md:text-lg' : 'text-lg md:text-xl'}`}>
-              Impulso X
-            </span>
+            <span className="font-display text-lg font-bold text-cream md:text-xl">Impulso X</span>
             <span className="mt-1 hidden text-[11px] font-medium text-steel sm:block">Intelligence</span>
           </span>
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative text-sm font-medium text-steel transition-colors duration-300 hover:text-cream"
-            >
-              {link.label}
-              <span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-300 ease-out-expo group-hover:scale-x-100" />
-            </a>
-          ))}
+          {links.map((link) => {
+            const id = link.href.slice(1);
+            const isActive = activeId === id;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="group relative text-sm font-medium transition-colors duration-300 hover:text-cream"
+              >
+                <span className={isActive ? 'text-cream' : 'text-steel'}>{link.label}</span>
+                <span
+                  className={`absolute -bottom-2 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ease-out-expo ${
+                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
+              </a>
+            );
+          })}
         </nav>
 
         <div className="hidden lg:block">
@@ -99,12 +178,14 @@ export function Nav() {
           </CtaButton>
         </div>
 
-        {/* Mobile hamburger — min 44px touch target preserved */}
+        {/* Mobile hamburger — 44px touch target preserved */}
         <button
+          ref={menuButtonRef}
           type="button"
           className="relative grid h-11 w-11 place-items-center rounded-control border border-cream/12 lg:hidden"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
+          aria-controls="mobile-nav-menu"
           onClick={() => setOpen((state) => !state)}
         >
           <span
@@ -121,24 +202,33 @@ export function Nav() {
       </div>
 
       <motion.div
+        ref={menuPanelRef}
+        id="mobile-nav-menu"
         initial={false}
         animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
         transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        {...(!open ? { inert: true } : {})}
         className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
       >
         <nav aria-label="Menu mobile">
           <ul className="flex flex-col gap-2">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-control px-3 py-3 font-display text-xl font-semibold text-cream transition-colors duration-300 hover:bg-gold/10"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {links.map((link) => {
+              const id = link.href.slice(1);
+              const isActive = activeId === id;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={closeMenu}
+                    className={`block rounded-control px-3 py-3 font-display text-xl font-semibold transition-colors duration-300 hover:bg-gold/10 ${
+                      isActive ? 'bg-gold/10 text-gold-soft' : 'text-cream'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
         <CtaButton

@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ASSETS } from '@/lib/assets';
+import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
 import { LogoShine } from './ui/logo-shine';
+import { ScrambleWordmark } from './ui/scramble-wordmark';
+import { IntroParticles } from './ui/intro-particles';
 
 const INTRO_COMPLETE_EVENT = 'ix:intro-complete';
-const WORDMARK_LETTERS = ['I', 'm', 'p', 'u', 'l', 's', 'o', '\u00a0', 'X'] as const;
 
 export function useIntroReady() {
   const [ready, setReady] = useState(false);
@@ -33,6 +34,7 @@ export function useIntroReady() {
 
 export function IntroReveal() {
   const [done, setDone] = useState(false);
+  const [reduced, setReduced] = useState(false);
   const finishedRef = useRef(false);
 
   const finish = useCallback(() => {
@@ -61,6 +63,8 @@ export function IntroReveal() {
       return;
     }
 
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
     const siteShell = document.getElementById('site-shell');
     if (siteShell) siteShell.inert = true;
 
@@ -70,7 +74,9 @@ export function IntroReveal() {
       // The animation may run without storage; its fallback still releases the page.
     }
 
-    const fallbackMs = window.matchMedia('(max-width: 767px)').matches ? 2600 : 2950;
+    const fallbackMs = window.matchMedia('(max-width: 767px)').matches
+      ? INTRO_MOBILE_TOTAL_MS + 200
+      : INTRO_DESKTOP_TOTAL_MS + 200;
     const fallback = window.setTimeout(finish, fallbackMs);
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted) finish();
@@ -94,6 +100,7 @@ export function IntroReveal() {
         if (event.target === event.currentTarget) finish();
       }}
     >
+      <IntroParticles reduced={reduced} />
       <div className="intro-reveal__brand">
         <span className="intro-reveal__mark">
           <Image
@@ -108,18 +115,7 @@ export function IntroReveal() {
           <LogoShine variant="intro" />
         </span>
         <span className="intro-reveal__wordmark" role="img" aria-label="Impulso X">
-          <span className="intro-reveal__wordmark-text" aria-hidden="true">
-            {WORDMARK_LETTERS.map((letter, index) => (
-              <span className="intro-reveal__letter-mask" key={`${letter}-${index}`}>
-                <span
-                  className={letter === 'X' ? 'intro-reveal__letter intro-reveal__letter--gold' : 'intro-reveal__letter'}
-                  style={{ '--letter-delay': `${index * 60}ms` } as CSSProperties}
-                >
-                  {letter}
-                </span>
-              </span>
-            ))}
-          </span>
+          <ScrambleWordmark reduced={reduced} />
           <span className="intro-reveal__wordmark-shimmer" aria-hidden="true" />
         </span>
         <span className="intro-reveal__tag">Intelligence</span>

@@ -44,14 +44,16 @@ export function CtaButton({
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
       whileHover={{ y: -2 }}
-      whileTap={{ y: 0, scale: 0.98 }}
+      whileTap={{ y: 0, scale: 0.97 }}
       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className={`group inline-flex max-w-full items-center justify-center gap-3 rounded-control border font-display font-semibold leading-none transition-colors duration-300 ease-out-expo ${variantClass[variant]} ${sizeClass[size]} ${className}`}
+      className={`cta-btn group relative inline-flex max-w-full items-center justify-center gap-3 rounded-control border font-display font-semibold leading-none transition-colors duration-300 ease-out-expo ${variantClass[variant]} ${sizeClass[size]} ${className}`}
     >
-      <span className="truncate">{children}</span>
+      {/* Glow layer — opacity-only, no box-shadow animation. Hover guarded in CSS. */}
+      <span className="cta-glow" aria-hidden />
+      <span className="relative z-[1] truncate">{children}</span>
       <span
         aria-hidden
-        className={`grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 ${
+        className={`relative z-[1] grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 ${
           variant === 'primary'
             ? 'border-ink/18 bg-ink/10 text-ink'
             : 'border-gold/35 bg-gold/10 text-gold'
