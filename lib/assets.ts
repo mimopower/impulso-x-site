@@ -1,10 +1,8 @@
 export const ASSETS = {
   hero: {
-    desktop: '/assets/identidade/fundo-site-0-desktop.webp',
-    // Desktop image on mobile: 1717x916 at object-cover gives ~1.86x retina density,
-    // much sharper than the 900x480 landscape crop. object-[64%_center] frames the shield.
-    mobile: '/assets/identidade/fundo-site-0-desktop.webp',
-    width: 1717,
+    desktop: '/assets/identidade/fundo-site-0-sem-escudo-desktop.webp',
+    mobile: '/assets/identidade/fundo-site-0-sem-escudo-mobile.webp',
+    width: 1716,
     height: 916,
   },
   heroAlt: {
@@ -17,6 +15,22 @@ export const ASSETS = {
     src: '/assets/identidade/marca-escudo.webp',
     width: 760,
     height: 760,
+  },
+  markVideo: {
+    desktop: {
+      webm: '/assets/identidade/video-escudo-desktop-v1.webm',
+      mp4: '/assets/identidade/video-escudo-desktop-v1.mp4',
+      poster: '/assets/identidade/video-escudo-poster-desktop-v1.webp',
+      width: 720,
+      height: 1000,
+    },
+    mobile: {
+      webm: '/assets/identidade/video-escudo-mobile-v1.webm',
+      mp4: '/assets/identidade/video-escudo-mobile-v1.mp4',
+      poster: '/assets/identidade/video-escudo-poster-mobile-v1.webp',
+      width: 480,
+      height: 666,
+    },
   },
   wordmark: {
     src: '/assets/identidade/marca-completa.webp',

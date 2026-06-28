@@ -159,13 +159,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="preload"
           as="image"
-          href="/assets/identidade/fundo-site-0-desktop.webp"
+          href="/assets/identidade/fundo-site-0-sem-escudo-desktop.webp"
           media="(min-width: 768px)"
         />
         <link
           rel="preload"
           as="image"
-          href="/assets/identidade/fundo-site-0-desktop.webp"
+          href="/assets/identidade/fundo-site-0-sem-escudo-mobile.webp"
           media="(max-width: 767px)"
         />
         <script

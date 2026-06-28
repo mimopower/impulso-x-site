@@ -79,10 +79,8 @@
     .intro-reveal {
       display: none !important;
     }
-    .hero-aurora {
-      animation: none !important;
-      opacity: 0.42;
-      transform: translate3d(0, -50%, 0);
+    .hero-shield-media__video {
+      display: none !important;
     }
     /* Stop CSS animations on logo elements for users who prefer reduced motion */
     [style*="shield-breathe"],
@@ -271,17 +269,100 @@
     animation: intro-tag 0.42s var(--ease-expo) 1.05s forwards;
   }
 
-  .hero-aurora {
-    width: clamp(340px, 42vw, 680px);
-    aspect-ratio: 1.35;
+  .hero-background-image {
+    object-position: center;
+  }
+
+  .hero-contrast-overlay {
+    background: linear-gradient(
+      105deg,
+      rgba(13, 13, 13, 0.98) 0%,
+      rgba(13, 13, 13, 0.88) 38%,
+      rgba(13, 13, 13, 0.52) 58%,
+      rgba(13, 13, 13, 0.08) 82%,
+      rgba(13, 13, 13, 0.14) 100%
+    );
+  }
+
+  .hero-shield-media {
+    position: absolute;
+    top: 50%;
+    right: clamp(-76px, -3vw, -28px);
+    z-index: 4;
+    width: clamp(440px, 43vw, 680px);
+    aspect-ratio: 720 / 1000;
+    pointer-events: none;
+    opacity: 0.98;
+    transform: translate3d(0, -48%, 0);
+    contain: layout paint style;
+    isolation: isolate;
+  }
+
+  .hero-shield-media::after {
+    position: absolute;
+    inset: 8% -5% 4%;
+    z-index: -1;
     border-radius: 50%;
-    background:
-      radial-gradient(ellipse 58% 62% at 62% 48%, rgba(216, 184, 77, 0.23) 0%, rgba(201, 162, 39, 0.09) 38%, transparent 72%),
-      radial-gradient(ellipse 38% 46% at 82% 34%, rgba(244, 240, 231, 0.08) 0%, rgba(201, 162, 39, 0.05) 42%, transparent 76%);
-    opacity: 0.5;
-    transform: translate3d(-2%, -50%, 0) scale(0.98);
-    animation: aurora-drift 16s var(--ease-in-out) infinite alternate;
-    contain: layout paint;
+    background: radial-gradient(ellipse, rgba(201, 162, 39, 0.16), transparent 68%);
+    content: '';
+    opacity: 0.72;
+  }
+
+  .hero-shield-media__poster,
+  .hero-shield-media__video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 68%, rgba(0, 0, 0, 0.92) 82%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, #000 68%, rgba(0, 0, 0, 0.92) 82%, transparent 100%);
+  }
+
+  .hero-shield-media__poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hero-shield-media__video {
+    z-index: 2;
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 520ms var(--ease-expo);
+  }
+
+  .hero-shield-media__video.is-ready {
+    opacity: 1;
+  }
+
+  @media (max-width: 767px) {
+    .hero-background-image {
+      object-position: 56% center;
+    }
+
+    .hero-contrast-overlay {
+      background:
+        linear-gradient(180deg, rgba(13, 13, 13, 0.56) 0%, rgba(13, 13, 13, 0.18) 26%, rgba(13, 13, 13, 0.72) 78%, rgba(13, 13, 13, 0.96) 100%),
+        linear-gradient(90deg, rgba(13, 13, 13, 0.92) 0%, rgba(13, 13, 13, 0.68) 48%, rgba(13, 13, 13, 0.22) 100%);
+    }
+
+    .hero-shield-media {
+      top: 7rem;
+      right: -8vw;
+      width: min(88vw, 360px);
+      opacity: 0.84;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-shield-media {
+      right: -120px;
+      width: 520px;
+    }
   }
 
   .service-hover-sweep {
@@ -901,12 +982,6 @@
 
 @keyframes intro-tag {
   to { opacity: 1; transform: translate3d(0, 0, 0); }
-}
-
-@keyframes aurora-drift {
-  0% { opacity: 0.42; transform: translate3d(-2%, -50%, 0) scale(0.98); }
-  50% { opacity: 0.56; transform: translate3d(3%, -53%, 0) scale(1.015); }
-  100% { opacity: 0.47; transform: translate3d(6%, -48%, 0) scale(1.03); }
 }
 
 @keyframes scroll-line-grow {

@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { useIntroReady } from './intro-reveal';
 import { CtaButton } from './ui/cta-button';
+import { HeroShieldVideo } from './ui/hero-shield-video';
 import { WordRotator } from './ui/word-rotator';
 
 export function Hero() {
@@ -39,41 +39,17 @@ export function Hero() {
           src={ASSETS.hero.desktop}
           alt=""
           fetchPriority="high"
-          className="h-full w-full scale-[1.04] object-cover object-[64%_center] md:object-[60%_center]"
+          className="hero-background-image h-full w-full scale-[1.04] object-cover"
         />
       </motion.picture>
 
-      {/* Overlay: heavy on left for text legibility, lighter right for shield */}
-      <div
-        aria-hidden
-        className="absolute inset-0 z-[2]"
-        style={{
-          background:
-            'linear-gradient(105deg, rgba(13,13,13,0.97) 0%, rgba(13,13,13,0.84) 38%, rgba(13,13,13,0.28) 70%, rgba(13,13,13,0.10) 100%)',
-        }}
-      />
+      <HeroShieldVideo enabled={motionReady} />
+
+      {/* Contrast layer keeps copy readable while preserving the animated mark. */}
+      <div aria-hidden className="hero-contrast-overlay absolute inset-0 z-[5]" />
 
       {/* Bottom fade into next section */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 z-[3] h-48 bg-gradient-to-t from-ink to-transparent" />
-
-      {/* Shield watermark — mobile only. Subtle brand presence where the
-          desktop shield is hidden. Low opacity so it never competes with text. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 z-[4] block select-none md:hidden"
-        style={{ width: '62vw', opacity: 0.07 }}
-      >
-        <Image
-          src={ASSETS.mark.src}
-          alt=""
-          width={ASSETS.mark.width}
-          height={ASSETS.mark.height}
-          className="w-full h-auto"
-        />
-      </div>
-
-      {/* Controlled gold aurora — replaces the previous static glow. */}
-      <div aria-hidden className="hero-aurora pointer-events-none absolute right-[-6%] top-1/2 z-[1] hidden md:block" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-[6] h-48 bg-gradient-to-t from-ink to-transparent" />
 
       {/* Content */}
       <div className="container-x relative z-10">
