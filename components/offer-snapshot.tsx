@@ -1,9 +1,8 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/motion';
 import { SectionReveal } from './section-reveal';
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 type Layer = {
   n: string;
@@ -43,17 +42,18 @@ const layers: Layer[] = [
 function LayerBlock({ layer, dominant }: { layer: Layer; dominant?: boolean }) {
   const prefersReduced = useReducedMotion();
   const common =
-    'group relative flex flex-col justify-between rounded-brand border transition-colors duration-500';
+    'interactive-card-glow group relative flex flex-col justify-between border transition-colors duration-500';
 
   if (dominant) {
     return (
       <motion.a
         href={layer.href}
         aria-label={`${layer.title}: ${layer.body} — ${layer.cta}`}
-        className={`${common} h-full border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10 hover:border-gold/70 focus-visible:border-gold focus-visible:outline-none`}
+        className={`${common} h-full rounded-card-lg border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10 hover:border-gold/70`}
+        whileTap={prefersReduced ? undefined : { scale: 0.99 }}
         initial={false}
         animate={prefersReduced ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease }}
+        transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
       >
         <span
           aria-hidden
@@ -67,7 +67,7 @@ function LayerBlock({ layer, dominant }: { layer: Layer; dominant?: boolean }) {
         <p className="mt-4 max-w-[42ch] font-sans text-lg leading-[1.5] text-steel text-pretty">
           {layer.body}
         </p>
-        <span className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold transition-transform duration-300 ease-out-expo group-hover:translate-x-1">
+        <span className={`mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold transition-transform duration-300 ease-out-expo ${prefersReduced ? '' : 'group-hover:translate-x-1'}`}>
           {layer.cta}
           <span aria-hidden className="text-gold">→</span>
         </span>
@@ -79,10 +79,11 @@ function LayerBlock({ layer, dominant }: { layer: Layer; dominant?: boolean }) {
     <motion.a
       href={layer.href}
       aria-label={`${layer.title}: ${layer.body} — ${layer.cta}`}
-      className={`${common} border-cream/12 bg-ink2/60 p-6 hover:border-cream/30 hover:bg-ink2 focus-visible:border-gold/60 focus-visible:outline-none`}
+      className={`${common} rounded-card border-cream/12 bg-ink2/60 p-6 hover:border-cream/30 hover:bg-ink2`}
+      whileTap={prefersReduced ? undefined : { scale: 0.99 }}
       initial={false}
       animate={prefersReduced ? {} : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease }}
+      transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
     >
       <div className="flex items-baseline gap-3">
         <span aria-hidden className="font-display text-xs font-bold text-gold tabular">
@@ -136,7 +137,7 @@ export function OfferSnapshot() {
             initial={prefersReduced ? false : { opacity: 0, y: 12 }}
             whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease, delay: 0 }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0 }}
             className="lg:row-span-2"
           >
             <LayerBlock layer={camada1} dominant />
@@ -147,7 +148,7 @@ export function OfferSnapshot() {
             initial={prefersReduced ? false : { opacity: 0, y: 12 }}
             whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease, delay: 0.08 }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.08 }}
           >
             <LayerBlock layer={camada2} />
           </motion.div>
@@ -157,7 +158,7 @@ export function OfferSnapshot() {
             initial={prefersReduced ? false : { opacity: 0, y: 12 }}
             whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease, delay: 0.16 }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.16 }}
           >
             <LayerBlock layer={camada3} />
           </motion.div>

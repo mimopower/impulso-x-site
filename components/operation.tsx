@@ -100,7 +100,7 @@ export function Operation() {
                 layer.anchor ? (
                   <li
                     key={layer.n}
-                    className="relative mb-4 rounded-brand border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-6"
+                    className="premium-card-depth relative mb-4 rounded-card border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-6"
                   >
                     <span
                       aria-hidden

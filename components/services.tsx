@@ -101,7 +101,7 @@ export function Services() {
               // Camada 1 — bloco âncora dominante (borda dourada, maior área/copy)
               <article
                 key={solution.n}
-                className="service-item group relative mb-6 rounded-brand border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10"
+                className="premium-card-depth service-item group relative mb-6 rounded-card border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10"
               >
                 <ServiceSweep />
                 <div className="grid gap-6 md:grid-cols-[120px_1fr_1.4fr] md:items-center md:gap-10">

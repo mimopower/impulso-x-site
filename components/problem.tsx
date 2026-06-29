@@ -52,7 +52,7 @@ export function Problem() {
         </div>
 
         {/* 4 pain points — open 2x2, large outline numbers. No metal-panel cards (banned). */}
-        <div className="mt-12 grid grid-cols-2 border border-cream/10 md:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-card border border-cream/10 md:grid-cols-4">
           {pains.map((pain, i) => (
             <motion.div
               key={pain}

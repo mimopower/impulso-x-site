@@ -134,7 +134,7 @@ export function Nav() {
       >
         <a href="#top" className="group flex min-w-0 items-center gap-3" aria-label={`${SITE.name} - voltar ao topo`}>
           {/* Logo box stays a fixed size on scroll — no layout shift. */}
-          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-[7px] border border-gold/25 bg-ink p-1">
+          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-[10px] border border-gold/25 bg-ink p-1">
             <Image
               src={ASSETS.mark.src}
               alt=""

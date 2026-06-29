@@ -36,8 +36,11 @@ const config: Config = {
         prose: '68ch',
       },
       borderRadius: {
-        brand: '8px',
-        control: '6px',
+        brand: 'var(--radius-brand)',
+        card: 'var(--radius-card)',
+        'card-lg': 'var(--radius-card-lg)',
+        control: 'var(--radius-control)',
+        pill: 'var(--radius-pill)',
       },
       transitionTimingFunction: {
         'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',

@@ -20,7 +20,7 @@ export function Footer() {
         <div className="grid gap-12 py-14 md:grid-cols-12 md:py-20">
           <div className="md:col-span-5">
             <a href="#top" aria-label={`${SITE.name} - voltar ao topo`} className="inline-flex items-center gap-4">
-              <span className="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-[7px] border border-gold/20 bg-ink p-1.5">
+              <span className="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-[10px] border border-gold/20 bg-ink p-1.5">
                 <Image
                   src={ASSETS.mark.src}
                   alt=""
