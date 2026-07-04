@@ -49,9 +49,9 @@ export const ASSETS = {
   },
   founders: {
     luiz: {
-      src: '/assets/identidade/perfil-luiz-v2.webp',
-      width: 720,
-      height: 798,
+      src: '/assets/identidade/perfil-luiz-v3.webp',
+      width: 960,
+      height: 1200,
     },
     karina: {
       src: '/assets/identidade/perfil-karina.webp',

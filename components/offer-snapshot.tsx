@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
+import { ASSETS } from '@/lib/assets';
 import { EASE_OUT_EXPO } from '@/lib/motion';
 import { SectionReveal } from './section-reveal';
 
@@ -49,28 +51,48 @@ function LayerBlock({ layer, dominant }: { layer: Layer; dominant?: boolean }) {
       <motion.a
         href={layer.href}
         aria-label={`${layer.title}: ${layer.body} — ${layer.cta}`}
-        className={`${common} h-full rounded-card-lg border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10 hover:border-gold/70`}
+        className={`${common} h-full overflow-hidden rounded-card-lg border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-8 md:p-10 hover:border-gold/70`}
         whileTap={prefersReduced ? undefined : { scale: 0.99 }}
         initial={false}
         animate={prefersReduced ? {} : { opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
       >
-        <span
+        {/* Marca d'água preenche o respiro vertical do card âncora sem competir com o texto */}
+        <Image
+          src={ASSETS.mark.src}
+          alt=""
           aria-hidden
-          className="font-display text-sm font-bold tracking-[0.14em] text-gold"
-        >
-          CAMADA {layer.n} · ÂNCORA
-        </span>
-        <h3 className="mt-5 font-display text-3xl font-bold leading-tight text-cream md:text-4xl">
-          {layer.title}
-        </h3>
-        <p className="mt-4 max-w-[42ch] font-sans text-lg leading-[1.5] text-steel text-pretty">
-          {layer.body}
-        </p>
-        <span className={`mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold text-gold transition-transform duration-300 ease-out-expo ${prefersReduced ? '' : 'group-hover:translate-x-1'}`}>
-          {layer.cta}
-          <span aria-hidden className="text-gold">→</span>
-        </span>
+          width={ASSETS.mark.width}
+          height={ASSETS.mark.height}
+          className="pointer-events-none absolute -bottom-14 -right-12 w-[240px] select-none md:w-[300px]"
+          style={{ opacity: 0.05 }}
+        />
+
+        <div className="relative z-[1]">
+          <span
+            aria-hidden
+            className="font-display text-sm font-bold tracking-[0.14em] text-gold"
+          >
+            CAMADA {layer.n} · ÂNCORA
+          </span>
+          <h3 className="mt-5 font-display text-3xl font-bold leading-tight text-cream md:text-4xl">
+            {layer.title}
+          </h3>
+          <p className="mt-4 max-w-[42ch] font-sans text-lg leading-[1.5] text-steel text-pretty">
+            {layer.body}
+          </p>
+        </div>
+
+        <div className="relative z-[1] mt-8 flex flex-col items-start gap-5">
+          <span className="agent-status">
+            <span aria-hidden className="agent-status__dot" />
+            Ativo no WhatsApp e Telegram
+          </span>
+          <span className={`inline-flex items-center gap-2 font-display text-sm font-semibold text-gold transition-transform duration-300 ease-out-expo ${prefersReduced ? '' : 'group-hover:translate-x-1'}`}>
+            {layer.cta}
+            <span aria-hidden className="text-gold">→</span>
+          </span>
+        </div>
       </motion.a>
     );
   }

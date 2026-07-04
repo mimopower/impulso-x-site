@@ -12,7 +12,8 @@ const founders = [
     role: 'Tecnologia, IA e operação',
     image: ASSETS.founders.luiz,
     alt: 'Retrato de Luiz Otávio, cofundador da Impulso X',
-    photoClass: 'object-[50%_28%]',
+    // Retrato de estúdio já graduado — só um toque leve para casar com a paleta escura
+    photoClass: 'object-[50%_30%] saturate-[0.92] contrast-[1.04]',
     side: 'left' as const,
     manifesto: [
       'Sou Luiz Otávio, engenheiro por formação e apaixonado por tecnologia, estratégia e soluções inteligentes. Sempre busquei unir inovação e criatividade para transformar ideias em experiências reais e negócios mais eficientes.',

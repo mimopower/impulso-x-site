@@ -3,6 +3,7 @@ import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { CtaButton } from './ui/cta-button';
 import { SectionReveal } from './section-reveal';
+import { AgentChat } from './ui/agent-chat';
 
 // 3 camadas AI-first — Camada 1 (agente) é a âncora/herói, com peso visual dominante.
 // Camadas 2 e 3 se constroem ao redor dela, como profundidade subordinada — nunca
@@ -161,20 +162,7 @@ export function Operation() {
                   </span>
                 </div>
 
-                <div className="agent-chat" aria-label="Exemplo ilustrativo de conversa do agente">
-                  {messages.map((message) => (
-                    <p
-                      key={message.text}
-                      className={`agent-chat__bubble agent-chat__bubble--${message.from}`}
-                    >
-                      {message.text}
-                    </p>
-                  ))}
-                  <p className="agent-handoff">
-                    <span aria-hidden className="agent-handoff__pulse" />
-                    Transferindo para a equipe
-                  </p>
-                </div>
+                <AgentChat messages={messages} />
 
                 <ol className="agent-flow" aria-label="Momentos do fluxo operacional">
                   {moments.map((moment) => (
