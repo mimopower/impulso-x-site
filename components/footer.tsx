@@ -63,6 +63,14 @@ export function Footer() {
                 WhatsApp: {SITE.whatsappDisplay}
               </a>
               <a
+                href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic, SITE.whatsappSecondaryE164)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-steel transition-colors duration-300 hover:text-cream"
+              >
+                WhatsApp: {SITE.whatsappSecondaryDisplay}
+              </a>
+              <a
                 href={SITE.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
