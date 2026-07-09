@@ -45,6 +45,12 @@
     overflow: hidden;
   }
 
+  html[data-intro="play"] #site-shell {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 320ms ease, visibility 320ms ease;
+  }
+
   body {
     min-height: 100dvh;
     overflow-x: hidden;

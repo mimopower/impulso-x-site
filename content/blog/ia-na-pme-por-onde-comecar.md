@@ -23,7 +23,7 @@ O caminho mais curto é o contrário: primeiro o gargalo, depois a solução.
 
 Na Impulso X, a entrada é um diagnóstico gratuito de 30 minutos. O objetivo não é vender. É enxergar onde a empresa perde tempo, dinheiro ou oportunidade hoje.
 
-A gente mapeia um gargalo ponta-a-ponta. Por exemplo:
+A gente mapeia um gargalo ponta a ponta. Por exemplo:
 
 - Leads entram no WhatsApp e demoram para ser respondidos.
 - A equipe repete a mesma pergunta dez vezes por dia.

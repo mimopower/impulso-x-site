@@ -8,7 +8,7 @@ const steps = [
   {
     n: '01',
     title: 'Diagnóstico grátis',
-    body: 'Mapa de um gargalo ponta-a-ponta, contexto do negócio e plano de 7 dias. O mapa é seu, mesmo sem fechar.',
+    body: 'Mapa de um gargalo ponta a ponta, contexto do negócio e plano de 7 dias. O mapa é seu, mesmo sem fechar.',
   },
   {
     n: '02',

@@ -29,7 +29,7 @@ const faqs = [
   {
     question: 'A Impulso X só faz o agente de atendimento?',
     answer:
-      'Não. Atendimento é uma das quatro frentes do time de IA. Também atuamos em operação interna, estrutura e dados, e presença que converte — sempre na ordem que faz sentido para o seu negócio.',
+      'Não. Atendimento é uma das quatro frentes do time de IA. Também atuamos em operação interna, estrutura, dados e presença que converte — sempre na ordem que faz sentido para o seu negócio.',
   },
   {
     question: 'E se eu precisar de mais de uma frente ao mesmo tempo?',
@@ -61,7 +61,7 @@ export function Faq() {
               Dúvidas antes do diagnóstico
             </h2>
             <p className="mt-5 max-w-prose font-sans text-lg leading-[1.5] text-steel text-pretty">
-              A conversa começa simples: entendemos o funil, definimos limites do agente e mostramos
+              A conversa começa simples: entendemos o funil, definimos os limites do agente e mostramos
               como ele entraria na sua rotina.
             </p>
           </div>

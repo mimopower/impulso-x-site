@@ -1,5 +1,5 @@
 ---
-title: "Como uma empresa de eventos parou de perder lead fora do horário"
+title: "Como uma empresa de eventos parou de perder leads fora do horário"
 description: "O gargalo invisível do WhatsApp depois das 18h e o que muda com resposta em segundos."
 date: "2026-07-09"
 slug: "lead-fora-do-horario"

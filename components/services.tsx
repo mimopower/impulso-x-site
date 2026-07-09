@@ -16,7 +16,7 @@ const frentes: Frente[] = [
   {
     n: '01',
     title: 'Atendimento e vendas com IA',
-    quote: 'Parar de perder lead no WhatsApp: resposta rápida 24/7, triagem, agenda e follow-up — com humano assumindo na hora certa.',
+    quote: 'Parar de perder leads no WhatsApp: resposta rápida 24/7, triagem, agenda e follow-up — com humano assumindo na hora certa.',
     chips: ['Resposta em segundos, 24/7', 'Triagem de tema, data e orçamento', 'Follow-up de quem esfriou'],
   },
   {

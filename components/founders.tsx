@@ -31,7 +31,7 @@ const founders = [
     side: 'right' as const,
     manifesto: [
       'Sou Karina, cofundadora da Impulso X e apaixonada por criatividade, comunicação e experiências que conectam marcas e pessoas de forma verdadeira.',
-      'Atuo diretamente na parte criativa, marketing e construção da identidade da marca, buscando unir estratégia, inovação e autenticidade em cada projeto desenvolvido.',
+      'Atuo diretamente na parte criativa, no marketing e na construção da identidade da marca, buscando unir estratégia, inovação e autenticidade em cada projeto desenvolvido.',
       'Acredito que uma empresa vai muito além de vender serviços. Ela precisa transmitir confiança, proximidade e gerar experiências marcantes para seus clientes.',
       'Na Impulso X, meu propósito é transformar ideias em conexões reais, criando soluções visuais e estratégicas que fortaleçam empresas e impulsionem seu crescimento no ambiente digital.',
     ],
