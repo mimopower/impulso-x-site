@@ -14,7 +14,7 @@ const faqs = [
   {
     question: 'Quando o agente transfere para uma pessoa?',
     answer:
-      'As regras de handoff são configuradas com você. A transferência pode acontecer por tipo de pedido, dúvida sensível, intenção de compra ou qualquer limite definido no projeto.',
+      'As regras de transferência para uma pessoa são configuradas com você. A passagem pode acontecer por tipo de pedido, dúvida sensível, intenção de compra ou qualquer limite definido no projeto.',
   },
   {
     question: 'Preciso trocar meu número ou canal de atendimento?',
@@ -39,7 +39,7 @@ const faqs = [
   {
     question: 'Preciso entender de tecnologia?',
     answer:
-      'Não. O time cuida da parte técnica, você decide o negócio. Tudo é documentado em um runbook simples, e a equipe é treinada para operar junto com a IA.',
+      'Não. O time cuida da parte técnica, você decide o negócio. Tudo é documentado em um guia simples de operação, e a equipe é treinada para operar junto com a IA.',
   },
   {
     question: 'E os meus dados e os dos meus clientes?',

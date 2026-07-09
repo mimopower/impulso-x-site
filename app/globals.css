@@ -45,8 +45,9 @@
     overflow: hidden;
   }
 
-  html[data-intro="play"] #site-shell {
+  html[data-intro="play"] #site-shell > :not(.intro-reveal) {
     opacity: 0;
+    pointer-events: none;
     visibility: hidden;
     transition: opacity 320ms ease, visibility 320ms ease;
   }

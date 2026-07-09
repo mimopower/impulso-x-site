@@ -36,6 +36,6 @@ Esse modelo funciona porque reduz atrito sem criar dependência da máquina.
 
 A gente não implementa “IA para tudo” de uma vez. Começamos com dois fluxos que dão resultado rápido — normalmente orçamento e resumo de conversa — e validamos com a equipe.
 
-Só depois de ver a equipe usando naturalmente é que expandimos para propostas, follow-up e relatórios automáticos.
+Só depois de ver a equipe usando naturalmente é que expandimos para propostas, acompanhamento e relatórios automáticos.
 
 O resultado é uma operação que para de morar na cabeça do dono e passa a rodar num sistema que qualquer pessoa da equipe consegue operar.

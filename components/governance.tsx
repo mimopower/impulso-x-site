@@ -3,7 +3,7 @@ import { SectionReveal } from './section-reveal';
 const items = [
   'A IA rascunha, classifica e resume. Quem aprova preço, contrato e situação sensível é gente.',
   'LGPD desde o início: acordo de tratamento de dados antes de qualquer trabalho em produção.',
-  'Sem caixa-preta: regras de uso e runbook documentados ficam com você.',
+  'Sem caixa-preta: regras de uso e guia de operação documentados ficam com você.',
   'O diagnóstico é seu: fica com tudo que mapeamos, mesmo que não feche.',
 ];
 

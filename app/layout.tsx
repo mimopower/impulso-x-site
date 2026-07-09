@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Manrope, Rajdhani } from 'next/font/google';
 import { AnalyticsEvents } from '@/components/ui/analytics-events';
 import { SITE } from '@/lib/site';
+import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
 import './globals.css';
 
 const organizationSchema = {
@@ -40,6 +41,38 @@ const organizationSchema = {
 };
 
 const ogImage = '/og-image-ai-first.png';
+
+const introGateScript = `(function(){
+  var root=document.documentElement;
+  var release=function(){
+    root.removeAttribute('data-intro');
+    var shell=document.getElementById('site-shell');
+    if(shell) shell.inert=false;
+    try { sessionStorage.setItem('ix_intro_seen','1'); } catch(error) {}
+  };
+  try {
+    var isHome=window.location.pathname==='/' || window.location.pathname==='';
+    if(!isHome) return;
+    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen=sessionStorage.getItem('ix_intro_seen')==='1';
+    var forced=new URLSearchParams(window.location.search).get('intro')==='1';
+    if(forced){
+      try { sessionStorage.removeItem('ix_intro_seen'); } catch(error) {}
+    }
+    if(!reduced&&(!seen||forced)){
+      root.dataset.intro='play';
+      window.setTimeout(function(){
+        release();
+        window.dispatchEvent(new Event('ix:intro-complete'));
+      },window.matchMedia('(max-width: 767px)').matches?${INTRO_MOBILE_TOTAL_MS}:${INTRO_DESKTOP_TOTAL_MS});
+    }
+  } catch(error) {
+    release();
+  }
+  window.addEventListener('pageshow',function(event){
+    if(event.persisted) release();
+  });
+})();`;
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
@@ -124,6 +157,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: introGateScript,
+          }}
+        />
         <link
           rel="preload"
           as="image"

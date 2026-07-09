@@ -16,7 +16,7 @@ export const SITE = {
 
 export const WHATSAPP_MESSAGES = {
   diagnostic:
-    'Olá! Quero o diagnóstico gratuito do Time de IA da Impulso X para mapear o gargalo prioritário do meu negócio.',
+    'Olá! Quero o diagnóstico gratuito da Impulso X para mapear o gargalo prioritário do meu negócio.',
   solutions:
     'Olá! Quero entender como a Impulso X entra como time de IA na minha empresa: atendimento, operação, dados e presença.',
 };

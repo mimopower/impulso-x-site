@@ -85,10 +85,12 @@ export function IntroReveal() {
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted) finish();
     };
+    window.addEventListener(INTRO_COMPLETE_EVENT, finish);
     window.addEventListener('pageshow', handlePageShow);
 
     return () => {
       window.clearTimeout(fallback);
+      window.removeEventListener(INTRO_COMPLETE_EVENT, finish);
       window.removeEventListener('pageshow', handlePageShow);
       if (siteShell) siteShell.inert = false;
     };

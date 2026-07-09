@@ -29,7 +29,7 @@ A frente de atendimento entrou em duas semanas. O agente passou a responder em s
 
 1. **Saudação e coleta de contexto**: data, local, número de convidados e tipo de evento.
 2. **Triagem de urgência**: orçamento para breve, evento já em aberto, ou só pesquisando.
-3. **Agendamento ou handoff**: quando havia data definida, o agente marcava a continuidade da conversa. Quando era uma dúvida complexa, passava para a equipe com todo o contexto.
+3. **Agendamento ou transferência para a equipe**: quando havia data definida, o agente marcava a continuidade da conversa. Quando era uma dúvida complexa, passava para a equipe com todo o contexto.
 
 A equipe parou de recomeçar conversas do zero. Passou a receber leads já qualificados, com informações organizadas e prioridade clara.
 

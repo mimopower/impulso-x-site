@@ -1,8 +1,8 @@
 # Site Impulso X
 
-Repositorio separado do site institucional da Impulso X.
+Repositório separado do site institucional da Impulso X.
 
-Dominio canonico: `https://www.impulsox.com.br`
+Domínio canônico: `https://www.impulsox.com.br`
 
 ## Desenvolvimento
 
@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-## Validacao
+## Validação
 
 ```bash
 npm run typecheck
@@ -20,7 +20,7 @@ npm run build
 
 ## Deploy na VPS
 
-O deploy atual publica o export estatico em `/var/www/impulsox-site`.
+O deploy atual publica o export estático em `/var/www/impulsox-site`.
 
 ```bash
 cd /root/impulso-x/site-repositorio
@@ -32,11 +32,11 @@ nginx -t
 systemctl reload nginx
 ```
 
-## Separacao obrigatoria
+## Separação obrigatória
 
-Este repositorio e somente da Impulso X.
+Este repositório é somente da Impulso X.
 
-Nao publicar este site em caminhos da Mimo Power, como:
+Não publicar este site em caminhos da Mimo Power, como:
 
 - `/var/www/mimopower-site/dist`
 - `/etc/nginx/sites-available/mp-hub.conf`
