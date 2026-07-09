@@ -7,7 +7,6 @@ import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { useIntroReady } from './intro-reveal';
 import { CtaButton } from './ui/cta-button';
 import { HeroShieldVideo } from './ui/hero-shield-video';
-import { WordRotator } from './ui/word-rotator';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -62,14 +61,14 @@ export function Hero() {
             animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
-            IA por dentro, resultado por fora
+            Time de IA para PMEs
           </motion.div>
 
-          {/* H1 — stable aria-label for screen readers; visual word rotates.
+          {/* H1 — stable aria-label for screen readers.
               Emil: stagger 60-80ms between lines; only opacity+transform animated. */}
           <h1
             id="hero-heading"
-            aria-label="Inteligência para atender, qualificar, agendar e reativar conversas com clientes."
+            aria-label="Sua empresa com IA por dentro. Resultado por fora. Sem contratar."
             className="mt-6 font-display text-hero font-bold text-cream text-balance"
             style={{ lineHeight: '0.98' }}
           >
@@ -80,22 +79,17 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.02 : 0 }}
             >
-              Inteligência para
+              Sua empresa com
             </motion.span>
 
             <motion.span
               aria-hidden
-              className="block"
+              className="block text-gold-gradient"
               initial={false}
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.04 : 0 }}
             >
-              <WordRotator
-                words={['atender', 'qualificar', 'agendar', 'reativar']}
-                enabled={motionReady}
-                startDelay={900}
-                className="text-gold-gradient"
-              />
+              IA por dentro.
             </motion.span>
 
             <motion.span
@@ -103,9 +97,19 @@ export function Hero() {
               className="block"
               initial={false}
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.09 : 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             >
-              conversas com clientes.
+              Resultado por fora.
+            </motion.span>
+
+            <motion.span
+              aria-hidden
+              className="block text-steel"
+              initial={false}
+              animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.08 : 0 }}
+            >
+              Sem contratar.
             </motion.span>
           </h1>
 
@@ -116,7 +120,7 @@ export function Hero() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
-            Um agente de IA atende no WhatsApp ou Telegram, qualifica e passa para a sua equipe na hora certa. Ao redor dele, organizamos presença, dados e recompra.
+            Em 30 minutos a gente mapeia onde a IA devolve tempo, dinheiro e escala no seu negócio — e começamos pelo gargalo que mais dói.
           </motion.p>
 
           {/* CTAs — 4th and final hero element */}
@@ -126,11 +130,17 @@ export function Hero() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.08 : 0 }}
             className="mt-7 flex flex-col gap-3 sm:flex-row"
           >
-            <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
-              Quero meu diagnóstico
+            <CtaButton
+              href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+              variant="primary"
+              size="xl"
+              external
+              eventName="whatsapp_diagnostico"
+            >
+              Quero o diagnóstico gratuito
             </CtaButton>
-            <CtaButton href="#operacao" variant="outline" size="xl">
-              Ver como funciona
+            <CtaButton href="#snapshot" variant="outline" size="xl" eventName="nav_ancora_frentes">
+              Ver as frentes de atuação
             </CtaButton>
           </motion.div>
         </div>

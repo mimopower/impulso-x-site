@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ASSETS } from '@/lib/assets';
@@ -10,13 +12,70 @@ import { CtaButton } from './ui/cta-button';
 import { LogoShine } from './ui/logo-shine';
 
 const links = [
+  { href: '#snapshot', label: 'Frentes' },
   { href: '#operacao', label: 'Operação' },
-  { href: '#servicos', label: 'Soluções' },
+  { href: '#servicos', label: 'Serviços' },
   { href: '#processo', label: 'Processo' },
+  { href: '/blog/', label: 'Blog' },
   { href: '#fundadores', label: 'Fundadores' },
 ];
 
-const SECTION_IDS = ['top', 'operacao', 'servicos', 'processo', 'fundadores'] as const;
+const SECTION_IDS = ['top', 'snapshot', 'operacao', 'servicos', 'processo', 'fundadores'] as const;
+
+function NavLink({
+  href,
+  label,
+  isActive,
+  onClick,
+  variant = 'desktop',
+}: {
+  href: string;
+  label: string;
+  isActive: boolean;
+  onClick?: () => void;
+  variant?: 'desktop' | 'mobile';
+}) {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const isInternal = href.startsWith('#');
+  const resolvedHref = isHome || !isInternal ? href : `/${href}`;
+  const className =
+    variant === 'mobile'
+      ? `block rounded-control px-3 py-3 font-display text-xl font-semibold transition-colors duration-300 hover:bg-gold/10 ${
+          isActive ? 'bg-gold/10 text-gold-soft' : 'text-cream'
+        }`
+      : `group relative text-sm font-medium transition-colors duration-300 hover:text-cream ${
+          isActive ? 'text-cream' : 'text-steel'
+        }`;
+
+  if (isHome || !isInternal) {
+    return (
+      <a href={resolvedHref} onClick={onClick} className={className}>
+        <span>{label}</span>
+        {variant === 'desktop' && (
+          <span
+            className={`absolute -bottom-2 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ease-out-expo ${
+              isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            }`}
+          />
+        )}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={resolvedHref} onClick={onClick} className={className} scroll={false}>
+      <span>{label}</span>
+      {variant === 'desktop' && (
+        <span
+          className={`absolute -bottom-2 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ease-out-expo ${
+            isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        />
+      )}
+    </Link>
+  );
+}
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -156,24 +215,24 @@ export function Nav() {
             const id = link.href.slice(1);
             const isActive = activeId === id;
             return (
-              <a
+              <NavLink
                 key={link.href}
                 href={link.href}
-                className="group relative text-sm font-medium transition-colors duration-300 hover:text-cream"
-              >
-                <span className={isActive ? 'text-cream' : 'text-steel'}>{link.label}</span>
-                <span
-                  className={`absolute -bottom-2 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ease-out-expo ${
-                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`}
-                />
-              </a>
+                label={link.label}
+                isActive={isActive}
+              />
             );
           })}
         </nav>
 
         <div className="hidden lg:block">
-          <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="outline" size="md" external>
+          <CtaButton
+            href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+            variant="outline"
+            size="md"
+            external
+            eventName="whatsapp_diagnostico"
+          >
             Agendar diagnóstico
           </CtaButton>
         </div>
@@ -201,46 +260,45 @@ export function Nav() {
         </button>
       </div>
 
-      <motion.div
-        ref={menuPanelRef}
-        id="mobile-nav-menu"
-        initial={false}
-        animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-        {...(!open ? { inert: true } : {})}
-        className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
-      >
-        <nav aria-label="Menu mobile">
-          <ul className="flex flex-col gap-2">
-            {links.map((link) => {
-              const id = link.href.slice(1);
-              const isActive = activeId === id;
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={closeMenu}
-                    className={`block rounded-control px-3 py-3 font-display text-xl font-semibold transition-colors duration-300 hover:bg-gold/10 ${
-                      isActive ? 'bg-gold/10 text-gold-soft' : 'text-cream'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-        <CtaButton
-          href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
-          variant="primary"
-          size="lg"
-          external
-          className="mt-4 w-full"
+        <motion.div
+          ref={menuPanelRef}
+          id="mobile-nav-menu"
+          initial={false}
+          animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
+          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          {...(!open ? { inert: true } : {})}
+          className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
         >
-          Agendar diagnóstico
-        </CtaButton>
-      </motion.div>
+          <nav aria-label="Menu mobile">
+            <ul className="flex flex-col gap-2">
+              {links.map((link) => {
+                const id = link.href.slice(1);
+                const isActive = activeId === id;
+                return (
+                  <li key={link.href}>
+                    <NavLink
+                      href={link.href}
+                      label={link.label}
+                      isActive={isActive}
+                      onClick={closeMenu}
+                      variant="mobile"
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          <CtaButton
+            href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+            variant="primary"
+            size="lg"
+            external
+            eventName="whatsapp_diagnostico"
+            className="mt-4 w-full"
+          >
+            Agendar diagnóstico
+          </CtaButton>
+        </motion.div>
     </motion.header>
   );
 }

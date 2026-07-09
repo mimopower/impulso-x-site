@@ -123,7 +123,7 @@ export function Founders() {
             Tecnologia e criatividade, lado a lado.
           </h2>
           <p className="mt-5 max-w-prose font-sans text-lg leading-[1.5] text-steel text-pretty">
-            A Impulso X nasce da união entre raciocínio técnico, visão de marca e cuidado na execução.
+            A Impulso X é o time de IA das PMEs: raciocínio técnico, visão de marca e cuidado na execução, do diagnóstico à operação.
           </p>
         </SectionReveal>
 

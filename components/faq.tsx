@@ -7,6 +7,11 @@ const faqs = [
       'Não. O agente organiza a primeira conversa e chama sua equipe quando a situação pede decisão humana.',
   },
   {
+    question: 'Como vocês escolhem por qual frente começar?',
+    answer:
+      'Pelo diagnóstico gratuito. A gente mapeia onde a IA devolve mais resultado hoje — atendimento, operação, dados ou presença — e propõe uma primeira entrega pequena o suficiente para validar.',
+  },
+  {
     question: 'Quando o agente transfere para uma pessoa?',
     answer:
       'As regras de handoff são configuradas com você. A transferência pode acontecer por tipo de pedido, dúvida sensível, intenção de compra ou qualquer limite definido no projeto.',
@@ -24,12 +29,17 @@ const faqs = [
   {
     question: 'A Impulso X só faz o agente de atendimento?',
     answer:
-      'Não. O agente é a âncora, mas a operação inteligente se constrói ao redor dele: presença que converte, marca, conteúdo e dados para recompra — em 3 camadas que crescem conforme a sua empresa precisa.',
+      'Não. Atendimento é uma das quatro frentes do time de IA. Também atuamos em operação interna, estrutura e dados, e presença que converte — sempre na ordem que faz sentido para o seu negócio.',
+  },
+  {
+    question: 'E se eu precisar de mais de uma frente ao mesmo tempo?',
+    answer:
+      'Começamos por uma. Com a primeira validada, expandimos para as demais na ordem certa — sem nunca abandonar a operação que já está rodando.',
   },
   {
     question: 'O painel e o CRM são sob medida?',
     answer:
-      'Sim. O escopo sai no diagnóstico — começamos pelo mínimo (painel operacional essencial) e expandimos conforme a operação cresce. Sem preço fechado no site: o tamanho da entrega depende da sua dor.',
+      'Sim. O escopo sai no diagnóstico — começamos pelo mínimo (painel operacional essencial) e expandimos conforme a operação cresce. Cada proposta é escopada pós-diagnóstico.',
   },
 ] as const;
 
@@ -56,7 +66,7 @@ export function Faq() {
               <details key={item.question} className="faq-item" open={index === 0}>
                 <summary className="faq-summary">
                   <span className="faq-number" aria-hidden>
-                    0{index + 1}
+                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </span>
                   <span>{item.question}</span>
                 </summary>

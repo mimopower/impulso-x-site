@@ -81,19 +81,25 @@ export function FinalCta() {
           id="cta-heading"
           className="mx-auto mt-6 max-w-[13ch] font-display text-display font-bold text-cream text-balance"
         >
-          Pronto para organizar sua operação digital?
+          Pronto para ter um time de IA na sua empresa?
         </h2>
 
         <p className="mx-auto mt-5 max-w-[46ch] font-sans text-lead text-steel text-pretty">
-          Comece pelo diagnóstico gratuito. Mostramos onde o cliente esfria e quais frentes devem ser organizadas primeiro.
+          Comece pelo diagnóstico gratuito. Em 30 minutos a gente mapeia o gargalo prioritário e mostra por onde começar.
         </p>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
-            Quero meu diagnóstico
+          <CtaButton
+            href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+            variant="primary"
+            size="xl"
+            external
+            eventName="whatsapp_diagnostico"
+          >
+            Quero o diagnóstico gratuito
           </CtaButton>
-          <CtaButton href="#operacao" variant="outline" size="xl">
-            Ver como a operação funciona
+          <CtaButton href="#snapshot" variant="outline" size="xl" eventName="nav_ancora_frentes">
+            Ver as frentes de atuação
           </CtaButton>
         </div>
 

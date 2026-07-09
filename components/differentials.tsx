@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { SectionReveal } from './section-reveal';
 
 const changes = [
-  'Menos conversa parada no WhatsApp.',
-  'Menos tempo preso em perguntas repetidas.',
-  'Follow-up registrado, sem depender da memória.',
-  'Mais rotina para recompra e indicação.',
+  'Menos tarefa repetitiva para a equipe.',
+  'Resposta rápida nos canais do cliente.',
+  'Decisões com dados em vez de memória.',
+  'Presença que gera confiança antes da conversa.',
 ];
 
 const ease = [0.23, 1, 0.32, 1] as const;

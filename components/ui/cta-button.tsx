@@ -15,6 +15,7 @@ type Props = {
   external?: boolean;
   ariaLabel?: string;
   className?: string;
+  eventName?: string;
 };
 
 const variantClass: Record<Variant, string> = {
@@ -37,6 +38,7 @@ export function CtaButton({
   external = false,
   ariaLabel,
   className = '',
+  eventName,
 }: Props) {
   const prefersReduced = useReducedMotion();
   const [flashId, setFlashId] = useState<number | null>(null);
@@ -51,6 +53,7 @@ export function CtaButton({
     <motion.a
       href={href}
       aria-label={ariaLabel}
+      data-event={eventName}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
       onTapStart={startFlash}

@@ -7,23 +7,28 @@ import { GoldCircuitLines } from './ui/gold-circuit-lines';
 const steps = [
   {
     n: '01',
-    title: 'Diagnóstico',
-    body: 'Mapeamos seu funil de WhatsApp/Google e onde o lead esfria.',
+    title: 'Diagnóstico gratuito',
+    body: '30 minutos para mapear o gargalo prioritário: atendimento, operação, dados ou presença. Saímos com uma prioridade clara.',
   },
   {
     n: '02',
-    title: 'Agente no ar',
-    body: 'Implantamos o agente no WhatsApp ou Telegram, com handoff humano e fluxo aprovado.',
+    title: 'Arquitetura e plano',
+    body: 'Desenhamos a primeira entrega, o que depende dela e como as frentes se conectam depois. Sem projeto inchado.',
   },
   {
     n: '03',
-    title: 'Presença que alimenta',
-    body: 'Site, GMN e presença nos canais certos para gerar leads mais qualificados para o agente.',
+    title: 'Primeira frente no ar',
+    body: 'Construímos e testamos a primeira frente com a sua equipe. Resultado validado antes de seguir para a próxima.',
   },
   {
     n: '04',
-    title: 'Operação inteligente',
-    body: 'Painel, CRM e automações conforme a dor valida. Relatório mensal do que o agente gerou.',
+    title: 'Validação e ajuste',
+    body: 'Medimos o impacto real, ajustamos os gatilhos e garantimos que a operação confie no que está rodando.',
+  },
+  {
+    n: '05',
+    title: 'Expansão e governança',
+    body: 'Ligamos as demais frentes, documentamos regras e mantemos o time de IA operando com segurança e clareza.',
   },
 ];
 
@@ -35,7 +40,6 @@ export function Process() {
       <GoldCircuitLines variant="process" />
       <div className="container-x">
         <SectionReveal className="max-w-3xl">
-          {/* Eyebrow #2 of 3 allowed on page */}
           <span className="section-kicker">Método</span>
           <h2
             id="process-heading"
@@ -45,35 +49,30 @@ export function Process() {
           </h2>
         </SectionReveal>
 
-        {/* Steps — open layout, NO metal-panel cards (taste-skill ban: identical card grid).
-            Remotion philosophy: each step enters with a deliberate delay sequence (60ms stagger).
-            Desktop: horizontal 4-col. Mobile: stacked. */}
-        <div className="mt-12 grid gap-0 md:grid-cols-4">
-          {steps.map((step, i) => (
+        <div className="mt-12 grid gap-0 md:grid-cols-5">
+          {steps.map((step) => (
             <motion.div
               key={step.n}
               className="relative border-l border-cream/12 first:border-l-0 md:border-l-0 md:border-t md:border-t-cream/12"
               transition={{ duration: 0.35, ease }}
             >
-              {/* Gold node at top of each step (desktop) — on the border line */}
               <div
                 aria-hidden
                 className="absolute left-0 top-0 hidden h-[7px] w-[7px] -translate-x-[3.5px] -translate-y-[3.5px] rounded-full bg-gold md:block"
               />
-              {/* Vertical step connector (mobile, left border) */}
               <div
                 aria-hidden
                 className="absolute left-0 top-0 hidden h-full w-px bg-gradient-to-b from-gold/60 to-transparent md:hidden"
               />
 
-              <div className="pl-6 pr-4 pb-10 pt-8 md:pl-0 md:pr-6 md:pb-0 md:pt-8">
+              <div className="pl-6 pr-4 pb-10 pt-8 md:pl-0 md:pr-5 md:pb-0 md:pt-8">
                 <span
                   className="font-display text-sm font-bold text-gold tabular"
                   aria-label={`Passo ${step.n}`}
                 >
                   {step.n}
                 </span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-cream md:text-3xl">
+                <h3 className="mt-4 font-display text-2xl font-bold text-cream md:text-2xl lg:text-3xl">
                   {step.title}
                 </h3>
                 <p className="mt-3 font-sans text-base leading-[1.5] text-steel text-pretty">

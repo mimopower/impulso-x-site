@@ -6,11 +6,12 @@ import { LogoShine } from './ui/logo-shine';
 const currentYear = new Date().getFullYear();
 
 const links = [
-  { label: 'Operação', href: '#operacao' },
-  { label: 'Soluções', href: '#servicos' },
-  { label: 'Processo', href: '#processo' },
-  { label: 'Fundadores', href: '#fundadores' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Frentes', href: '#snapshot', eventName: 'nav_ancora_frentes' },
+  { label: 'Operação', href: '#operacao', eventName: 'nav_ancora_operacao' },
+  { label: 'Serviços', href: '#servicos', eventName: 'nav_ancora_servicos' },
+  { label: 'Processo', href: '#processo', eventName: 'nav_ancora_processo' },
+  { label: 'Blog', href: '/blog/', eventName: 'nav_blog' },
+  { label: 'Fundadores', href: '#fundadores', eventName: 'nav_ancora_fundadores' },
 ];
 
 export function Footer() {
@@ -43,7 +44,11 @@ export function Footer() {
             <ul className="mt-5 flex flex-col gap-3">
               {links.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-steel transition-colors duration-300 hover:text-cream">
+                  <a
+                    href={link.href}
+                    data-event={link.eventName}
+                    className="text-sm text-steel transition-colors duration-300 hover:text-cream"
+                  >
                     {link.label}
                   </a>
                 </li>
@@ -58,6 +63,7 @@ export function Footer() {
                 href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-event="whatsapp_diagnostico"
                 className="text-steel transition-colors duration-300 hover:text-cream"
               >
                 WhatsApp: {SITE.whatsappDisplay}
@@ -66,6 +72,7 @@ export function Footer() {
                 href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic, SITE.whatsappSecondaryE164)}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-event="whatsapp_diagnostico"
                 className="text-steel transition-colors duration-300 hover:text-cream"
               >
                 WhatsApp: {SITE.whatsappSecondaryDisplay}
@@ -74,6 +81,7 @@ export function Footer() {
                 href={SITE.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-event="instagram_click"
                 className="text-steel transition-colors duration-300 hover:text-cream"
               >
                 Instagram
@@ -82,6 +90,7 @@ export function Footer() {
                 href={SITE.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-event="tiktok_click"
                 className="text-steel transition-colors duration-300 hover:text-cream"
               >
                 TikTok

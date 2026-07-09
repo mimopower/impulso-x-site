@@ -68,8 +68,7 @@ export function Cases() {
             </h2>
           </div>
           <p className="max-w-prose font-sans text-lg leading-[1.5] text-steel text-pretty">
-            Estes são exemplos de aplicação da identidade e do tipo de entrega que a Impulso X pode montar.
-            Não são projetos reais publicados; são possibilidades de projeto.
+            Cada frente entrega um resultado concreto. A ordem depende do diagnóstico.
           </p>
         </SectionReveal>
 

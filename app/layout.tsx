@@ -1,38 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Manrope, Rajdhani } from 'next/font/google';
-import { IntroReveal } from '@/components/intro-reveal';
-import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
+import { AnalyticsEvents } from '@/components/ui/analytics-events';
 import { SITE } from '@/lib/site';
 import './globals.css';
-
-const introGateScript = `(function(){
-  var root=document.documentElement;
-  var release=function(){
-    root.removeAttribute('data-intro');
-    var shell=document.getElementById('site-shell');
-    if(shell) shell.inert=false;
-  };
-  try {
-    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var seen=sessionStorage.getItem('ix_intro_seen')==='1';
-    var forced=new URLSearchParams(window.location.search).get('intro')==='1';
-    if(forced){
-      try { sessionStorage.removeItem('ix_intro_seen'); } catch(error) {}
-    }
-    if(!reduced&&(!seen||forced)){
-      root.dataset.intro='play';
-      window.setTimeout(function(){
-        release();
-        window.dispatchEvent(new Event('ix:intro-complete'));
-      },window.matchMedia('(max-width: 767px)').matches?${INTRO_MOBILE_TOTAL_MS}:${INTRO_DESKTOP_TOTAL_MS});
-    }
-  } catch(error) {
-    release();
-  }
-  window.addEventListener('pageshow',function(event){
-    if(event.persisted) release();
-  });
-})();`;
 
 const organizationSchema = {
   '@context': 'https://schema.org',
@@ -50,18 +20,18 @@ const organizationSchema = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Soluções Impulso X',
+    name: 'Time de IA Impulso X',
     itemListElement: [
-      'Agente de IA no WhatsApp ou Telegram com handoff humano',
-      'Diagnóstico do funil de atendimento',
-      'Presença digital que converte',
+      'Diagnóstico gratuito do gargalo prioritário',
+      'Atendimento e vendas com IA',
+      'Operação interna com IA',
+      'Estrutura e dados',
+      'Presença que converte',
+      'Agentes no WhatsApp e Telegram',
       'Painel administrativo sob medida',
       'CRM e funil comercial',
       'Dashboards e relatórios de valor',
-      'Automações e integrações',
-      'Marca e identidade',
-      'Conteúdo para redes',
-      'Google Meu Negócio e SEO local',
+      'Governança e segurança de IA',
     ].map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -90,22 +60,23 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.shortName} | Inteligência que atende, qualifica e faz seu cliente voltar`,
+    default: `${SITE.shortName} | ${SITE.tagline}`,
     template: `%s | ${SITE.shortName}`,
   },
-  description:
-    'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
+  description: SITE.description,
   keywords: [
-    'operação inteligente para PMEs',
-    'atendimento automatizado com IA',
+    'time de IA para PMEs',
+    'IA por dentro resultado por fora',
     'agente de IA para atendimento',
     'agente de IA no WhatsApp',
     'agente de IA no Telegram',
+    'operação inteligente com IA',
     'presença digital para PMEs',
     'painel administrativo sob medida',
     'CRM para PMEs',
-    'qualificação de leads',
-    'recompra',
+    'qualificação de leads com IA',
+    'recompra automatizada',
+    'governança de IA',
     'Impulso X',
   ],
   authors: [{ name: SITE.name }],
@@ -119,9 +90,8 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: SITE.url,
     siteName: SITE.name,
-    title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
-    description:
-      'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
+    title: `Impulso X | ${SITE.tagline}`,
+    description: SITE.description,
     images: [
       {
         url: ogImage,
@@ -133,9 +103,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Impulso X | Inteligência que atende, qualifica e faz seu cliente voltar',
-    description:
-      'A Impulso X instala um agente de IA no seu WhatsApp ou Telegram para responder na hora, qualificar e agendar — e transferir para um humano quando precisa. Você para de perder cliente e de depender de você mesmo para responder tudo.',
+    title: `Impulso X | ${SITE.tagline}`,
+    description: SITE.description,
     images: [ogImage],
   },
 };
@@ -155,7 +124,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <script id="ix-intro-gate" dangerouslySetInnerHTML={{ __html: introGateScript }} />
         <link
           rel="preload"
           as="image"
@@ -174,9 +142,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
           }}
         />
+        <script
+          defer
+          src="/umami/script.js"
+          data-website-id="7d787043-4a49-4609-ae5b-dda8e1261a8d"
+          data-host-url="https://www.impulsox.com.br/umami"
+        />
       </head>
       <body className="bg-ink text-cream antialiased">
-        <IntroReveal />
+        <AnalyticsEvents />
         <div id="site-shell">
           <a
             href="#main-content"

@@ -5,27 +5,23 @@ import { CtaButton } from './ui/cta-button';
 import { SectionReveal } from './section-reveal';
 import { AgentChat } from './ui/agent-chat';
 
-// 3 camadas AI-first — Camada 1 (agente) é a âncora/herói, com peso visual dominante.
-// Camadas 2 e 3 se constroem ao redor dela, como profundidade subordinada — nunca
-// como 3 itens de igual peso (cicatriz Realize: cardápio plano de agência).
-type Layer = { n: string; title: string; body: string; anchor?: boolean };
+type Step = { n: string; title: string; body: string };
 
-const layers: Layer[] = [
+const steps: Step[] = [
   {
     n: '01',
-    title: 'Atendimento inteligente',
-    body: 'O agente de IA atende no WhatsApp ou Telegram, qualifica, agenda e faz follow-up — e passa para a equipe quando precisa.',
-    anchor: true,
+    title: 'Diagnóstico gratuito',
+    body: 'Em 30 minutos a gente mapeia onde a IA devolve mais resultado hoje: atendimento, operação, dados ou presença.',
   },
   {
     n: '02',
-    title: 'Presença que converte',
-    body: 'Site, landing e GMN que geram confiança antes da conversa e alimentam o agente com leads mais qualificados.',
+    title: 'Primeira entrega escopada',
+    body: 'Escolhemos uma frente para começar. Construímos, testamos e validamos o resultado antes de seguir em frente.',
   },
   {
     n: '03',
-    title: 'Operação inteligente',
-    body: 'Painel sob medida, CRM/funil, dashboards de valor e automações — começando pelo mínimo e crescendo conforme a dor valida.',
+    title: 'Expande para o resto',
+    body: 'Com a primeira frente rodando, ligamos as demais áreas: agentes, painéis, automações e presença, sempre na ordem certa.',
   },
 ];
 
@@ -66,9 +62,6 @@ export function Operation() {
       className="section-shell-wide relative overflow-hidden bg-ink2"
       aria-labelledby="operation-heading"
     >
-      {/* Âncora de compatibilidade — preserva links #agente já compartilhados (invisível). */}
-      <span id="agente" className="sr-only" aria-hidden="true" />
-
       <div aria-hidden className="gold-hairline absolute inset-x-0 top-0" />
 
       <Image
@@ -83,63 +76,47 @@ export function Operation() {
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <SectionReveal>
-            <p className="section-kicker">As 3 camadas da operação inteligente</p>
+            <p className="section-kicker">Como trabalhamos</p>
             <h2
               id="operation-heading"
-              className="mt-6 max-w-[20ch] font-display text-display font-bold text-cream text-balance"
+              className="mt-6 max-w-[18ch] font-display text-display font-bold text-cream text-balance"
             >
-              O agente é o coração. A operação se constrói ao redor dele.
+              Como o time de IA entra na sua empresa
             </h2>
             <p className="mt-6 max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
-              Do primeiro contato à recompra: o agente de IA atende onde o seu cliente fala.
-              Ao redor dele, presença que converte, marca consistente e dados que mantêm o cliente voltando.
+              Diagnóstico primeiro. Depois construímos na ordem que faz sentido para você.
             </p>
 
-            {/* Camada 1 — bloco âncora destacado (borda dourada, maior área/copy) */}
-            <ul className="mt-8" aria-label="Camadas da operação inteligente">
-              {layers.map((layer) =>
-                layer.anchor ? (
-                  <li
-                    key={layer.n}
-                    className="premium-card-depth relative mb-4 rounded-card border border-gold/40 bg-gradient-to-b from-gold/[0.06] to-transparent p-6"
-                  >
-                    <span
-                      aria-hidden
-                      className="font-display text-xs font-bold tracking-[0.14em] text-gold"
-                    >
-                      CAMADA {layer.n} · ÂNCORA
-                    </span>
-                    <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
-                      {layer.title}
+            <ul className="mt-8" aria-label="Etapas de entrada do time de IA">
+              {steps.map((step) => (
+                <li
+                  key={step.n}
+                  className="grid grid-cols-[2.4rem_1fr] items-start gap-4 border-b border-cream/12 py-5 last:border-b-0"
+                >
+                  <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
+                    {step.n}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-semibold leading-tight text-cream">
+                      {step.title}
                     </h3>
-                    <p className="mt-2 max-w-[46ch] font-sans text-base leading-[1.5] text-steel text-pretty">
-                      {layer.body}
+                    <p className="mt-1.5 font-sans text-sm leading-snug text-steel text-pretty">
+                      {step.body}
                     </p>
-                  </li>
-                ) : (
-                  <li
-                    key={layer.n}
-                    className="grid grid-cols-[2.4rem_1fr] items-start gap-4 border-b border-cream/12 py-5 last:border-b-0"
-                  >
-                    <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
-                      {layer.n}
-                    </span>
-                    <div>
-                      <h3 className="font-display text-lg font-semibold leading-tight text-cream">
-                        {layer.title}
-                      </h3>
-                      <p className="mt-1.5 font-sans text-sm leading-snug text-steel text-pretty">
-                        {layer.body}
-                      </p>
-                    </div>
-                  </li>
-                ),
-              )}
+                  </div>
+                </li>
+              ))}
             </ul>
 
             <div className="mt-8">
-              <CtaButton href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)} variant="primary" size="xl" external>
-                Quero meu diagnóstico
+              <CtaButton
+                href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+                variant="primary"
+                size="xl"
+                external
+                eventName="whatsapp_diagnostico"
+              >
+                Quero o diagnóstico gratuito
               </CtaButton>
             </div>
           </SectionReveal>

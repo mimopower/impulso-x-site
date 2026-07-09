@@ -6,10 +6,10 @@ import { AssetImage } from './ui/asset-image';
 import { SectionReveal } from './section-reveal';
 
 const pains = [
-  'O lead chama no WhatsApp e fica esperando.',
-  'As mesmas perguntas consomem tempo todos os dias.',
-  'Sem follow-up, o orçamento perde força.',
-  'Quando a equipe está ocupada, a conversa para.',
+  'O lead chama e fica esperando.',
+  'A equipe repete as mesmas tarefas todo dia.',
+  'Decisões são tomadas sem dados claros.',
+  'Quando o dono está ocupado, a operação desacelera.',
 ];
 
 const ease = [0.23, 1, 0.32, 1] as const;
@@ -26,11 +26,11 @@ export function Problem() {
               id="problem-heading"
               className="max-w-[13ch] font-display text-display font-bold text-cream text-balance"
             >
-              Cada conversa parada é um cliente esfriando.
+              Sem estrutura, a empresa para quando o dono para.
             </h2>
             <p className="mt-5 max-w-prose text-lead text-steel text-pretty">
-              O lead chega pelo WhatsApp, Instagram ou Google, mas o atendimento nem
-              sempre acompanha o volume, os horários e o gargalo que fica preso no dono.
+              IA não substitui a equipe. Mas pode tirar da equipe o que é repetitivo,
+              liberando tempo para o que gera resultado.
             </p>
           </SectionReveal>
 
