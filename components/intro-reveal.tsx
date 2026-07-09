@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
@@ -33,9 +34,12 @@ export function useIntroReady() {
 }
 
 export function IntroReveal() {
+  const pathname = usePathname();
   const [done, setDone] = useState(false);
   const [reduced, setReduced] = useState(false);
   const finishedRef = useRef(false);
+
+  if (pathname !== '/') return null;
 
   const finish = useCallback(() => {
     if (finishedRef.current) return;

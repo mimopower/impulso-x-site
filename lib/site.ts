@@ -1,9 +1,9 @@
 export const SITE = {
   name: 'Impulso X Intelligence',
   shortName: 'Impulso X',
-  tagline: 'A IA da sua empresa. Sem contratar. Sem trocar ferramentas.',
+  tagline: 'O time de IA da sua empresa. IA por dentro, resultado por fora.',
   description:
-    'A Impulso X atua como time de IA dentro da sua empresa: diagnóstico, arquitetura, agentes, governança e operação. Resultados em semanas, sem contratar mais gente.',
+    'A Impulso X é o time de IA da sua empresa: diagnóstico gratuito primeiro, e o time entra pelo que o negócio mais precisa — atendimento, operação interna, dados ou presença digital. IA por dentro, resultado por fora.',
   url: 'https://www.impulsox.com.br',
   whatsappE164: '5511939505573',
   whatsappDisplay: '(11) 93950-5573',

@@ -6,12 +6,11 @@ import { LogoShine } from './ui/logo-shine';
 const currentYear = new Date().getFullYear();
 
 const links = [
-  { label: 'Frentes', href: '#snapshot', eventName: 'nav_ancora_frentes' },
-  { label: 'Operação', href: '#operacao', eventName: 'nav_ancora_operacao' },
-  { label: 'Serviços', href: '#servicos', eventName: 'nav_ancora_servicos' },
-  { label: 'Processo', href: '#processo', eventName: 'nav_ancora_processo' },
-  { label: 'Blog', href: '/blog/', eventName: 'nav_blog' },
-  { label: 'Fundadores', href: '#fundadores', eventName: 'nav_ancora_fundadores' },
+  { label: 'Operação', href: '/#operacao', eventName: 'nav_ancora_operacao' },
+  { label: 'Frentes', href: '/#servicos', eventName: 'nav_ancora_frentes' },
+  { label: 'Como funciona', href: '/#processo', eventName: 'nav_ancora_processo' },
+  { label: 'Fundadores', href: '/#fundadores', eventName: 'nav_ancora_fundadores' },
+  { label: 'Blog', href: '/blog', eventName: 'nav_blog' },
 ];
 
 export function Footer() {
@@ -20,7 +19,7 @@ export function Footer() {
       <div className="container-x">
         <div className="grid gap-12 py-14 md:grid-cols-12 md:py-20">
           <div className="md:col-span-5">
-            <a href="#top" aria-label={`${SITE.name} - voltar ao topo`} className="inline-flex items-center gap-4">
+            <a href="/" aria-label={`${SITE.name} - voltar ao início`} className="inline-flex items-center gap-4">
               <span className="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-[10px] border border-gold/20 bg-ink p-1.5">
                 <Image
                   src={ASSETS.mark.src}
