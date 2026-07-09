@@ -12,15 +12,14 @@ import { CtaButton } from './ui/cta-button';
 import { LogoShine } from './ui/logo-shine';
 
 const links = [
-  { href: '#snapshot', label: 'Frentes' },
-  { href: '#operacao', label: 'Operação' },
-  { href: '#servicos', label: 'Serviços' },
-  { href: '#processo', label: 'Processo' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '#fundadores', label: 'Fundadores' },
+  { href: '/#operacao', label: 'Operação' },
+  { href: '/#servicos', label: 'Frentes' },
+  { href: '/#processo', label: 'Como funciona' },
+  { href: '/#fundadores', label: 'Fundadores' },
+  { href: '/blog', label: 'Blog' },
 ];
 
-const SECTION_IDS = ['top', 'snapshot', 'operacao', 'servicos', 'processo', 'fundadores'] as const;
+const SECTION_IDS = ['top', 'operacao', 'servicos', 'processo', 'fundadores'] as const;
 
 function NavLink({
   href,
@@ -35,10 +34,7 @@ function NavLink({
   onClick?: () => void;
   variant?: 'desktop' | 'mobile';
 }) {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
-  const isInternal = href.startsWith('#');
-  const resolvedHref = isHome || !isInternal ? href : `/${href}`;
+  const isInternal = href.startsWith('/#');
   const className =
     variant === 'mobile'
       ? `block rounded-control px-3 py-3 font-display text-xl font-semibold transition-colors duration-300 hover:bg-gold/10 ${
@@ -48,9 +44,9 @@ function NavLink({
           isActive ? 'text-cream' : 'text-steel'
         }`;
 
-  if (isHome || !isInternal) {
+  if (isInternal) {
     return (
-      <a href={resolvedHref} onClick={onClick} className={className}>
+      <a href={href} onClick={onClick} className={className}>
         <span>{label}</span>
         {variant === 'desktop' && (
           <span
@@ -64,7 +60,7 @@ function NavLink({
   }
 
   return (
-    <Link href={resolvedHref} onClick={onClick} className={className} scroll={false}>
+    <Link href={href} onClick={onClick} className={className} scroll={false}>
       <span>{label}</span>
       {variant === 'desktop' && (
         <span
@@ -78,6 +74,10 @@ function NavLink({
 }
 
 export function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const isBlog = pathname.startsWith('/blog');
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState('');
@@ -97,8 +97,9 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Scroll-spy via IntersectionObserver (no per-scroll layout jank).
+  // Scroll-spy via IntersectionObserver — only on home.
   useEffect(() => {
+    if (!isHome) return;
     const sections = SECTION_IDS
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -118,7 +119,7 @@ export function Nav() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [isHome]);
 
   // Body scroll lock + focus management on open/close.
   useEffect(() => {
@@ -135,7 +136,6 @@ export function Nav() {
         window.clearTimeout(t);
       };
     }
-    // Skip focus-return on the very first mount (menu never opened yet).
     if (firstMountRef.current) {
       firstMountRef.current = false;
       return;
@@ -191,7 +191,7 @@ export function Nav() {
             : 'border-cream/10 bg-ink/34 backdrop-blur-md'
         }`}
       >
-        <a href="#top" className="group flex min-w-0 items-center gap-3" aria-label={`${SITE.name} - voltar ao topo`}>
+        <Link href="/" className="group flex min-w-0 items-center gap-3" aria-label={`${SITE.name} - voltar ao início`}>
           {/* Logo box stays a fixed size on scroll — no layout shift. */}
           <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-[10px] border border-gold/25 bg-ink p-1">
             <Image
@@ -208,12 +208,14 @@ export function Nav() {
             <span className="font-display text-lg font-bold text-cream md:text-xl">Impulso X</span>
             <span className="mt-1 hidden text-[11px] font-medium text-steel sm:block">Intelligence</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
           {links.map((link) => {
-            const id = link.href.slice(1);
-            const isActive = activeId === id;
+            const id = link.href.replace('/#', '');
+            const isActive = isBlog
+              ? link.href === '/blog'
+              : isHome && activeId === id;
             return (
               <NavLink
                 key={link.href}
@@ -260,45 +262,47 @@ export function Nav() {
         </button>
       </div>
 
-        <motion.div
-          ref={menuPanelRef}
-          id="mobile-nav-menu"
-          initial={false}
-          animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
-          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-          {...(!open ? { inert: true } : {})}
-          className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
+      <motion.div
+        ref={menuPanelRef}
+        id="mobile-nav-menu"
+        initial={false}
+        animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10, pointerEvents: open ? 'auto' : 'none' }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        {...(!open ? { inert: true } : {})}
+        className="absolute left-3 right-3 top-full mt-2 rounded-brand border border-gold/20 bg-ink/94 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl md:left-6 md:right-6 lg:hidden"
+      >
+        <nav aria-label="Menu mobile">
+          <ul className="flex flex-col gap-2">
+            {links.map((link) => {
+              const id = link.href.replace('/#', '');
+              const isActive = isBlog
+                ? link.href === '/blog'
+                : isHome && activeId === id;
+              return (
+                <li key={link.href}>
+                  <NavLink
+                    href={link.href}
+                    label={link.label}
+                    isActive={isActive}
+                    onClick={closeMenu}
+                    variant="mobile"
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <CtaButton
+          href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+          variant="primary"
+          size="lg"
+          external
+          eventName="whatsapp_diagnostico"
+          className="mt-4 w-full"
         >
-          <nav aria-label="Menu mobile">
-            <ul className="flex flex-col gap-2">
-              {links.map((link) => {
-                const id = link.href.slice(1);
-                const isActive = activeId === id;
-                return (
-                  <li key={link.href}>
-                    <NavLink
-                      href={link.href}
-                      label={link.label}
-                      isActive={isActive}
-                      onClick={closeMenu}
-                      variant="mobile"
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-          <CtaButton
-            href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
-            variant="primary"
-            size="lg"
-            external
-            eventName="whatsapp_diagnostico"
-            className="mt-4 w-full"
-          >
-            Agendar diagnóstico
-          </CtaButton>
-        </motion.div>
+          Agendar diagnóstico
+        </CtaButton>
+      </motion.div>
     </motion.header>
   );
 }

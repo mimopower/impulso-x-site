@@ -1,67 +1,70 @@
 import Image from 'next/image';
 import { ASSETS } from '@/lib/assets';
+import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { SectionReveal } from './section-reveal';
 import { GoldCircuitLines } from './ui/gold-circuit-lines';
+import { CtaButton } from './ui/cta-button';
 
 type Frente = {
   n: string;
   title: string;
-  body: string;
+  quote: string;
   chips: string[];
 };
 
 const frentes: Frente[] = [
   {
-    n: 'A',
+    n: '01',
     title: 'Atendimento e vendas com IA',
-    body: 'Agente no canal do cliente que responde na hora, qualifica e agenda. A equipe entra só onde a máquina ainda não resolve.',
-    chips: ['Agente WhatsApp/Telegram', 'Qualificação', 'Agendamento', 'Handoff humano', 'Follow-up', 'Recompra'],
+    quote: 'Parar de perder lead no WhatsApp: resposta rápida 24/7, triagem, agenda e follow-up — com humano assumindo na hora certa.',
+    chips: ['Resposta em segundos, 24/7', 'Triagem de tema, data e orçamento', 'Follow-up de quem esfriou'],
   },
   {
-    n: 'B',
+    n: '02',
     title: 'Operação interna com IA',
-    body: 'Copilotos e automações que tiram da equipe as tarefas repetitivas que roubam tempo de venda e atendimento.',
-    chips: ['Copilotos', 'Automações', 'Fluxos de aprovação', 'Relatórios', 'Integrações'],
+    quote: 'A IA trabalhando por dentro da sua equipe: orçamento, proposta e resumo de conversa saem em minutos, não em horas.',
+    chips: ['Orçamento e proposta em minutos', 'Resumo pronto de cada conversa', 'IA rascunha, você só aprova'],
   },
   {
-    n: 'C',
+    n: '03',
     title: 'Estrutura e dados',
-    body: 'CRM, painéis e dashboards conectados para você parar de operar no escuro e decidir com clareza.',
-    chips: ['CRM', 'Painel administrativo', 'Dashboards', 'Funil comercial', 'Base de conhecimento'],
+    quote: 'A operação num sistema, não em planilha solta e print de WhatsApp.',
+    chips: ['Leads, agenda e status num painel só', 'Funil com score: quem priorizar hoje', 'Relatório mensal com resultado visível'],
   },
   {
-    n: 'D',
+    n: '04',
     title: 'Presença que converte',
-    body: 'Site, Google Meu Negócio, copy e marca que alimentam o funil e geram confiança antes da conversa.',
-    chips: ['Site/Landing', 'Google Meu Negócio', 'SEO local', 'Copy comercial', 'Marca'],
+    quote: 'O cliente te encontra no Google e chega na conversa já vendo prova e contexto.',
+    chips: ['Google Meu Negócio completo', 'Portfólio e provas organizados', 'Landing que alimenta o atendimento'],
   },
 ];
 
 function FrenteBlock({ frente, index }: { frente: Frente; index: number }) {
   return (
-    <article
-      key={frente.n}
-      className="service-item group relative rounded-card border border-cream/12 bg-ink/60 p-6 transition-colors duration-500 hover:border-cream/25 hover:bg-ink md:p-8"
-    >
-      <span aria-hidden className="font-display text-xs font-bold tracking-[0.14em] text-gold">
-        FRENTE {frente.n}
-      </span>
-      <h3 className="mt-4 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
-        {frente.title}
-      </h3>
-      <p className="mt-3 font-sans text-base leading-[1.55] text-steel text-pretty">
-        {frente.body}
-      </p>
-      <ul className="mt-5 flex flex-wrap gap-2">
-        {frente.chips.map((chip) => (
-          <li
-            key={chip}
-            className="rounded-full border border-cream/12 bg-cream/[0.04] px-3 py-1.5 font-sans text-xs font-medium text-steel"
-          >
-            {chip}
-          </li>
-        ))}
-      </ul>
+    <article className="service-item group relative rounded-card border border-cream/12 bg-ink/60 p-6 transition-colors duration-500 hover:border-cream/25 hover:bg-ink md:p-8">
+      <div className="grid gap-6 md:grid-cols-[4rem_1fr]">
+        <span aria-hidden className="font-display text-4xl font-bold leading-none text-gold/30 transition-colors group-hover:text-gold/50 md:text-5xl">
+          {frente.n}
+        </span>
+        <div>
+          <h3 className="font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
+            {frente.title}
+          </h3>
+          <p className="mt-3 font-sans text-lg leading-[1.55] text-cream text-pretty">
+            “{frente.quote}”
+          </p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {frente.chips.map((chip) => (
+              <li
+                key={chip}
+                className="rounded-full border border-cream/15 bg-cream/[0.04] px-3 py-1.5 font-sans text-xs font-medium text-steel transition-colors hover:border-gold/40 hover:text-cream"
+              >
+                {chip}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </article>
   );
 }
@@ -83,22 +86,39 @@ export function Services() {
 
       <div className="container-x relative">
         <SectionReveal className="max-w-4xl">
-          <p className="section-kicker">Serviços</p>
+          <p className="section-kicker">O que o time faz</p>
           <h2
             id="services-heading"
             className="mt-6 max-w-[18ch] font-display text-display font-bold text-cream text-balance"
           >
-            Quatro frentes de atuação
+            As 4 frentes do time de IA
           </h2>
           <p className="mt-5 max-w-[56ch] text-lg leading-[1.55] text-steel text-pretty">
-            Escolhemos a primeira junto com você no diagnóstico. Depois expandimos para as demais na ordem certa.
+            Cada frente resolve uma dor concreta. A ordem é definida no diagnóstico.
           </p>
         </SectionReveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-12 grid gap-5">
           {frentes.map((frente, index) => (
             <FrenteBlock key={frente.n} frente={frente} index={index} />
           ))}
+        </div>
+
+        <div className="mt-12 rounded-card border border-gold/20 bg-gradient-to-b from-gold/[0.05] to-transparent p-8 md:p-10">
+          <p className="max-w-[52ch] font-sans text-lg leading-[1.55] text-cream text-pretty">
+            O diagnóstico gratuito mostra por qual dessas frentes faz sentido começar.
+          </p>
+          <div className="mt-6">
+            <CtaButton
+              href={WHATSAPP_URL(WHATSAPP_MESSAGES.diagnostic)}
+              variant="primary"
+              size="xl"
+              external
+              eventName="whatsapp_diagnostico"
+            >
+              Quero meu diagnóstico
+            </CtaButton>
+          </div>
         </div>
       </div>
     </section>

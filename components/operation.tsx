@@ -5,26 +5,6 @@ import { CtaButton } from './ui/cta-button';
 import { SectionReveal } from './section-reveal';
 import { AgentChat } from './ui/agent-chat';
 
-type Step = { n: string; title: string; body: string };
-
-const steps: Step[] = [
-  {
-    n: '01',
-    title: 'Diagnóstico gratuito',
-    body: 'Em 30 minutos a gente mapeia onde a IA devolve mais resultado hoje: atendimento, operação, dados ou presença.',
-  },
-  {
-    n: '02',
-    title: 'Primeira entrega escopada',
-    body: 'Escolhemos uma frente para começar. Construímos, testamos e validamos o resultado antes de seguir em frente.',
-  },
-  {
-    n: '03',
-    title: 'Expande para o resto',
-    body: 'Com a primeira frente rodando, ligamos as demais áreas: agentes, painéis, automações e presença, sempre na ordem certa.',
-  },
-];
-
 const moments = [
   {
     n: '01',
@@ -76,37 +56,16 @@ export function Operation() {
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <SectionReveal>
-            <p className="section-kicker">Como trabalhamos</p>
+            <p className="section-kicker">Um exemplo do time em ação</p>
             <h2
               id="operation-heading"
               className="mt-6 max-w-[18ch] font-display text-display font-bold text-cream text-balance"
             >
-              Como o time de IA entra na sua empresa
+              Veja o time de IA em ação
             </h2>
             <p className="mt-6 max-w-prose font-sans text-lg leading-[1.55] text-steel text-pretty">
-              Diagnóstico primeiro. Depois construímos na ordem que faz sentido para você.
+              Este é um exemplo da frente de atendimento: o agente responde, qualifica e passa para a sua equipe na hora certa. Cada frente do time tem a sua versão disso — do orçamento que sai em minutos ao painel que mostra o funil.
             </p>
-
-            <ul className="mt-8" aria-label="Etapas de entrada do time de IA">
-              {steps.map((step) => (
-                <li
-                  key={step.n}
-                  className="grid grid-cols-[2.4rem_1fr] items-start gap-4 border-b border-cream/12 py-5 last:border-b-0"
-                >
-                  <span className="font-display text-sm font-bold text-gold tabular" aria-hidden>
-                    {step.n}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-lg font-semibold leading-tight text-cream">
-                      {step.title}
-                    </h3>
-                    <p className="mt-1.5 font-sans text-sm leading-snug text-steel text-pretty">
-                      {step.body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
 
             <div className="mt-8">
               <CtaButton
@@ -116,7 +75,7 @@ export function Operation() {
                 external
                 eventName="whatsapp_diagnostico"
               >
-                Quero o diagnóstico gratuito
+                Quero meu diagnóstico
               </CtaButton>
             </div>
           </SectionReveal>

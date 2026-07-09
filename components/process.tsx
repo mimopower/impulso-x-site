@@ -7,28 +7,28 @@ import { GoldCircuitLines } from './ui/gold-circuit-lines';
 const steps = [
   {
     n: '01',
-    title: 'Diagnóstico gratuito',
-    body: '30 minutos para mapear o gargalo prioritário: atendimento, operação, dados ou presença. Saímos com uma prioridade clara.',
+    title: 'Diagnóstico grátis',
+    body: 'Mapa de um gargalo ponta-a-ponta, contexto do negócio e plano de 7 dias. O mapa é seu, mesmo sem fechar.',
   },
   {
     n: '02',
-    title: 'Arquitetura e plano',
-    body: 'Desenhamos a primeira entrega, o que depende dela e como as frentes se conectam depois. Sem projeto inchado.',
+    title: 'Call de diagnóstico',
+    body: 'Conversa curta para confirmar a dor, o impacto e a prioridade — sem pitch de pacote.',
   },
   {
     n: '03',
-    title: 'Primeira frente no ar',
-    body: 'Construímos e testamos a primeira frente com a sua equipe. Resultado validado antes de seguir para a próxima.',
+    title: 'Orçamento escopado',
+    body: 'Depois da call, você recebe uma proposta para UMA primeira entrega: a que resolve o gargalo priorizado.',
   },
   {
     n: '04',
-    title: 'Validação e ajuste',
-    body: 'Medimos o impacto real, ajustamos os gatilhos e garantimos que a operação confie no que está rodando.',
+    title: 'Construir & validar',
+    body: 'Escopo produtizado, teste assistido e aprovação humana. Nada entra em produção sem validar.',
   },
   {
     n: '05',
-    title: 'Expansão e governança',
-    body: 'Ligamos as demais frentes, documentamos regras e mantemos o time de IA operando com segurança e clareza.',
+    title: 'Operar & expandir',
+    body: 'Relatório mensal de valor, ajuste fino e expansão por ciclo — só depois de medir.',
   },
 ];
 
@@ -40,7 +40,7 @@ export function Process() {
       <GoldCircuitLines variant="process" />
       <div className="container-x">
         <SectionReveal className="max-w-3xl">
-          <span className="section-kicker">Método</span>
+          <span className="section-kicker">Como funciona</span>
           <h2
             id="process-heading"
             className="mt-6 font-display text-display font-bold text-cream text-balance"
@@ -81,6 +81,12 @@ export function Process() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-12 border-t border-cream/12 pt-6">
+          <p className="font-sans text-sm uppercase tracking-[0.12em] text-steel/80">
+            Metodologia: <span className="text-gold">Diagnosticar</span> → <span className="text-gold">Construir & Validar</span> → <span className="text-gold">Operar & Otimizar</span>.
+          </p>
         </div>
       </div>
     </section>

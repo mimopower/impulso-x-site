@@ -37,9 +37,14 @@ const faqs = [
       'Começamos por uma. Com a primeira validada, expandimos para as demais na ordem certa — sem nunca abandonar a operação que já está rodando.',
   },
   {
-    question: 'O painel e o CRM são sob medida?',
+    question: 'Preciso entender de tecnologia?',
     answer:
-      'Sim. O escopo sai no diagnóstico — começamos pelo mínimo (painel operacional essencial) e expandimos conforme a operação cresce. Cada proposta é escopada pós-diagnóstico.',
+      'Não. O time cuida da parte técnica, você decide o negócio. Tudo é documentado em um runbook simples, e a equipe é treinada para operar junto com a IA.',
+  },
+  {
+    question: 'E os meus dados e os dos meus clientes?',
+    answer:
+      'Nenhum dado sensível entra no diagnóstico. Antes de qualquer trabalho em produção, formalizamos o acordo de tratamento de dados (LGPD). E aprovação humana é obrigatória no que é sensível.',
   },
 ] as const;
 

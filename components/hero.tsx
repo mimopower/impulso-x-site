@@ -7,6 +7,7 @@ import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
 import { useIntroReady } from './intro-reveal';
 import { CtaButton } from './ui/cta-button';
 import { HeroShieldVideo } from './ui/hero-shield-video';
+import { WordRotator } from './ui/word-rotator';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -53,22 +54,20 @@ export function Hero() {
       {/* Content */}
       <div className="container-x relative z-10">
         <div className="max-w-[900px] lg:ml-[3vw] xl:ml-[7vw]">
-          {/* Eyebrow — visible by default (opacity 0.92), enhances to 1.0 on mount.
-              Emil: content must be visible even before motion fires. */}
+          {/* Eyebrow */}
           <motion.div
             className="section-kicker"
             initial={false}
             animate={{ opacity: motionReady ? 1 : 0.92, x: motionReady ? 0 : -6 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease }}
           >
-            Time de IA para PMEs
+            IA por dentro, resultado por fora
           </motion.div>
 
-          {/* H1 — stable aria-label for screen readers.
-              Emil: stagger 60-80ms between lines; only opacity+transform animated. */}
+          {/* H1 — stable aria-label for screen readers. */}
           <h1
             id="hero-heading"
-            aria-label="Sua empresa com IA por dentro. Resultado por fora. Sem contratar."
+            aria-label="O time de IA da sua empresa — que atende, organiza, opera e vende."
             className="mt-6 font-display text-hero font-bold text-cream text-balance"
             style={{ lineHeight: '0.98' }}
           >
@@ -79,7 +78,7 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.02 : 0 }}
             >
-              Sua empresa com
+              O time de IA
             </motion.span>
 
             <motion.span
@@ -89,7 +88,11 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.04 : 0 }}
             >
-              IA por dentro.
+              <WordRotator
+                words={['que atende', 'que organiza', 'que opera', 'que vende']}
+                enabled={motionReady}
+                className="text-gold-gradient"
+              />
             </motion.span>
 
             <motion.span
@@ -99,31 +102,21 @@ export function Hero() {
               animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             >
-              Resultado por fora.
-            </motion.span>
-
-            <motion.span
-              aria-hidden
-              className="block text-steel"
-              initial={false}
-              animate={{ opacity: motionReady ? 1 : 0.92, y: motionReady ? 0 : 6 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.08 : 0 }}
-            >
-              Sem contratar.
+              da sua empresa.
             </motion.span>
           </h1>
 
-          {/* Subtexto — max ~20 words (taste-skill hero rule) */}
+          {/* Subheadline */}
           <motion.p
             initial={false}
             animate={{ opacity: motionReady ? 1 : 0.9, y: motionReady ? 0 : 5 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.24, ease, delay: motionReady ? 0.06 : 0 }}
             className="mt-5 max-w-[52ch] text-lead text-steel text-pretty"
           >
-            Em 30 minutos a gente mapeia onde a IA devolve tempo, dinheiro e escala no seu negócio — e começamos pelo gargalo que mais dói.
+            Diagnóstico primeiro, solução depois: o time entra pelo que o seu negócio mais precisa otimizar, estruturar ou organizar com IA. E o mapa é seu, mesmo que a gente não feche.
           </motion.p>
 
-          {/* CTAs — 4th and final hero element */}
+          {/* CTAs */}
           <motion.div
             initial={false}
             animate={{ opacity: motionReady ? 1 : 0.9, y: motionReady ? 0 : 5 }}
@@ -137,16 +130,16 @@ export function Hero() {
               external
               eventName="whatsapp_diagnostico"
             >
-              Quero o diagnóstico gratuito
+              Quero meu diagnóstico
             </CtaButton>
-            <CtaButton href="#snapshot" variant="outline" size="xl" eventName="nav_ancora_frentes">
-              Ver as frentes de atuação
+            <CtaButton href="#processo" variant="outline" size="xl" eventName="nav_ancora_processo">
+              Ver como funciona
             </CtaButton>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll cue — subtle vertical pulse line */}
+      {/* Scroll cue */}
       <div
         aria-hidden
         className="absolute bottom-7 left-1/2 hidden h-12 w-px -translate-x-1/2 overflow-hidden bg-cream/10 sm:block"
