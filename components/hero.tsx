@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 import { ASSETS } from '@/lib/assets';
 import { WHATSAPP_MESSAGES, WHATSAPP_URL } from '@/lib/site';
@@ -45,24 +44,6 @@ export function Hero() {
       </motion.picture>
 
       <HeroShieldVideo enabled={motionReady} />
-
-      <motion.div
-        aria-hidden
-        className="hero-float-icon pointer-events-none absolute z-[7] grid place-items-center"
-        initial={false}
-        animate={
-          motionReady && !prefersReducedMotion
-            ? { opacity: 1, y: [0, -7, 0], rotate: [0, 4, 0, -4, 0] }
-            : { opacity: 0.9, y: 0, rotate: 0 }
-        }
-        transition={
-          motionReady && !prefersReducedMotion
-            ? { duration: 6.5, ease: 'easeInOut', repeat: Infinity }
-            : { duration: 0.2, ease }
-        }
-      >
-        <Sparkles size={22} strokeWidth={1.65} />
-      </motion.div>
 
       {/* Contrast layer keeps copy readable while preserving the animated mark. */}
       <div aria-hidden className="hero-contrast-overlay absolute inset-0 z-[5]" />
