@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useState, type ReactNode } from 'react';
 import { EASE_OUT_EXPO } from '@/lib/motion';
 
-type Variant = 'primary' | 'outline' | 'ghost';
+type Variant = 'primary' | 'outline' | 'ghost' | 'prism';
 type Size = 'md' | 'lg' | 'xl';
 
 type Props = {
@@ -22,6 +22,7 @@ const variantClass: Record<Variant, string> = {
   primary: 'border-gold bg-gold text-ink hover:border-gold-soft hover:bg-gold-soft',
   outline: 'border-gold/60 bg-ink/35 text-cream hover:border-gold hover:bg-gold/10',
   ghost: 'border-transparent bg-transparent text-cream hover:text-gold',
+  prism: 'cta-btn--prism border-transparent text-cream',
 };
 
 const sizeClass: Record<Size, string> = {

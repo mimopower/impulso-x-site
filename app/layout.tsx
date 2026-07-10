@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Manrope, Rajdhani } from 'next/font/google';
 import { AnalyticsEvents } from '@/components/ui/analytics-events';
+import { MatrixCodeRain } from '@/components/ui/matrix-code-rain';
 import { SITE } from '@/lib/site';
 import { INTRO_DESKTOP_TOTAL_MS, INTRO_MOBILE_TOTAL_MS } from '@/lib/intro-timeline';
 import './globals.css';
@@ -209,6 +210,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <rect width="100%" height="100%" filter="url(#noise-filter)" />
             </svg>
           </div>
+
+          <MatrixCodeRain />
 
           {children}
         </div>
